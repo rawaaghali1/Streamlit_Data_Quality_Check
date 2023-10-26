@@ -84,67 +84,7 @@ def load_data(sb_selectbox):
     return data, dq_json
 
 # compute the measures of data quality based on project criteria
-###
-@st.cache(allow_output_mutation=True)
-def compute_dq_metrics(data,dq_json):
-    # COMPLETENESS
-    completeness = int(np.round((data.notna().to_numpy() == True).mean() * 100))
-
-    # CONSISTENCY
-    cols = ['ws_source_ip','time','train_id','train_speed','obm_color','obm_direction','kp_in_track',
-                        'obm_source_ip','scanned_mac_address','rssi_dbm','crssi_dbm']
-    type_list = [str,str,numpy.int64,numpy.float64,str,str,numpy.float64,str,str,numpy.float64,numpy.float64]
-    # create temporary df
-    temp_data = data[cols]
-    temp_type_list = []
-    # get the type of columns
-    for col in temp_data.columns:
-        temp_type_list.append(type(temp_data[col].iloc[0]))
-    con_df = pd.DataFrame({"columns" : cols, "type_actual" : type_list, "type_current" : temp_type_list})
-    con_df['type_result'] = con_df['type_actual'] == con_df['type_current']
-    consistency = round(con_df["type_result"].sum()/len(con_df) * 100)
-
-    # ACCURACY
-    a = 0
-    b = 0
-    if data['train_id'].nunique() == 1:
-        a = 95
-    if len(list(data['obm_color'].unique())) == 1:
-        b = 95    
-    c = 100 - len(data[~data['obm_color'].isin(['BLUE','RED'])])/len(data)
-    d = 100 - len(data[~data['obm_direction'].isin(['Head','Tail'])])/len(data)
-
-    accuracy = round(((a+b+c+d)/400)*100)
-
-    # RELEVANCY
-    relevancy = round(((accuracy + consistency)/200)*100)
-
-    # TIMELINESS
-    today = datetime.datetime.now().date()
-    data_date = datetime.datetime.strptime(data['time'].iloc[0], "%Y-%m-%d %H:%M:%S.%f").date()
-    delta = today - data_date
-    timeliness = 95
-    if delta.days > 150:
-        timeliness = 30
-    elif delta.days > 120:
-        timeliness = 50
-    elif delta.days > 90:
-        timeliness = 60
-    elif delta.days > 60:
-        timeliness = 80
-
-    # create a score using checks passed and records dropped
-    checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
-    # get a score based on number of rows dropped
-    records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
-    # final dq score
-    total_score = round(((completeness + consistency + accuracy + relevancy + timeliness + checks_score + records_score)/700) * 100)
-
-    dq_metrics_df = pd.DataFrame({"metric" : ["completeness","completeness_l","consistency","consistency_l","accuracy","accuracy_l","relevancy","relevancy_l","timeliness","timeliness_l"], \
-    "percentage" : [completeness,100-completeness,consistency,100-consistency,accuracy,100-accuracy,relevancy,100-relevancy,timeliness,100-timeliness]})
-
-    return dq_metrics_df, total_score
-###
+# deleted
 
 # basic metrics like null values, unique values
 @st.cache(allow_output_mutation=True)
