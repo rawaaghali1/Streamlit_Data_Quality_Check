@@ -1,0 +1,456 @@
+{
+    "checks_table_level": {
+        "Check sparsity to be below specific threshold": {
+            "check_type": "Check sparsity to be below specific threshold",
+            "threshold": {
+                "threshold_percent": 200,
+                "threshold_value": 25194852
+            },
+            "observed_value": {
+                "total_cells": 12597426,
+                "total_empty_cells": 3704988,
+                "sparsity_percent": 29.41
+            },
+            "result": true
+        },
+        "check dataframe columns to match a set of columns": {
+            "check_type": "check dataframe columns to match a set of columns",
+            "qualification_level": "verify",
+            "expected_value": [
+                "time",
+                "train_id",
+                "train_speed",
+                "lost_pkt",
+                "obm_color",
+                "obm_direction",
+                "track_id",
+                "kp_in_track",
+                "scanned_mac_address",
+                "rssi_dbm",
+                "ho_count",
+                "ho_duration",
+                "crssi_dbm"
+            ],
+            "observed_value": {
+                "columns_in_data": [
+                    "ws_source_ip",
+                    "time",
+                    "train_id",
+                    "train_speed",
+                    "obm_color",
+                    "obm_direction",
+                    "block_id",
+                    "absc_in_block",
+                    "track_id",
+                    "kp_in_track",
+                    "obm_source_ip",
+                    "scanned_mac_address",
+                    "rssi_dbm",
+                    "connected_mac_address",
+                    "ho_count",
+                    "ho_duration",
+                    "crssi_dbm",
+                    "irssi_dbm"
+                ],
+                "columns_not_in_data": [
+                    "lost_pkt"
+                ],
+                "columns_unexpected": [
+                    "obm_source_ip",
+                    "irssi_dbm",
+                    "connected_mac_address",
+                    "ws_source_ip",
+                    "absc_in_block",
+                    "block_id"
+                ]
+            },
+            "result": false
+        },
+        "checks_table_total": 2,
+        "checks_table_passed": 1,
+        "checks_table_failed": 1,
+        "result": false
+    },
+    "checks_column_level": {
+        "train_id": {
+            "check column datatype": {
+                "check_type": "check column datatype",
+                "column_name": "train_id",
+                "expected_value": "<class 'int'>",
+                "observed_value": "int64",
+                "result": true
+            },
+            "Check column values to be not null": {
+                "check_type": "Check column values to be not null",
+                "column_name": "train_id",
+                "qualification_level": "assert",
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            },
+            "check values to be unique": {
+                "check_type": "check values to be unique",
+                "column_name": "train_id",
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "unique_values": 1
+                },
+                "result": true
+            }
+        },
+        "train_speed": {
+            "check column datatype": {
+                "check_type": "check column datatype",
+                "column_name": "train_speed",
+                "expected_value": "<class 'float'>",
+                "observed_value": "float64",
+                "result": true
+            },
+            "check values to be in a specific range": {
+                "check_type": "check values to be in a specific range",
+                "column_name": "train_speed",
+                "qualification_level": "assert",
+                "expected_values_range": [
+                    0,
+                    85
+                ],
+                "include_null": true,
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "values_in_range": 699857,
+                    "values_out_range": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            },
+            "Check column values to be not null": {
+                "check_type": "Check column values to be not null",
+                "column_name": "train_speed",
+                "qualification_level": "assert",
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            }
+        },
+        "time": {
+            "check column datatype": {
+                "check_type": "check column datatype",
+                "column_name": "time",
+                "expected_value": "<class 'object'>",
+                "observed_value": "object",
+                "result": true
+            },
+            "Check column values to be not null": {
+                "check_type": "Check column values to be not null",
+                "column_name": "time",
+                "qualification_level": "assert",
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            },
+            "check values to be distinct": {
+                "check_type": "check values to be distinct",
+                "column_name": "time",
+                "qualification_level": "verify",
+                "threshold": {
+                    "threshold_percent": 20,
+                    "threshold_value": 139971
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "distinct_values": 612773,
+                    "distinct_percent": 87.56,
+                    "non_distinct_values": 87084,
+                    "non_distinct_percent": 12.44
+                },
+                "result": true
+            },
+            "check column values to be monotonic": {
+                "check_type": "check column values to be monotonic",
+                "column_name": "time",
+                "qualification_level": "assert",
+                "monotonic_increasing": true,
+                "strictly_monotonic": false,
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "monotonic_values": 699857,
+                    "non_monotonic_values": 0,
+                    "non_monotonic_percent": 0.0
+                },
+                "drop_unexpected": false,
+                "result": true
+            }
+        },
+        "rssi_dbm": {
+            "check values to be in a specific range": {
+                "check_type": "check values to be in a specific range",
+                "column_name": "rssi_dbm",
+                "qualification_level": "verify",
+                "expected_values_range": [
+                    -100,
+                    -20
+                ],
+                "include_null": false,
+                "threshold": {
+                    "threshold_percent": 3,
+                    "threshold_value": 20995
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 690359,
+                    "null_values": 9498,
+                    "values_in_range": 690359,
+                    "values_out_range": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            }
+        },
+        "crssi_dbm": {
+            "check values to be in a specific range": {
+                "check_type": "check values to be in a specific range",
+                "column_name": "crssi_dbm",
+                "qualification_level": "verify",
+                "expected_values_range": [
+                    -85,
+                    -20
+                ],
+                "include_null": false,
+                "threshold": {
+                    "threshold_percent": 1,
+                    "threshold_value": 6998
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 72148,
+                    "null_values": 627709,
+                    "values_in_range": 72144,
+                    "values_out_range": 4
+                },
+                "drop_unexpected": false,
+                "result": true
+            }
+        },
+        "obm_color": {
+            "Check column values to be not null": {
+                "check_type": "Check column values to be not null",
+                "column_name": "obm_color",
+                "qualification_level": "assert",
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            },
+            "check values to be unique": {
+                "check_type": "check values to be unique",
+                "column_name": "obm_color",
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "unique_values": 1
+                },
+                "result": true
+            },
+            "check column to have values from a specific set": {
+                "check_type": "check column to have values from a specific set",
+                "column_name": "obm_color",
+                "qualification_level": "verify",
+                "expected_values_list": [
+                    "BLUE",
+                    "RED"
+                ],
+                "include_null": true,
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "column_values_list": [
+                        "BLUE"
+                    ],
+                    "values_not_in_column_list": [
+                        "RED"
+                    ],
+                    "unexpected_values_list": [],
+                    "unexpected_values_count": 0,
+                    "unexpected_values_percent": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            }
+        },
+        "obm_direction": {
+            "Check column values to be not null": {
+                "check_type": "Check column values to be not null",
+                "column_name": "obm_direction",
+                "qualification_level": "assert",
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            },
+            "check column to have values from a specific set": {
+                "check_type": "check column to have values from a specific set",
+                "column_name": "obm_direction",
+                "qualification_level": "verify",
+                "expected_values_list": [
+                    "Head",
+                    "Tail"
+                ],
+                "include_null": true,
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "column_values_list": [
+                        "Head",
+                        "Tail"
+                    ],
+                    "values_not_in_column_list": [],
+                    "unexpected_values_list": [],
+                    "unexpected_values_count": 0,
+                    "unexpected_values_percent": 0
+                },
+                "drop_unexpected": false,
+                "result": true
+            }
+        },
+        "kp_in_track": {
+            "Check column values to be not null": {
+                "check_type": "Check column values to be not null",
+                "column_name": "kp_in_track",
+                "qualification_level": "assert",
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 256487,
+                    "null_values": 443370
+                },
+                "drop_unexpected": false,
+                "result": false
+            }
+        },
+        "scanned_mac_address": {
+            "check length of column values to be in specific range of length": {
+                "check_type": "check length of column values to be in specific range of length",
+                "column_name": "scanned_mac_address",
+                "qualification_level": "assert",
+                "expected_values_len_range": [
+                    17,
+                    17
+                ],
+                "include_null": true,
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 699857,
+                    "null_values": 0,
+                    "values_in_range": 699857,
+                    "values_not_in_range": 0,
+                    "percent_not_in_range": 0.0
+                },
+                "drop_unexpected": false,
+                "result": true
+            }
+        },
+        "ho_count": {
+            "check values to be distinct": {
+                "check_type": "check values to be distinct",
+                "column_name": "ho_count",
+                "qualification_level": "verify",
+                "threshold": {
+                    "threshold_percent": 0,
+                    "threshold_value": 0
+                },
+                "observed_value": {
+                    "total_values": 699857,
+                    "not_null_values": 88,
+                    "null_values": 699769,
+                    "distinct_values": 88,
+                    "distinct_percent": 0.01,
+                    "non_distinct_values": 699769,
+                    "non_distinct_percent": 99.99
+                },
+                "result": false
+            }
+        },
+        "checks_column_total": 20,
+        "checks_column_passed": 18,
+        "checks_column_failed": 2,
+        "result": false
+    },
+    "checks_total": 22,
+    "checks_passed": 19,
+    "checks_failed": 3,
+    "total_records_actual": 699857,
+    "total_records_dropped": 0,
+    "result": false
+}
