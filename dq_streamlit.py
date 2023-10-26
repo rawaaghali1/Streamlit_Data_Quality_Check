@@ -80,7 +80,7 @@ def load_data(sb_selectbox):
         dq_json = json.load(open("result/dq_result.json"))
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
-    data.set_index('kp_in_track', drop = False, inplace = True)
+    # data.set_index('kp_in_track', drop = False, inplace = True)
     return data, dq_json
 
 # compute the measures of data quality based on project criteria
