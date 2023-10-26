@@ -27,6 +27,7 @@ footer {visibility: hidden;}
 
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+print("Line 30 OK")
 
 # define layout for plotly graphs
 @st.cache(allow_output_mutation=True)
@@ -126,6 +127,7 @@ def compute_column_checks_results(dq_json):
 
 # run the functions
 data, dq_json= load_data(sb_selectbox)
+st.dataframe(data)
 
 dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
 
