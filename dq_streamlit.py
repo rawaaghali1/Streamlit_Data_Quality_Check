@@ -15,8 +15,6 @@ def load_data(nrows):
     print("2")
     data.rename(lowercase, axis='columns', inplace=True)
     print("3")
-    data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-    print("4")
     return data
 
 data_load_state = st.text('Loading data...')
