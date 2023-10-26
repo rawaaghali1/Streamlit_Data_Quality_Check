@@ -84,6 +84,7 @@ def load_data(sb_selectbox):
     return data, dq_json
 
 # compute the measures of data quality based on project criteria
+###
 @st.cache(allow_output_mutation=True)
 def compute_dq_metrics(data,dq_json):
     # COMPLETENESS
@@ -143,6 +144,7 @@ def compute_dq_metrics(data,dq_json):
     "percentage" : [completeness,100-completeness,consistency,100-consistency,accuracy,100-accuracy,relevancy,100-relevancy,timeliness,100-timeliness]})
 
     return dq_metrics_df, total_score
+###
 
 # basic metrics like null values, unique values
 @st.cache(allow_output_mutation=True)
