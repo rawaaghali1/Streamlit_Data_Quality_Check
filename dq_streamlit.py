@@ -10,9 +10,13 @@ DATA_PATH = ('data/dataset_1.csv')
 @st.cache_data
 def load_data(nrows):
     data = pd.read_csv(DATA_PATH, nrows=nrows)
+    print("1")
     lowercase = lambda x: str(x).lower()
+    print("2")
     data.rename(lowercase, axis='columns', inplace=True)
+    print("3")
     data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
+    print("4")
     return data
 
 data_load_state = st.text('Loading data...')
