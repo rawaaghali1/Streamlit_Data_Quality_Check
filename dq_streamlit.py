@@ -74,14 +74,14 @@ sb_selectbox = st.sidebar.selectbox(
 @st.cache(allow_output_mutation=True)
 def load_data(sb_selectbox):
     if sb_selectbox == 'Dataset 1':
-        data = pd.read_csv("data/dataset_1.csv")
+        data = pd.read_csv("data/dataset_1.csv", encoding='unicode_escape')
         dq_json = json.load(open("result/dq_result.json"))
     else:
-        data = pd.read_csv("data/dataset_2.csv")
+        data = pd.read_csv("data/dataset_2.csv", encoding='unicode_escape')
         dq_json = json.load(open("result/dq_result.json"))
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
-    data.set_index('kp_in_track', drop = False, inplace = True)
+    data.set_index('Result_No', drop = False, inplace = True)
     return data, dq_json
 
 # compute the measures of data quality based on project criteria
