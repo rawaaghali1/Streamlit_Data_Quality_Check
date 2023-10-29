@@ -124,10 +124,10 @@ def compute_dq_metrics(data,dq_json):
     # get a score based on number of rows dropped
     records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
     # final dq score
-    total_score = round(((completeness + consistency + accuracy + relevancy + timeliness + checks_score + records_score)/700) * 100)
+    total_score = round(((completeness + consistency + accuracy + relevancy + checks_score + records_score)/700) * 100)
 
-    dq_metrics_df = pd.DataFrame({"metric" : ["completeness","completeness_l","consistency","consistency_l","accuracy","accuracy_l","relevancy","relevancy_l","timeliness","timeliness_l"], \
-    "percentage" : [completeness,100-completeness,consistency,100-consistency,accuracy,100-accuracy,relevancy,100-relevancy,timeliness,100-timeliness]})
+    dq_metrics_df = pd.DataFrame({"metric" : ["completeness","completeness_l","consistency","consistency_l","accuracy","accuracy_l","relevancy","relevancy_l"], \
+    "percentage" : [completeness,100-completeness,consistency,100-consistency,accuracy,100-accuracy,relevancy,100-relevancy]})
 
     return dq_metrics_df, total_score
 
@@ -186,7 +186,7 @@ st.title('Data Quality')
 st.subheader('metrics')
 
 ###### ROW 1 #######
-accuracy, relevancy, completeness, timeliness, consistency, overall_score,stats = st.columns([1,1,1,1,1,1,1])
+accuracy, relevancy, completeness, consistency, overall_score, stats = st.columns([1,1,1,1,1,1])
 
 with accuracy:
     st.write('Accuracy')
@@ -212,15 +212,6 @@ with completeness:
         hole = 0.5,color_discrete_map={"completeness" : '#19AA6E',"completeness_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
     layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "completeness"]["percentage"].iloc[0])
-    fig.update_layout(layout_plot)
-    st.plotly_chart(fig, use_container_width=True)
-
-with timeliness:
-    st.write('Timeliness')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('timeliness')], names = 'metric', values = 'percentage', color = 'metric', \
-        hole = 0.5,color_discrete_map={"timeliness" : '#19AA6E',"timeliness_l" : '#0E1117'})
-    fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "timeliness"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
