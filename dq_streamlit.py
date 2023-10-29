@@ -74,10 +74,10 @@ sb_selectbox = st.sidebar.selectbox(
 @st.cache(allow_output_mutation=True)
 def load_data(sb_selectbox):
     if sb_selectbox == 'Dataset 1':
-        data = pd.read_csv("data/dataset_1.csv", encoding='unicode_escape')
+        data = pd.read_csv("data/Good_dataset_test.csv", encoding='unicode_escape')
         dq_json = json.load(open("result/dq_result.json"))
     else:
-        data = pd.read_csv("data/dataset_2.csv", encoding='unicode_escape')
+        data = pd.read_csv("data/Bad_dataset_test.csv", encoding='unicode_escape')
         dq_json = json.load(open("result/dq_result.json"))
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
