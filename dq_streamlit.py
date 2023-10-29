@@ -119,20 +119,6 @@ def compute_dq_metrics(data,dq_json):
     # RELEVANCY
     relevancy = round(((accuracy + consistency)/200)*100)
 
-    # TIMELINESS
-    today = datetime.datetime.now().date()
-    data_date = datetime.datetime.strptime(data['time'].iloc[0], "%Y-%m-%d %H:%M:%S.%f").date()
-    delta = today - data_date
-    timeliness = 95
-    if delta.days > 150:
-        timeliness = 30
-    elif delta.days > 120:
-        timeliness = 50
-    elif delta.days > 90:
-        timeliness = 60
-    elif delta.days > 60:
-        timeliness = 80
-
     # create a score using checks passed and records dropped
     checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
     # get a score based on number of rows dropped
