@@ -66,19 +66,19 @@ def layout():
 # Add a selectbox to the sidebar:
 sb_selectbox = st.sidebar.selectbox(
     'Select a dataset',
-    ('Good dataset', 'Bad dataset'),
+    ('Dataset 1', 'Dataset 2'),
     key = 'sb_selectbox'
 )
 
 # loading the data
 @st.cache(allow_output_mutation=True)
 def load_data(sb_selectbox):
-    if sb_selectbox == 'Good dataset':
-        data = pd.read_csv("data/rssi_df_good.csv")
-        dq_json = json.load(open("result/dq_result_pass.json"))
+    if sb_selectbox == 'Dataset 1':
+        data = pd.read_csv("data/dataset_1.csv")
+        dq_json = json.load(open("result/dq_result.json"))
     else:
-        data = pd.read_csv("data/rssi_df_bad.csv")
-        dq_json = json.load(open("result/dq_result_fail.json"))
+        data = pd.read_csv("data/dataset_2.csv")
+        dq_json = json.load(open("result/dq_result.json"))
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data.set_index('kp_in_track', drop = False, inplace = True)
