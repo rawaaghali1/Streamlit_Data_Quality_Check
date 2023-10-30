@@ -77,45 +77,23 @@ def layout():
 def load_data():
     data = pd.read_excel("data/test_raw_file.xlsx")
     dq_json = json.load(open("result/test_original.json"))
-    lowercase = lambda x: str(x).lower()
-    data.rename(lowercase, axis='columns', inplace=True)
-    data.set_index('res_num', drop = False, inplace = True)
+#    lowercase = lambda x: str(x).lower()
+#    data.rename(lowercase, axis='columns', inplace=True)
+    data.set_index('RES_NUM', drop = False, inplace = True)
     return data, dq_json
 
 # compute the measures of data quality based on project criteria
 @st.cache(allow_output_mutation=True)
 def compute_dq_metrics(data,dq_json):
-    # COMPLETENESS
-    completeness = int(np.round((data.notna().to_numpy() == True).mean() * 100))
+    # PHY_STA_COD
+    PHY_STA_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PHY_STA_COD'][0])
+    # TIM_VAL
+    cols = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TIM_VAL'][0])
+    # TPR_VAL
+    PHY_STA_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
+    # UNT_COD
+    cols = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'UNT_COD'][0])
 
-    # CONSISTENCY
-    cols = ['ws_source_ip','time','train_id','train_speed','obm_color','obm_direction','kp_in_track',
-                        'obm_source_ip','scanned_mac_address','rssi_dbm','crssi_dbm']
-    type_list = [str,str,numpy.int64,numpy.float64,str,str,numpy.float64,str,str,numpy.float64,numpy.float64]
-    # create temporary df
-    temp_data = data[cols]
-    temp_type_list = []
-    # get the type of columns
-    for col in temp_data.columns:
-        temp_type_list.append(type(temp_data[col].iloc[0]))
-    con_df = pd.DataFrame({"columns" : cols, "type_actual" : type_list, "type_current" : temp_type_list})
-    con_df['type_result'] = con_df['type_actual'] == con_df['type_current']
-    consistency = round(con_df["type_result"].sum()/len(con_df) * 100)
-
-    # ACCURACY
-    a = 0
-    b = 0
-    if data['train_id'].nunique() == 1:
-        a = 95
-    if len(list(data['obm_color'].unique())) == 1:
-        b = 95    
-    c = 100 - len(data[~data['obm_color'].isin(['BLUE','RED'])])/len(data)
-    d = 100 - len(data[~data['obm_direction'].isin(['Head','Tail'])])/len(data)
-
-    accuracy = round(((a+b+c+d)/400)*100)
-
-    # RELEVANCY
-    relevancy = round(((accuracy + consistency)/200)*100)
 
     # create a score using checks passed and records dropped
     checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
