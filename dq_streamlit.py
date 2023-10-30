@@ -420,8 +420,10 @@ with distribution_plot:
 # signal 
 st.write('Signal')
 st.line_chart(data['crssi_dbm'])
+"""
+
 # raw dataset
 st.write('View raw dataset')
 if st.checkbox('Show dataframe'):
     data
-"""
+
