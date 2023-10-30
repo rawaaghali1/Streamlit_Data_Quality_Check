@@ -185,6 +185,7 @@ st.subheader('metrics')
 
 ###### ROW 1 #######
 PHY_STA_COD, TIM_VAL, TPR_VAL, UNT_COD, FAT_CNT_TXT, NIT_FLU_TXT = st.columns(6)
+AGE_DSC, PRO_HDR_TXT, DEN_VAL, DIL_VAL, HUM_VAL, TPR_VAL = st.columns(6)
 overall_score = st.columns(1)
 with PHY_STA_COD:
     st.write('PHY_STA_COD')
