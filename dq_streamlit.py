@@ -184,8 +184,9 @@ st.title('Data Quality')
 st.subheader('metrics')
 
 ###### ROW 1 #######
-PHY_STA_COD, TIM_VAL, TPR_VAL = st.columns([1,1,1])
-UNT_COD, overall_score = st.columns(3)
+PHY_STA_COD, TIM_VAL, TPR_VAL, UNT_COD, FAT_CNT_TXT, NIT_FLU_TXT = st.columns(6)
+AGE_DSC, PRO_HDR_TXT, DEN_VAL, DIL_VAL, HUM_VAL, TPR_VAL = st.columns(6)
+overall_score = st.columns(1)
 with PHY_STA_COD:
     st.write('PHY_STA_COD')
     fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('PHY_STA_COD')], names = 'metric', values = 'percentage', color = 'metric', \
@@ -258,39 +259,39 @@ with PRO_HDR_TXT:
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
-with PHY_STA_COD:
-    st.write('PHY_STA_COD')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('PHY_STA_COD')], names = 'metric', values = 'percentage', color = 'metric', \
-        hole = 0.5,color_discrete_map={"PHY_STA_COD" : '#19AA6E',"PHY_STA_COD_l" : '#0E1117'})
+with DEN_VAL:
+    st.write('DEN_VAL')
+    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('DEN_VAL')], names = 'metric', values = 'percentage', color = 'metric', \
+        hole = 0.5,color_discrete_map={"DEN_VAL" : '#19AA6E',"DEN_VAL_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "PHY_STA_COD"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "DEN_VAL"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
-with PHY_STA_COD:
-    st.write('PHY_STA_COD')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('PHY_STA_COD')], names = 'metric', values = 'percentage', color = 'metric', \
-        hole = 0.5,color_discrete_map={"PHY_STA_COD" : '#19AA6E',"PHY_STA_COD_l" : '#0E1117'})
+with DIL_VAL:
+    st.write('DIL_VAL')
+    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('DIL_VAL')], names = 'metric', values = 'percentage', color = 'metric', \
+        hole = 0.5,color_discrete_map={"DIL_VAL" : '#19AA6E',"DIL_VAL_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "PHY_STA_COD"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "DIL_VAL"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
-with PHY_STA_COD:
-    st.write('PHY_STA_COD')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('PHY_STA_COD')], names = 'metric', values = 'percentage', color = 'metric', \
-        hole = 0.5,color_discrete_map={"PHY_STA_COD" : '#19AA6E',"PHY_STA_COD_l" : '#0E1117'})
+with HUM_VAL:
+    st.write('HUM_VAL')
+    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('HUM_VAL')], names = 'metric', values = 'percentage', color = 'metric', \
+        hole = 0.5,color_discrete_map={"HUM_VAL" : '#19AA6E',"HUM_VAL_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "PHY_STA_COD"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "HUM_VAL"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
-with PHY_STA_COD:
-    st.write('PHY_STA_COD')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('PHY_STA_COD')], names = 'metric', values = 'percentage', color = 'metric', \
-        hole = 0.5,color_discrete_map={"PHY_STA_COD" : '#19AA6E',"PHY_STA_COD_l" : '#0E1117'})
+with TPR_VAL:
+    st.write('TPR_VAL')
+    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('TPR_VAL')], names = 'metric', values = 'percentage', color = 'metric', \
+        hole = 0.5,color_discrete_map={"TPR_VAL" : '#19AA6E',"TPR_VAL_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "PHY_STA_COD"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "TPR_VAL"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
