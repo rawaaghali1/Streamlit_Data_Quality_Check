@@ -88,22 +88,37 @@ def compute_dq_metrics(data,dq_json):
     # PHY_STA_COD
     PHY_STA_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PHY_STA_COD'][0])
     # TIM_VAL
-    cols = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TIM_VAL'][0])
+    TIM_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TIM_VAL'][0])
     # TPR_VAL
-    PHY_STA_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
+    TPR_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
     # UNT_COD
-    cols = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'UNT_COD'][0])
-
+    UNT_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'UNT_COD'][0])
+    # FAT_CNT_TXT
+    FAT_CNT_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'FAT_CNT_TXT'][0])
+    # NIT_FLU_TXT
+    NIT_FLU_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'NIT_FLU_TXT'][0])
+    # AGE_DSC
+    AGE_DSC = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'AGE_DSC'][0])
+    # PRO_HDR_TXT
+    PRO_HDR_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PRO_HDR_TXT'][0])
+    # DEN_VAL
+    DEN_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DEN_VAL'][0])
+    # DIL_VAL
+    DIL_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DIL_VAL'][0])
+    # HUM_VAL
+    HUM_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'HUM_VAL'][0])
+    # TPR_VAL
+    TPR_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
 
     # create a score using checks passed and records dropped
-    checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
+    # checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
     # get a score based on number of rows dropped
-    records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
+    # records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
     # final dq score
-    total_score = round(((completeness + consistency + accuracy + relevancy + checks_score + records_score)/700) * 100)
+    total_score = round(((PHY_STA_COD + TIM_VAL + TPR_VAL + UNT_COD + FAT_CNT_TXT + NIT_FLU_TXT + AGE_DSC + PRO_HDR_TXT + DEN_VAL + DIL_VAL + HUM_VAL + TPR_VAL)/1200) * 100)
 
-    dq_metrics_df = pd.DataFrame({"metric" : ["completeness","completeness_l","consistency","consistency_l","accuracy","accuracy_l","relevancy","relevancy_l"], \
-    "percentage" : [completeness,100-completeness,consistency,100-consistency,accuracy,100-accuracy,relevancy,100-relevancy]})
+    dq_metrics_df = pd.DataFrame({"metric" : ["PHY_STA_COD","PHY_STA_COD_l","TIM_VAL","TIM_VAL_l","TPR_VAL","TPR_VAL_l","UNT_COD","UNT_COD_l"], \
+    "percentage" : [PHY_STA_COD,100-PHY_STA_COD,TIM_VAL,100-TIM_VAL,TPR_VAL,100-TPR_VAL,UNT_COD,100-UNT_COD]})
 
     return dq_metrics_df, total_score
 
