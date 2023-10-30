@@ -180,8 +180,8 @@ st.title('Data Quality')
 st.subheader('metrics')
 
 ###### ROW 1 #######
-PHY_STA_COD, TIM_VAL, TPR_VAL, UNT_COD, overall_score = st.columns([1,1,1],[1,1])
-
+PHY_STA_COD, TIM_VAL, TPR_VAL = st.columns([1,1,1])
+UNT_COD, overall_score = st.columns([1,1])
 with PHY_STA_COD:
     st.write('PHY_STA_COD')
     fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('PHY_STA_COD')], names = 'metric', values = 'percentage', color = 'metric', \
