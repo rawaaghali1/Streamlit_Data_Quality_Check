@@ -64,14 +64,13 @@ def layout():
 
     return layout_plot, layout_dist
 
-"""
-Add a selectbox to the sidebar:
-sb_selectbox = st.sidebar.selectbox(
-    'Select a dataset',
-    ('Dataset 1', 'Dataset 2'),
-    key = 'sb_selectbox'
-)
-"""
+
+#Add a selectbox to the sidebar:
+#sb_selectbox = st.sidebar.selectbox(
+#    'Select a dataset',
+#    ('Dataset 1', 'Dataset 2'),
+#    key = 'sb_selectbox'
+#)
 
 # loading the data
 @st.cache(allow_output_mutation=True)
