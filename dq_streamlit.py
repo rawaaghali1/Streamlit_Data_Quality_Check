@@ -64,22 +64,20 @@ def layout():
 
     return layout_plot, layout_dist
 
-# Add a selectbox to the sidebar:
+"""
+Add a selectbox to the sidebar:
 sb_selectbox = st.sidebar.selectbox(
     'Select a dataset',
     ('Dataset 1', 'Dataset 2'),
     key = 'sb_selectbox'
 )
+"""
 
 # loading the data
 @st.cache(allow_output_mutation=True)
 def load_data(sb_selectbox):
-    if sb_selectbox == 'Dataset 1':
-        data = pd.read_excel("data/test_raw_file.xlsx")
-        dq_json = json.load(open("result/dq_result.json"))
-    else:
-        data = pd.read_csv("data/Bad_dataset_test.csv", encoding='unicode_escape')
-        dq_json = json.load(open("result/dq_result.json"))
+    data = pd.read_excel("data/test_raw_file.xlsx")
+    dq_json = json.load(open("result/dq_result.json"))
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data.set_index('res_num', drop = False, inplace = True)
