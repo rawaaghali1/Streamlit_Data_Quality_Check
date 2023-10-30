@@ -107,15 +107,13 @@ def compute_dq_metrics(data,dq_json):
     DIL_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DIL_VAL'][0])
     # HUM_VAL
     HUM_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'HUM_VAL'][0])
-    # TPR_VAL
-    TPR_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
-
+	
     # create a score using checks passed and records dropped
     # checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
     # get a score based on number of rows dropped
     # records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
     # final dq score
-    total_score = round(((PHY_STA_COD + TIM_VAL + TPR_VAL + UNT_COD + FAT_CNT_TXT + NIT_FLU_TXT + AGE_DSC + PRO_HDR_TXT + DEN_VAL + DIL_VAL + HUM_VAL + TPR_VAL)/1200) * 100)
+    total_score = round(((PHY_STA_COD + TIM_VAL + TPR_VAL + UNT_COD + FAT_CNT_TXT + NIT_FLU_TXT + AGE_DSC + PRO_HDR_TXT + DEN_VAL + DIL_VAL + HUM_VAL)/1100) * 100)
 
     dq_metrics_df = pd.DataFrame({"metric" : ["PHY_STA_COD","PHY_STA_COD_l","TIM_VAL","TIM_VAL_l","TPR_VAL","TPR_VAL_l","UNT_COD","UNT_COD_l",\
 					     "FAT_CNT_TXT","FAT_CNT_TXT_l","NIT_FLU_TXT","NIT_FLU_TXT_l","AGE_DSC","AGE_DSC_l","PRO_HDR_TXT","PRO_HDR_TXT_l",\
