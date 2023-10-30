@@ -128,6 +128,7 @@ def compute_basic_metrics(data):
     basic_metrics_df = pd.DataFrame({"null_values" : data.isna().sum(), "unique_values" : data.nunique()})
     return basic_metrics_df
 
+"""
 # get table checks results
 @st.cache(allow_output_mutation=True)
 def compute_table_checks_results(dq_json):
@@ -141,7 +142,8 @@ def compute_table_checks_results(dq_json):
     table_results_df = pd.DataFrame({"checks" : table_checks, "results" : table_results})
 
     return table_results_df
-
+"""
+"""
 # get column checks results
 @st.cache(allow_output_mutation=True)
 def compute_column_checks_results(dq_json):
@@ -158,6 +160,7 @@ def compute_column_checks_results(dq_json):
     column_results_df = pd.DataFrame({'columns' : columns, 'checks' : checks, 'results' : results})
 
     return column_results_df
+"""
 
 # run the functions
 data, dq_json= load_data()
@@ -233,7 +236,7 @@ with table_checks_heading:
 with column_checks_heading:
     st.subheader('Column checks')
 
-
+"""
 ######## ROW 3 #######
 table_checks_radio, table_checks_stats, column_checks_radio, column_checks_stats = st.columns([1,1,1,1])
 
@@ -355,4 +358,4 @@ st.line_chart(data['crssi_dbm'])
 st.write('View raw dataset')
 if st.checkbox('Show dataframe'):
     data
-
+"""
