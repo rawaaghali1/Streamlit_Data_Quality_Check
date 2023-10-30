@@ -76,7 +76,7 @@ def layout():
 @st.cache(allow_output_mutation=True)
 def load_data():
     data = pd.read_excel("data/test_raw_file.xlsx")
-    dq_json = json.load(open("result/dq_result.json"))
+    dq_json = json.load(open("result/test_original.json"))
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data.set_index('res_num', drop = False, inplace = True)
