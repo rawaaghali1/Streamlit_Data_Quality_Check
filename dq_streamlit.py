@@ -180,7 +180,7 @@ st.title('Data Quality')
 st.subheader('metrics')
 
 ###### ROW 1 #######
-PHY_STA_COD, TIM_VAL, TPR_VAL, UNT_COD, overall_score = st.columns([1,1,1,1,1])
+PHY_STA_COD, TIM_VAL, TPR_VAL, UNT_COD, overall_score = st.columns([1,1,1],[1,1])
 
 with PHY_STA_COD:
     st.write('PHY_STA_COD')
@@ -205,7 +205,7 @@ with TPR_VAL:
     fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('TPR_VAL')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"TPR_VAL" : '#19AA6E',"TPR_VAL_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "TPR_VAL_l"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "TPR_VAL"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
