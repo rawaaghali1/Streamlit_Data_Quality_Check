@@ -30,7 +30,7 @@ footer {visibility: hidden;}
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # define layout for plotly graphs
-@st.cache_data(allow_output_mutation=True)
+@st.cache_data
 def layout():
     layout_plot = dict(paper_bgcolor = '#0E1117',
         plot_bgcolor = '#0E1117',
@@ -73,7 +73,7 @@ def layout():
 #)
 
 # loading the data
-@st.cache_data(allow_output_mutation=True)
+@st.cache_data
 def load_data():
     data = pd.read_excel("data/test_raw_file.xlsx")
     dq_json = json.load(open("result/test_original.json"))
@@ -83,7 +83,7 @@ def load_data():
     return data, dq_json
 
 # compute the measures of data quality based on project criteria
-@st.cache_data(allow_output_mutation=True)
+@st.cache_data
 def compute_dq_metrics(data,dq_json):
     # PHY_STA_COD
     PHY_STA_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PHY_STA_COD'][0])
@@ -125,14 +125,14 @@ def compute_dq_metrics(data,dq_json):
     return dq_metrics_df, total_score
 
 # basic metrics like null values, unique values
-@st.cache_data(allow_output_mutation=True)
+@st.cache_data
 def compute_basic_metrics(data):
     basic_metrics_df = pd.DataFrame({"null_values" : data.isna().sum(), "unique_values" : data.nunique()})
     return basic_metrics_df
 
 """
 # get table checks results
-@st.cache_data(allow_output_mutation=True)
+@st.cache_data
 def compute_table_checks_results(dq_json):
     table_checks = []
     table_results = []
@@ -147,7 +147,7 @@ def compute_table_checks_results(dq_json):
 """
 """
 # get column checks results
-@st.cache_data(allow_output_mutation=True)
+@st.cache_data
 def compute_column_checks_results(dq_json):
     columns = []
     checks = []
