@@ -75,7 +75,7 @@ sb_selectbox = st.sidebar.selectbox(
 
 # loading the data
 @st.cache(allow_output_mutation=True)
-def load_data(sb_selectbox):
+def load_data():
     data = pd.read_excel("data/test_raw_file.xlsx")
     dq_json = json.load(open("result/dq_result.json"))
     lowercase = lambda x: str(x).lower()
@@ -168,7 +168,7 @@ def compute_column_checks_results(dq_json):
     return column_results_df
 
 # run the functions
-data, dq_json= load_data(sb_selectbox)
+data, dq_json= load_data()
 
 dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
 
