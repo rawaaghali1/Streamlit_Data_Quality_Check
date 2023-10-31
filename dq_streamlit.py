@@ -9,6 +9,7 @@ import time
 import copy
 import datetime
 import openpyxl
+import ast
 from datetime import date
 
 # set the page configuration
@@ -145,24 +146,19 @@ def compute_table_checks_results(dq_json):
 
     return table_results_df
 """
-"""
+
 # get column checks results
 @st.cache_data
 def compute_column_checks_results(dq_json):
     columns = []
     checks = []
     results = []
-    for i in dq_json['checks_column_level'].keys():
-        if type(dq_json['checks_column_level'][i]) not in (int,bool):
-            for j in dq_json['checks_column_level'][i].keys():
-                columns.append(i)
-                checks.append(j)
-                results.append(dq_json['checks_column_level'][i][j]['result'])
-
+    for i in dq_json:
+    	columns.append(i['column'])
+        checks.append(ast.literal_eval(i['notes'])[1])
+        results.append(i['success'])
     column_results_df = pd.DataFrame({'columns' : columns, 'checks' : checks, 'results' : results})
-
     return column_results_df
-"""
 
 # run the functions
 data, dq_json= load_data()
@@ -171,7 +167,7 @@ dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
 
 #table_results_df = compute_table_checks_results(dq_json)
 
-#column_results_df = compute_column_checks_results(dq_json)
+column_results_df = compute_column_checks_results(dq_json)
 
 basic_metrics_df= compute_basic_metrics(data)
 
@@ -301,7 +297,7 @@ with table_checks_heading:
 with column_checks_heading:
     st.subheader('Column checks')
 
-"""
+
 ######## ROW 3 #######
 #table_checks_radio, table_checks_stats, column_checks_radio, column_checks_stats = st.columns([1,1,1,1])
 column_checks_radio, column_checks_stats = st.columns([1,1])
@@ -311,7 +307,7 @@ column_checks_radio, column_checks_stats = st.columns([1,1])
 #    table_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'table_checks_radio')
 
 #with table_checks_stats:
-#    st.metric(label="Total checks", value=f"{dq_json['checks_table_level']['checks_table_total']}", delta = f"-{dq_json['checks_table_level']['checks_table_failed']} checks failed")
+#    st.metric(label="Total checks", value=f"{len(data)}", delta = f"-{dq_json['checks_table_level']['checks_table_failed']} checks failed")
 
 
 # COLUMN CHECKS
@@ -320,32 +316,32 @@ with column_checks_radio:
     column_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'column_checks_radio')
 
 # overall checks passed and failed
-#with column_checks_stats:
-#    st.metric(label="Total checks", value=f"{}", delta = f"-{dq_json['checks_column_level']['checks_column_failed']} checks failed")
+with column_checks_stats:
+    st.metric(label="Total checks", value=f"{len(data)}", delta = f"-{sum(1 for element in data if element['success'] == "FALSE")} checks failed")
 
-
+"""
 ###### ROW 4 #######
-table_checks_select, column_checks_col_select, column_checks_select = st.columns([2,1,1])
+#table_checks_select, column_checks_col_select, column_checks_select = st.columns([2,1,1])
 
 # table checks select
-with table_checks_select:
-    if table_checks_radio == 'Pass':
-        table_checks_options = tuple(table_results_df[table_results_df['results'] == True]['checks'])
-    else:
-        table_checks_options = tuple(table_results_df[table_results_df['results'] == False]['checks'])
+#with table_checks_select:
+#    if table_checks_radio == 'Pass':
+#       table_checks_options = tuple(table_results_df[table_results_df['results'] == True]['checks'])
+#    else:
+#        table_checks_options = tuple(table_results_df[table_results_df['results'] == False]['checks'])
     
-    table_checks_selectbox = st.selectbox(
-    'Select a check',
-    table_checks_options,
-    key = 'table_checks_selectbox'
-    )
+#    table_checks_selectbox = st.selectbox(
+#    'Select a check',
+#    table_checks_options,
+#    key = 'table_checks_selectbox'
+#    )
 
 # column select a column
 with column_checks_col_select:
     if column_checks_radio == 'Pass':
-        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == True]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == "TRUE"]['columns'].unique())
     else:
-        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == False]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == "FALSE"]['columns'].unique())
     
     column_checks_col_selectbox = st.selectbox(
     'Select a column',
