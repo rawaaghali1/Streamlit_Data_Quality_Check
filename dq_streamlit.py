@@ -303,14 +303,15 @@ with column_checks_heading:
 
 """
 ######## ROW 3 #######
-table_checks_radio, table_checks_stats, column_checks_radio, column_checks_stats = st.columns([1,1,1,1])
+#table_checks_radio, table_checks_stats, column_checks_radio, column_checks_stats = st.columns([1,1,1,1])
+column_checks_radio, column_checks_stats = st.columns([1,1])
 
 #TABLE CHECKS
-with table_checks_radio:
-    table_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'table_checks_radio')
+#with table_checks_radio:
+#    table_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'table_checks_radio')
 
-with table_checks_stats:
-    st.metric(label="Total checks", value=f"{dq_json['checks_table_level']['checks_table_total']}", delta = f"-{dq_json['checks_table_level']['checks_table_failed']} checks failed")
+#with table_checks_stats:
+#    st.metric(label="Total checks", value=f"{dq_json['checks_table_level']['checks_table_total']}", delta = f"-{dq_json['checks_table_level']['checks_table_failed']} checks failed")
 
 
 # COLUMN CHECKS
@@ -319,8 +320,8 @@ with column_checks_radio:
     column_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'column_checks_radio')
 
 # overall checks passed and failed
-with column_checks_stats:
-    st.metric(label="Total checks", value=f"{dq_json['checks_column_level']['checks_column_total']}", delta = f"-{dq_json['checks_column_level']['checks_column_failed']} checks failed")
+#with column_checks_stats:
+#    st.metric(label="Total checks", value=f"{}", delta = f"-{dq_json['checks_column_level']['checks_column_failed']} checks failed")
 
 
 ###### ROW 4 #######
