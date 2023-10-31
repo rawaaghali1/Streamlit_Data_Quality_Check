@@ -290,12 +290,12 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 
 ###### ROW 2 #######
 # heading
-#table_checks_heading, column_checks_heading = st.columns([1,1])
-#with table_checks_heading:
-#    st.subheader('Table checks')
-column_checks_heading = st.columns(1)
-with column_checks_heading:
+table_checks_heading, column_checks_heading = st.columns([1,1])
+with table_checks_heading:
     st.subheader('Column checks')
+
+with column_checks_heading:
+    st.subheader('Metrics')
 
 
 ######## ROW 3 #######
