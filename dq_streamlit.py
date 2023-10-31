@@ -173,7 +173,7 @@ layout_plot, layout_dist = layout()
 
 # Heading
 st.title('Data Quality')
-st.subheader('metrics')
+st.subheader('Metrics')
 
 ###### ROW 1 #######
 PHY_STA_COD, TIM_VAL, TPR_VAL, UNT_COD, FAT_CNT_TXT, NIT_FLU_TXT = st.columns(6)
