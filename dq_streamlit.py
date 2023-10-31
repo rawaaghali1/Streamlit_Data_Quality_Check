@@ -317,7 +317,7 @@ with column_checks_radio:
 
 # overall checks passed and failed
 with column_checks_stats:
-    st.metric(label="Total checks", value=f"{len(data)}", delta = f"-{sum(1 for element in data if element['success'] == "FALSE")} checks failed")
+    st.metric(label="Total checks", value=f"{len(data)}", delta = f"-{sum(1 for element in data if element['success'] == 'FALSE')} checks failed")
 
 """
 ###### ROW 4 #######
