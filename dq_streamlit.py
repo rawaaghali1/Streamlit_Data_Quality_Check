@@ -319,7 +319,7 @@ with column_checks_radio:
 with column_checks_stats:
     st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success'] == False)} checks failed")
 
-"""
+
 ###### ROW 4 #######
 #table_checks_select, column_checks_col_select, column_checks_select = st.columns([2,1,1])
 
@@ -339,9 +339,9 @@ with column_checks_stats:
 # column select a column
 with column_checks_col_select:
     if column_checks_radio == 'Pass':
-        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == "TRUE"]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == True]['columns'].unique())
     else:
-        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == "FALSE"]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == False]['columns'].unique())
     
     column_checks_col_selectbox = st.selectbox(
     'Select a column',
@@ -360,18 +360,18 @@ with column_checks_select:
     column_checks_options,
     key = 'column_checks_selectbox'
     )
-
+"""
 ###### ROW 5 #######
 
 table_checks_json, column_checks_json = st.columns([1,1])
 
 # table checks json
-with table_checks_json:
-    try:
-        table_json = dq_json['checks_table_level'][table_checks_selectbox]
-        st.json(table_json)
-    except KeyError:
-        st.json({'checks' : 'None'})
+#with table_checks_json:
+#    try:
+#        table_json = dq_json['checks_table_level'][table_checks_selectbox]
+#        st.json(table_json)
+#    except KeyError:
+#        st.json({'checks' : 'None'})
 
 # columns checks json
 with column_checks_json:
@@ -380,7 +380,7 @@ with column_checks_json:
         st.json(columns_json)
     except KeyError:
         st.json({'checks' : 'None'})
-"""        
+"""       
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
