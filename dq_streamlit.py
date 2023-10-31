@@ -131,21 +131,19 @@ def compute_basic_metrics(data):
     basic_metrics_df = pd.DataFrame({"null_values" : data.isna().sum(), "unique_values" : data.nunique()})
     return basic_metrics_df
 
-"""
 # get table checks results
-@st.cache_data
-def compute_table_checks_results(dq_json):
-    table_checks = []
-    table_results = []
-    for i in  dq_json['checks_table_level'].keys():
-        if type(dq_json['checks_table_level'][i]) not in (int,bool):
-            table_checks.append(i)
-            table_results.append(dq_json['checks_table_level'][i]['result'])
-
-    table_results_df = pd.DataFrame({"checks" : table_checks, "results" : table_results})
-
-    return table_results_df
-"""
+#@st.cache_data
+#def compute_table_checks_results(dq_json):
+#    table_checks = []
+#    table_results = []
+#    for i in  dq_json['checks_table_level'].keys():
+#        if type(dq_json['checks_table_level'][i]) not in (int,bool):
+#            table_checks.append(i)
+#            table_results.append(dq_json['checks_table_level'][i]['result'])
+#
+#    table_results_df = pd.DataFrame({"checks" : table_checks, "results" : table_results})
+#
+#    return table_results_df
 
 # get column checks results
 @st.cache_data
