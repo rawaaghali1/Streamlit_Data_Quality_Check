@@ -360,7 +360,7 @@ with column_checks_select:
     column_checks_options,
     key = 'column_checks_selectbox'
     )
-"""
+
 ###### ROW 5 #######
 
 table_checks_json, column_checks_json = st.columns([1,1])
@@ -376,12 +376,13 @@ table_checks_json, column_checks_json = st.columns([1,1])
 # columns checks json
 with column_checks_json:
     try:
-        columns_json = dq_json['checks_column_level'][column_checks_col_selectbox][column_checks_selectbox]
-        st.json(columns_json)
+	for i in dq_json:
+		if column_checks_selectbox in i['notes']:
+			st.json(i)
     except KeyError:
         st.json({'checks' : 'None'})
 """       
-
+"""
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 
