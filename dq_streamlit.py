@@ -335,7 +335,7 @@ with column_checks_stats:
 #    table_checks_options,
 #    key = 'table_checks_selectbox'
 #    )
-
+column_checks_col_select, column_checks_select = st.columns([1,1])
 # column select a column
 with column_checks_col_select:
     if column_checks_radio == 'Pass':
