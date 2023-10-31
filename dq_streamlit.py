@@ -363,7 +363,7 @@ with column_checks_select:
 
 ###### ROW 5 #######
 
-table_checks_json, column_checks_json = st.columns([1,1])
+column_checks_json = st.columns([1])
 
 # table checks json
 #with table_checks_json:
