@@ -419,7 +419,7 @@ with distribution_plot:
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 # raw dataset
-st.write('View raw dataset')
+st.subheader('View raw dataset')
 if st.checkbox('Show dataframe'):
     data
 
