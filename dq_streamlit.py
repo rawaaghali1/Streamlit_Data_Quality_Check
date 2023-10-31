@@ -375,7 +375,7 @@ column_checks_json, table_checks_json = st.columns([0.9, 0.1])
 with column_checks_json:
     try:
 	    for i in dq_json:
-		    if column_checks_selectbox in i['notes']:
+		    if column_checks_selectbox[0:15] in i['notes']:
 			    st.json(i)
     except KeyError:
 	    st.json({'checks' : 'None'})
