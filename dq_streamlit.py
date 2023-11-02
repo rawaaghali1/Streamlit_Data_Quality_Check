@@ -77,8 +77,8 @@ sb_selectbox = st.sidebar.selectbox(
 @st.cache_data
 def load_data(sb_selectbox):
     if sb_selectbox == 'Batch 1':
-        data = pd.read_excel("data/test_raw_file_1.xlsx")
-        dq_json = json.load(open("result/test_original_1.json"))
+        data = pd.read_excel("data/test_raw_file.xlsx")
+        dq_json = json.load(open("result/test_original.json"))
     else:
         data = pd.read_csv("data/test_raw_file_2.csv")
         dq_json = json.load(open("result/test_original_2.json"))
