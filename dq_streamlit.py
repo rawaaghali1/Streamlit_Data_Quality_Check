@@ -173,7 +173,7 @@ def compute_column_checks_results(dq_json):
     return column_results_df
 
 # run the functions
-data, dq_json= load_data()
+data, dq_json= load_data(sb_selectbox)
 
 dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
 
