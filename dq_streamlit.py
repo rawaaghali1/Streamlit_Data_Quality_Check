@@ -107,7 +107,7 @@ def compute_dq_metrics(data, dq_json):
     # TPR_VAL
     TPR_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
     # UNT_COD
-    UNT_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'UNT_COD'][0])
+    UNT_COD = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'UNT_COD'][0])
     # FAT_CNT_TXT
     FAT_CNT_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'FAT_CNT_TXT'][0])
     # NIT_FLU_TXT
