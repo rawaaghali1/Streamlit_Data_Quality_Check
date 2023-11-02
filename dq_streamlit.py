@@ -66,26 +66,40 @@ def layout():
     return layout_plot, layout_dist
 
 
-#Add a selectbox to the sidebar:
-#sb_selectbox = st.sidebar.selectbox(
-#    'Select a dataset',
-#    ('Dataset 1', 'Dataset 2'),
-#    key = 'sb_selectbox'
-#)
+# Add a selectbox to the sidebar:
+sb_selectbox = st.sidebar.selectbox(
+    'Select a dataset',
+    ('Batch 1', 'Batch 2'),
+    key = 'sb_selectbox'
+)
 
 # loading the data
 @st.cache_data
-def load_data():
-    data = pd.read_excel("data/test_raw_file.xlsx")
-    dq_json = json.load(open("result/test_original.json"))
+def load_data(sb_selectbox):
+    if sb_selectbox == 'Batch 1':
+        data = pd.read_excel("data/test_raw_file_1.xlsx")
+        dq_json = json.load(open("result/test_original_1.json"))
+    else:
+        data = pd.read_csv("data/test_raw_file_2.csv")
+        dq_json = json.load(open("result/test_original_2.json"))
 #    lowercase = lambda x: str(x).lower()
 #    data.rename(lowercase, axis='columns', inplace=True)
     data.set_index('RES_NUM', drop = False, inplace = True)
     return data, dq_json
 
+# loading the data
+#@st.cache_data
+#def load_data():
+#    data = pd.read_excel("data/test_raw_file.xlsx")
+#    dq_json = json.load(open("result/test_original.json"))
+#    lowercase = lambda x: str(x).lower()
+#    data.rename(lowercase, axis='columns', inplace=True)
+#    data.set_index('RES_NUM', drop = False, inplace = True)
+#    return data, dq_json
+
 # compute the measures of data quality based on project criteria
 @st.cache_data
-def compute_dq_metrics(data,dq_json):
+def compute_dq_metrics(data, dq_json):
     # PHY_STA_COD
     PHY_STA_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PHY_STA_COD'][0])
     # TIM_VAL
