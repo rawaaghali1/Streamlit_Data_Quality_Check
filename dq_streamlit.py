@@ -194,6 +194,8 @@ col1, col2, col3 = st.columns([10, 1, 1])
 with col1:
 	st.title('Data Quality Dashboard')
 with col2:
+	st.write('')
+	st.write('')
 	st.write('Powered by')
 with col3:
 	st.image(image, width=90, output_format='PNG')
