@@ -22,17 +22,6 @@ st.set_page_config(
 	page_icon=None,  # String, anything supported by st.image, or None.
 )
 
-# put logo image on the top right
-image = Image.open('assets/danone_ds_logo.png')
-image_resized = image.resize((100, 100))
-col1, col2, col3 = st.columns([3,3,1])
-with col1:
-	st.write("")
-with col2:
-	st.write("")	
-with col3:
-	st.image(image_resized, caption='Powered by Danone DS Team')
-
 # hide the blurb and footer
 hide_streamlit_style = """
 <style>
@@ -199,7 +188,14 @@ basic_metrics_df= compute_basic_metrics(data)
 layout_plot, layout_dist = layout()
 
 # Heading
-st.title('Data Quality')
+# put logo image on the top right
+image = Image.open('assets/danone_ds_logo.png')
+image_resized = image.resize((100, 100))
+col1, col2 = st.columns([9, 1])
+with col1:
+	st.title('Data Quality')
+with col2:
+	st.image(image_resized, caption='Powered by Danone DS Team')
 st.subheader('Metrics')
 
 ###### ROW 1 #######
