@@ -351,9 +351,9 @@ column_checks_col_select, column_checks_select = st.columns([1,1])
 # column select a column
 with column_checks_col_select:
     if column_checks_radio == 'Pass':
-        column_checks_col_options = tuple(column_results_df[column_results_df['results']==True]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[(column_results_df['results']==True)|(column_results_df['results']=='TRUE')]['columns'].unique())
     else:
-        column_checks_col_options = tuple(column_results_df[column_results_df['results']==False]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[(column_results_df['results']==False)|(column_results_df['results']=='FALSE')]['columns'].unique())
     
     column_checks_col_selectbox = st.selectbox(
     'Select a column',
@@ -364,9 +364,9 @@ with column_checks_col_select:
 # column checks select 
 with column_checks_select:
     if column_checks_radio == 'Pass':
-        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & (column_results_df['results']==True)]['checks'])
+        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & ((column_results_df['results']==True)|(column_results_df['results']=='TRUE'))]['checks'])
     else:
-        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & (column_results_df['results']==False)]['checks'])
+        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & ((column_results_df['results']==False)|(column_results_df['results']=='FALSE'))]['checks'])
     column_checks_selectbox = st.selectbox(
     'Select a check',
     column_checks_options,
