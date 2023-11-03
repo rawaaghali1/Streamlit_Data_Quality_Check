@@ -329,7 +329,7 @@ with column_checks_radio:
 
 # overall checks passed and failed
 with column_checks_stats:
-    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success'] == "FALSE")} checks failed")
+    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success'] == 'FALSE')} checks failed")
 
 
 ###### ROW 4 #######
@@ -338,9 +338,9 @@ with column_checks_stats:
 # table checks select
 #with table_checks_select:
 #    if table_checks_radio == 'Pass':
-#       table_checks_options = tuple(table_results_df[table_results_df['results'] == "TRUE"]['checks'])
+#       table_checks_options = tuple(table_results_df[table_results_df['results'] == 'TRUE']['checks'])
 #    else:
-#        table_checks_options = tuple(table_results_df[table_results_df['results'] == "FALSE"]['checks'])
+#        table_checks_options = tuple(table_results_df[table_results_df['results'] == 'FALSE']['checks'])
     
 #    table_checks_selectbox = st.selectbox(
 #    'Select a check',
