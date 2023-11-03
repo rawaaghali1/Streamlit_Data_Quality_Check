@@ -23,7 +23,7 @@ st.set_page_config(
 )
 
 image = Image.open('assets/danone_ds_logo.png')
-st.image(image, caption='Powered by Danone Data Science Team')
+st.image(image, width=200, caption='Powered by Danone Data Science Team')
 
 # hide the blurb and footer
 hide_streamlit_style = """
