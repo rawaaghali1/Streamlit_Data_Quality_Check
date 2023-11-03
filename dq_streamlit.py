@@ -190,7 +190,7 @@ layout_plot, layout_dist = layout()
 # Heading
 # put logo image on the top right
 image = Image.open('assets/danone_ds_logo.png')
-col1, col2, col3 = st.columns([10, 2, 1])
+col1, col2, col3 = st.columns([10, 2, 2])
 with col1:
 	st.title('Data Quality Dashboard')
 with col2:
