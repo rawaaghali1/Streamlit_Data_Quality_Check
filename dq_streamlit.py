@@ -19,11 +19,18 @@ st.set_page_config(
 	layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
 	initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
 	page_title="Data Quality App",  # String or None. Strings get appended with "• Streamlit". 
-	page_icon='https://github.com/Yoseko/streamlit_data_quality/blob/main/assets/danone_ds_logo.png?raw=true',  # String, anything supported by st.image, or None.
+	page_icon=None,  # String, anything supported by st.image, or None.
 )
 
+# put logo image on the top right
 image = Image.open('assets/danone_ds_logo.png')
-st.image(image, width=200, caption='Powered by Danone Data Science Team')
+col1, col2, col3 = st.beta_columns([3,3,1])
+with col1:
+	st.write("")
+with col2:
+	st.write("")	
+with col3:
+	st.image(image, width=200, caption='Powered by Danone DS Team')
 
 # hide the blurb and footer
 hide_streamlit_style = """
