@@ -11,13 +11,19 @@ import datetime
 import openpyxl
 import ast
 from datetime import date
+from PIL import Image
+
+image = Image.open('assets/danone_ds_logo.png')
+
+st.image(image, caption='Powered by Danone Data Science Team')
+
 
 # set the page configuration
 st.set_page_config(
 	layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
 	initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
 	page_title="Data Quality App",  # String or None. Strings get appended with "• Streamlit". 
-	page_icon=None,  # String, anything supported by st.image, or None.
+	page_icon=image,  # String, anything supported by st.image, or None.
 )
 
 # hide the blurb and footer
