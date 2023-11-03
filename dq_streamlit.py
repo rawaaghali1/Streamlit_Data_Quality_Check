@@ -329,7 +329,7 @@ with column_checks_radio:
 
 # overall checks passed and failed
 with column_checks_stats:
-    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success'] == False)} checks failed")
+    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success'] == "FALSE")} checks failed")
 
 
 ###### ROW 4 #######
