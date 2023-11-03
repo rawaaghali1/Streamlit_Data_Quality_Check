@@ -338,9 +338,9 @@ with column_checks_stats:
 # table checks select
 #with table_checks_select:
 #    if table_checks_radio == 'Pass':
-#       table_checks_options = tuple(table_results_df[table_results_df['results'] == True]['checks'])
+#       table_checks_options = tuple(table_results_df[table_results_df['results'] == "TRUE"]['checks'])
 #    else:
-#        table_checks_options = tuple(table_results_df[table_results_df['results'] == False]['checks'])
+#        table_checks_options = tuple(table_results_df[table_results_df['results'] == "FALSE"]['checks'])
     
 #    table_checks_selectbox = st.selectbox(
 #    'Select a check',
