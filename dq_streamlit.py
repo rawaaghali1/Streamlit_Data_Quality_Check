@@ -329,7 +329,7 @@ with column_checks_radio:
 
 # overall checks passed and failed
 with column_checks_stats:
-    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success'] == 'FALSE')} checks failed")
+    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
 
 
 ###### ROW 4 #######
@@ -338,9 +338,9 @@ with column_checks_stats:
 # table checks select
 #with table_checks_select:
 #    if table_checks_radio == 'Pass':
-#       table_checks_options = tuple(table_results_df[table_results_df['results'] == 'TRUE']['checks'])
+#       table_checks_options = tuple(table_results_df[table_results_df['results']==True]['checks'])
 #    else:
-#        table_checks_options = tuple(table_results_df[table_results_df['results'] == 'FALSE']['checks'])
+#        table_checks_options = tuple(table_results_df[table_results_df['results']==False]['checks'])
     
 #    table_checks_selectbox = st.selectbox(
 #    'Select a check',
@@ -351,9 +351,9 @@ column_checks_col_select, column_checks_select = st.columns([1,1])
 # column select a column
 with column_checks_col_select:
     if column_checks_radio == 'Pass':
-        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == True]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[column_results_df['results']==True]['columns'].unique())
     else:
-        column_checks_col_options = tuple(column_results_df[column_results_df['results'] == False]['columns'].unique())
+        column_checks_col_options = tuple(column_results_df[column_results_df['results']==False]['columns'].unique())
     
     column_checks_col_selectbox = st.selectbox(
     'Select a column',
@@ -364,9 +364,9 @@ with column_checks_col_select:
 # column checks select 
 with column_checks_select:
     if column_checks_radio == 'Pass':
-        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & (column_results_df['results'] == True)]['checks'])
+        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & (column_results_df['results']==True)]['checks'])
     else:
-        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & (column_results_df['results'] == False)]['checks'])
+        column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & (column_results_df['results']==False)]['checks'])
     column_checks_selectbox = st.selectbox(
     'Select a check',
     column_checks_options,
