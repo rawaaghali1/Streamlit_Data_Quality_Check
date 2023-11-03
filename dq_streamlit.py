@@ -196,6 +196,9 @@ with col1:
 with col2:
 	st.text('')
 	st.text('')
+	st.text('')
+	st.text('')
+	st.text('')
 	st.text('Powered by :')
 with col3:
 	st.image(image, width=100, output_format='PNG')
