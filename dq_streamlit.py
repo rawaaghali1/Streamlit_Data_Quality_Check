@@ -195,8 +195,8 @@ with col1:
 	st.title('Data Quality Dashboard')
 with col2:
 	st.text('')
-    	st.text('')
-    	st.text('Powered by :')
+	st.text('')
+	st.text('Powered by :')
 with col3:
 	st.image(image, width=100, output_format='PNG')
 
