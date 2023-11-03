@@ -24,7 +24,7 @@ st.set_page_config(
 
 # put logo image on the top right
 image = Image.open('assets/danone_ds_logo.png')
-col1, col2, col3 = st.beta_columns([3,3,1])
+col1, col2, col3 = st.columns([3,3,1])
 with col1:
 	st.write("")
 with col2:
