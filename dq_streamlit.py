@@ -24,13 +24,14 @@ st.set_page_config(
 
 # put logo image on the top right
 image = Image.open('assets/danone_ds_logo.png')
+image_resized = image.resize((100, 100))
 col1, col2, col3 = st.columns([3,3,1])
 with col1:
 	st.write("")
 with col2:
 	st.write("")	
 with col3:
-	st.image(image, width=200, caption='Powered by Danone DS Team')
+	st.image(image_resized, caption='Powered by Danone DS Team')
 
 # hide the blurb and footer
 hide_streamlit_style = """
