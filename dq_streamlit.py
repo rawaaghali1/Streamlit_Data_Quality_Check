@@ -191,9 +191,9 @@ layout_plot, layout_dist = layout()
 # put logo image on the top right
 image = Image.open('assets/danone_ds_logo.png')
 image_resized = image.resize((100, 100))
-col1, col2 = st.columns([9, 1])
+col1, col2 = st.columns([7, 1])
 with col1:
-	st.title('Data Quality')
+	st.title('Data Quality Dashboard')
 with col2:
 	st.image(image_resized, caption='Powered by Danone DS Team')
 st.subheader('Metrics')
@@ -409,7 +409,7 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 
 ###### ROW 6 #######
 # barplot and distribution 
-st.subheader('Viz')
+st.subheader('Visualization')
 bar_plot, distribution_plot  = st.columns([1,1])
 
 with bar_plot:
