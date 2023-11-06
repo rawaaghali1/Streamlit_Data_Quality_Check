@@ -387,7 +387,7 @@ with column_checks_select:
 
 ###### ROW 5 #######
 
-table_checks_json, column_checks_json = st.columns([2, 8])
+column_checks_json, table_checks_json = st.columns([8, 2])
 
 # table checks json
 #with table_checks_json:
@@ -411,6 +411,7 @@ with table_checks_json:
     color_discrete_map = {}
     color_discrete_map[column_checks_col_selectbox] = '#19AA6E'
     color_discrete_map[column_checks_col_selectbox+'_l'] = '#0E1117'
+    st.write('Data Quality Score')
     fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', color = 'metric',\
         hole = 0.5, color_discrete_map=color_discrete_map)
     fig.update_traces(textinfo='none')
