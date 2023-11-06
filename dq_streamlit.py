@@ -560,6 +560,12 @@ with distribution_plot:
     fig.update_layout(layout_dist)
     st.plotly_chart(fig, use_container_width=True)
 
+corr_plot, unknown_plot  = st.columns([1,1])
+with bar_plot:
+    data_quantitative = data[["DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
+    fig = px.imshow(data_quantitative.corr(numeric_only=True))
+    st.write(fig, use_container_width=True)
+
 ###### ROW 7 #######
 # signal 
 # st.write('Signal')
