@@ -240,6 +240,8 @@ data, dq_json= load_data(sb_selectbox)
 
 dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
 
+dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data,dq_json)
+
 #table_results_df = compute_table_checks_results(dq_json)
 
 column_results_df = compute_column_checks_results(dq_json)
