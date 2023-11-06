@@ -385,7 +385,7 @@ with column_checks_select:
 
 ###### ROW 5 #######
 
-column_checks_json, table_checks_json = st.columns([7, 3])
+column_checks_json, table_checks_json = st.columns([8, 2])
 
 # table checks json
 #with table_checks_json:
@@ -406,7 +406,7 @@ with column_checks_json:
 
 with table_checks_json:
     st.write(column_checks_col_selectbox)
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', color = 'metric', \
+    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', \
         hole = 0.5)
     fig.update_traces(textinfo='none')
     layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == column_checks_col_selectbox]["percentage"].iloc[0])
