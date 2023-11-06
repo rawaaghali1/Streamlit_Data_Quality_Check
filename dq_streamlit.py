@@ -563,8 +563,8 @@ with distribution_plot:
 corr_plot, unknown_plot  = st.columns([1,1])
 with corr_plot:
     st.write('Correlation heatmap')
-    data_quantitative = data[["DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
-    fig = px.imshow(data.corr(numeric_only=True))
+    data_quantitative = data[["DEN_VAL", "DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
+    fig = px.imshow(data_quantitative.corr(numeric_only=True))
     st.write(fig)
 
 ###### ROW 7 #######
