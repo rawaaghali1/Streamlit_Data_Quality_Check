@@ -148,9 +148,9 @@ def compute_dq_metrics_2(data,dq_json):
     completeness = int(np.round((data.notna().to_numpy() == True).mean() * 100))
 
     # CONSISTENCY
-    cols = ['ws_source_ip','time','train_id','train_speed','obm_color','obm_direction','kp_in_track',
-                        'obm_source_ip','scanned_mac_address','rssi_dbm','crssi_dbm']
-    type_list = [str,str,numpy.int64,numpy.float64,str,str,numpy.float64,str,str,numpy.float64,numpy.float64]
+    cols = ['SRC_SYS_COD','IDT_COD','PDS_COD','NPB_COD','DIL_VAL','HUM_VAL',
+                        'TPR_VAL','TIM_VAL','RES_TXT']
+    type_list = [str,str,numpy.int64,str,numpy.float64,numpy.float64,numpy.int64,numpy.float64,str]
     # create temporary df
     temp_data = data[cols]
     temp_type_list = []
@@ -164,12 +164,12 @@ def compute_dq_metrics_2(data,dq_json):
     # ACCURACY
     a = 0
     b = 0
-    if data['train_id'].nunique() == 1:
+    if data['SRC_SYS_COD'].nunique() == 1:
         a = 95
-    if len(list(data['obm_color'].unique())) == 1:
+    if len(list(data['PHY_STA_COD'].unique())) == 1:
         b = 95    
-    c = 100 - len(data[~data['obm_color'].isin(['BLUE','RED'])])/len(data)
-    d = 100 - len(data[~data['obm_direction'].isin(['Head','Tail'])])/len(data)
+    c = 100 - len(data[~data['AGE_DSC'].isin(['Infant','Non-Infant'])])/len(data)
+    d = 100 - len(data[~data['PHY_STA_COD'].isin(['Powder'])])/len(data)
 
     accuracy = round(((a+b+c+d)/400)*100)
 
@@ -178,24 +178,24 @@ def compute_dq_metrics_2(data,dq_json):
 
     # TIMELINESS
     today = datetime.datetime.now().date()
-    data_date = datetime.datetime.strptime(data['time'].iloc[0], "%Y-%m-%d %H:%M:%S.%f").date()
-    delta = today - data_date
-    timeliness = 95
-    if delta.days > 150:
-        timeliness = 30
-    elif delta.days > 120:
-        timeliness = 50
-    elif delta.days > 90:
-        timeliness = 60
-    elif delta.days > 60:
-        timeliness = 80
+    #data_date = datetime.datetime.strptime(data['MNF_DAT'].iloc[0], "%Y-%m-%d %H:%M:%S.%f").date()
+    #delta = today - data_date
+    timeliness = 50
+    #if delta.days > 150:
+    #    timeliness = 30
+    #elif delta.days > 120:
+    #    timeliness = 50
+    #elif delta.days > 90:
+    #    timeliness = 60
+    #elif delta.days > 60:
+    #    timeliness = 80
 
     # create a score using checks passed and records dropped
-    checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
+    #checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
     # get a score based on number of rows dropped
-    records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
+    #records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
     # final dq score
-    total_score = round(((completeness + consistency + accuracy + relevancy + timeliness + checks_score + records_score)/700) * 100)
+    total_score = round(((completeness + consistency + accuracy + relevancy + timeliness)/500) * 100)
 
     dq_metrics_df = pd.DataFrame({"metric" : ["completeness","completeness_l","consistency","consistency_l","accuracy","accuracy_l","relevancy","relevancy_l","timeliness","timeliness_l"], \
     "percentage" : [completeness,100-completeness,consistency,100-consistency,accuracy,100-accuracy,relevancy,100-relevancy,timeliness,100-timeliness]})
