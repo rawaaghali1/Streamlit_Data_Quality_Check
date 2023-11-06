@@ -124,7 +124,9 @@ def compute_dq_metrics(data, dq_json):
     DIL_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DIL_VAL'][0])
     # HUM_VAL
     HUM_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'HUM_VAL'][0])
-	
+    # RES_TXT
+    RES_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'RES_TXT'][0])
+    
     # create a score using checks passed and records dropped
     # checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
     # get a score based on number of rows dropped
