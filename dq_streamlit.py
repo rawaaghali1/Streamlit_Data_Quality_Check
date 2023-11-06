@@ -124,8 +124,6 @@ def compute_dq_metrics(data, dq_json):
     DIL_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DIL_VAL'][0])
     # HUM_VAL
     HUM_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'HUM_VAL'][0])
-    # RES_TXT
-    RES_TXT = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'RES_TXT'][0])
     
     # create a score using checks passed and records dropped
     # checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
@@ -140,6 +138,67 @@ def compute_dq_metrics(data, dq_json):
     "percentage" : [PHY_STA_COD,100-PHY_STA_COD,TIM_VAL,100-TIM_VAL,TPR_VAL,100-TPR_VAL,UNT_COD,100-UNT_COD,\
 		   FAT_CNT_TXT,100-FAT_CNT_TXT,NIT_FLU_TXT,100-NIT_FLU_TXT,AGE_DSC,100-AGE_DSC,PRO_HDR_TXT,100-PRO_HDR_TXT,\
 		   DEN_VAL,100-DEN_VAL,DIL_VAL,100-DIL_VAL,HUM_VAL,100-HUM_VAL]})
+
+    return dq_metrics_df, total_score
+
+# compute the measures of general data quality based on 3-5 criteria
+@st.cache_data
+def compute_dq_metrics_2(data,dq_json):
+    # COMPLETENESS
+    completeness = int(np.round((data.notna().to_numpy() == True).mean() * 100))
+
+    # CONSISTENCY
+    cols = ['ws_source_ip','time','train_id','train_speed','obm_color','obm_direction','kp_in_track',
+                        'obm_source_ip','scanned_mac_address','rssi_dbm','crssi_dbm']
+    type_list = [str,str,numpy.int64,numpy.float64,str,str,numpy.float64,str,str,numpy.float64,numpy.float64]
+    # create temporary df
+    temp_data = data[cols]
+    temp_type_list = []
+    # get the type of columns
+    for col in temp_data.columns:
+        temp_type_list.append(type(temp_data[col].iloc[0]))
+    con_df = pd.DataFrame({"columns" : cols, "type_actual" : type_list, "type_current" : temp_type_list})
+    con_df['type_result'] = con_df['type_actual'] == con_df['type_current']
+    consistency = round(con_df["type_result"].sum()/len(con_df) * 100)
+
+    # ACCURACY
+    a = 0
+    b = 0
+    if data['train_id'].nunique() == 1:
+        a = 95
+    if len(list(data['obm_color'].unique())) == 1:
+        b = 95    
+    c = 100 - len(data[~data['obm_color'].isin(['BLUE','RED'])])/len(data)
+    d = 100 - len(data[~data['obm_direction'].isin(['Head','Tail'])])/len(data)
+
+    accuracy = round(((a+b+c+d)/400)*100)
+
+    # RELEVANCY
+    relevancy = round(((accuracy + consistency)/200)*100)
+
+    # TIMELINESS
+    today = datetime.datetime.now().date()
+    data_date = datetime.datetime.strptime(data['time'].iloc[0], "%Y-%m-%d %H:%M:%S.%f").date()
+    delta = today - data_date
+    timeliness = 95
+    if delta.days > 150:
+        timeliness = 30
+    elif delta.days > 120:
+        timeliness = 50
+    elif delta.days > 90:
+        timeliness = 60
+    elif delta.days > 60:
+        timeliness = 80
+
+    # create a score using checks passed and records dropped
+    checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
+    # get a score based on number of rows dropped
+    records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
+    # final dq score
+    total_score = round(((completeness + consistency + accuracy + relevancy + timeliness + checks_score + records_score)/700) * 100)
+
+    dq_metrics_df = pd.DataFrame({"metric" : ["completeness","completeness_l","consistency","consistency_l","accuracy","accuracy_l","relevancy","relevancy_l","timeliness","timeliness_l"], \
+    "percentage" : [completeness,100-completeness,consistency,100-consistency,accuracy,100-accuracy,relevancy,100-relevancy,timeliness,100-timeliness]})
 
     return dq_metrics_df, total_score
 
