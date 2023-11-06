@@ -385,7 +385,7 @@ with column_checks_select:
 
 ###### ROW 5 #######
 
-column_checks_json, table_checks_json = st.columns([8, 2])
+table_checks_json, column_checks_json = st.columns([2, 8])
 
 # table checks json
 #with table_checks_json:
@@ -396,6 +396,14 @@ column_checks_json, table_checks_json = st.columns([8, 2])
 #        st.json({'checks' : 'None'})
 
 # columns checks json
+with table_checks_json:
+    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', color = 'metric',\
+        hole = 0.5)
+    fig.update_traces(textinfo='none')
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == column_checks_col_selectbox]["percentage"].iloc[0])
+    fig.update_layout(layout_plot)
+    st.plotly_chart(fig, use_container_width=True)
+	
 with column_checks_json:
     try:
 	    for i in dq_json:
@@ -403,15 +411,6 @@ with column_checks_json:
 			    st.json(i)
     except KeyError:
 	    st.json({'checks' : 'None'})
-
-with table_checks_json:
-    st.write(column_checks_col_selectbox)
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', \
-        hole = 0.5)
-    fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == column_checks_col_selectbox]["percentage"].iloc[0])
-    fig.update_layout(layout_plot)
-    st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
