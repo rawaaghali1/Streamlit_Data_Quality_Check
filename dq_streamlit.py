@@ -403,8 +403,16 @@ with column_checks_json:
 			    st.json(i)
     except KeyError:
 	    st.json({'checks' : 'None'})
-"""       
-"""
+
+with table_checks_json:
+    st.write(column_checks_col_selectbox)
+    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', color = 'metric', \
+        hole = 0.5)
+    fig.update_traces(textinfo='none')
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == column_checks_col_selectbox]["percentage"].iloc[0])
+    fig.update_layout(layout_plot)
+    st.plotly_chart(fig, use_container_width=True)
+
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 
