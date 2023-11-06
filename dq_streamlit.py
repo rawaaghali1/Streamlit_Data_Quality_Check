@@ -267,51 +267,51 @@ accuracy, relevancy, completeness, timeliness, consistency, overall_score = st.c
 
 with accuracy:
     st.write('Accuracy')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('accuracy')], names = 'metric', values = 'percentage', color = 'metric', \
+    fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('accuracy')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"accuracy" : '#19AA6E',"accuracy_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "accuracy"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df_2[dq_metrics_df_2['metric'] == "accuracy"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
 with relevancy:
     st.write('relevancy')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('relevancy')], names = 'metric', values = 'percentage', color = 'metric', \
+    fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('relevancy')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"relevancy" : '#19AA6E',"relevancy_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "relevancy"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df_2[dq_metrics_df_2['metric'] == "relevancy"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
 with completeness:
     st.write('Completeness')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('completeness')], names = 'metric', values = 'percentage', color = 'metric', \
+    fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('completeness')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"completeness" : '#19AA6E',"completeness_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "completeness"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df_2[dq_metrics_df_2['metric'] == "completeness"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
 with timeliness:
     st.write('Timeliness')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('timeliness')], names = 'metric', values = 'percentage', color = 'metric', \
+    fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('timeliness')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"timeliness" : '#19AA6E',"timeliness_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "timeliness"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df_2[dq_metrics_df_2['metric'] == "timeliness"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
 with consistency:
     st.write('Consistency')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains('consistency')], names = 'metric', values = 'percentage', color = 'metric', \
+    fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('consistency')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"consistency" : '#19AA6E',"consistency_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == "consistency"]["percentage"].iloc[0])
+    layout_plot['annotations'][0]['text'] = str(dq_metrics_df_2[dq_metrics_df_2['metric'] == "consistency"]["percentage"].iloc[0])
     fig.update_layout(layout_plot)
     st.plotly_chart(fig, use_container_width=True)
 
 with overall_score:
-    st.metric(label="DQ score", value=f"{total_score}", delta = f"-{100 - total_score}")
+    st.metric(label="DQ score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}")
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
