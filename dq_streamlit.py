@@ -275,7 +275,7 @@ with accuracy:
     st.plotly_chart(fig, use_container_width=True)
 
 with relevancy:
-    st.write('relevancy')
+    st.write('Relevancy')
     fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('relevancy')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"relevancy" : '#19AA6E',"relevancy_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
@@ -311,7 +311,7 @@ with consistency:
     st.plotly_chart(fig, use_container_width=True)
 
 with overall_score:
-    st.metric(label="DQ score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}")
+    st.metric(label="DQ Overall Score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}")
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
