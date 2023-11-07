@@ -266,8 +266,7 @@ st.subheader('Metrics')
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 st.subheader('Data Profiling')
-pr = ProfileReport(data, title="Report")
-st_profile_report(pr)
+ProfileReport(data, title="Report")
 
 ###### ROW 0 #######
 accuracy, relevancy, completeness, timeliness, consistency, overall_score = st.columns([1,1,1,1,1,1])
