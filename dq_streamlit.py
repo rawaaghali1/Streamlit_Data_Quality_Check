@@ -568,6 +568,12 @@ with corr_plot:
     st.write(fig)
 
 ###### ROW 7 #######
+import pandas_profiling
+from streamlit_pandas_profiling import st_profile_report
+pr = data.profile_report()
+st_profile_report(pr)
+
+###### ROW 7 #######
 # signal 
 # st.write('Signal')
 # st.line_chart(data['crssi_dbm'])
