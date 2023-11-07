@@ -12,7 +12,8 @@ import openpyxl
 import ast
 from datetime import date
 from PIL import Image
-
+from ydata_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 
 # set the page configuration
 st.set_page_config(
@@ -234,6 +235,10 @@ def compute_column_checks_results(dq_json):
 	    results.append(i['success'])
     column_results_df = pd.DataFrame({'columns' : columns, 'checks' : checks, 'results' : results})
     return column_results_df
+
+@st.cache_data
+def gen_profile_report(df, *report_args, **report_kwargs):
+    return ProfileReport(df, *report_args, **report_kwargs)
 
 # run the functions
 data, dq_json= load_data(sb_selectbox)
@@ -569,15 +574,13 @@ with corr_plot:
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 ###### ROW 7 #######
-from ydata_profiling import ProfileReport
-from streamlit_pandas_profiling import st_profile_report
 st.subheader('Data Profiling')
 data = data.reset_index(drop=True)
 if data.shape[0]>50000:
 	data_for_profiling = data.sample(50000)
 else:
 	data_for_profiling = data
-pr = ProfileReport(data_for_profiling, title="Report")
+pr = gen_profile_report(data_for_profiling)
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
 
