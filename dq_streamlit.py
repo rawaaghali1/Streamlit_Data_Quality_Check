@@ -575,8 +575,9 @@ data = data.reset_index(drop=True)
 pr = ProfileReport(data, title="Report")
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
+st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
-###### ROW 7 #######
+###### ROW 8 #######
 # signal 
 # st.write('Signal')
 # st.line_chart(data['crssi_dbm'])
