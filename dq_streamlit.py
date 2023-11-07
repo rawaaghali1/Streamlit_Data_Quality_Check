@@ -580,6 +580,7 @@ if data.shape[0]>30000:
 	data_for_profiling = data.sample(30000)
 else:
 	data_for_profiling = data
+print(data_for_profiling.shape)
 pr = gen_profile_report(data_for_profiling)
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
