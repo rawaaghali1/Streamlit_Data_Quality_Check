@@ -1,2 +1,3 @@
 plotly
 openpyxl
+streamlit_pandas_profiling
