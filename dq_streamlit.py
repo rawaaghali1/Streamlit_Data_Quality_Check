@@ -262,12 +262,6 @@ with col2:
 
 st.subheader('Metrics')
 
-###### ROW 7 #######
-from ydata_profiling import ProfileReport
-from streamlit_pandas_profiling import st_profile_report
-st.subheader('Data Profiling')
-ProfileReport(data, title="Report")
-
 ###### ROW 0 #######
 accuracy, relevancy, completeness, timeliness, consistency, overall_score = st.columns([1,1,1,1,1,1])
 
@@ -573,7 +567,11 @@ with corr_plot:
     fig = px.imshow(data_quantitative.corr(numeric_only=True))
     st.write(fig)
 
-
+###### ROW 7 #######
+from ydata_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
+st.subheader('Data Profiling')
+ProfileReport(data, title="Report")
 
 ###### ROW 7 #######
 # signal 
