@@ -576,8 +576,8 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 ###### ROW 7 #######
 st.subheader('Data Profiling')
 data = data.reset_index(drop=True)
-if data.shape[0]>35000:
-	data_for_profiling = data.sample(35000)
+if data.shape[0]>30000:
+	data_for_profiling = data.sample(30000)
 else:
 	data_for_profiling = data
 pr = gen_profile_report(data_for_profiling)
