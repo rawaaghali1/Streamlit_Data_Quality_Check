@@ -573,7 +573,8 @@ from streamlit_pandas_profiling import st_profile_report
 st.subheader('Data Profiling')
 data = data.reset_index(drop=True)
 pr = ProfileReport(data, title="Report")
-st_profile_report(pr)
+with st.expander("Report", expanded=True):
+	st_profile_report(pr)
 
 ###### ROW 7 #######
 # signal 
