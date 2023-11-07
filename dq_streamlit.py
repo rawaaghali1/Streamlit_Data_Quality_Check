@@ -571,7 +571,8 @@ with corr_plot:
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 st.subheader('Data Profiling')
-ProfileReport(data, title="Report")
+pr = ProfileReport(data, title="Report")
+st_profile_report(pr)
 
 ###### ROW 7 #######
 # signal 
