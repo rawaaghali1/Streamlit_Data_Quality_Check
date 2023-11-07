@@ -573,7 +573,11 @@ from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 st.subheader('Data Profiling')
 data = data.reset_index(drop=True)
-pr = ProfileReport(data, title="Report")
+if data.shape[0]>50000:
+	data_for_profiling = data.sample(50000)
+else:
+	data_for_profiling = data
+pr = ProfileReport(data_for_profiling, title="Report")
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
 
