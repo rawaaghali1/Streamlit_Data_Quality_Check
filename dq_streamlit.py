@@ -568,9 +568,9 @@ with corr_plot:
     st.write(fig)
 
 ###### ROW 7 #######
-import pandas_profiling
+from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
-pr = data.profile_report()
+pr = ProfileReport(data, title="Report")
 st_profile_report(pr)
 
 ###### ROW 7 #######
