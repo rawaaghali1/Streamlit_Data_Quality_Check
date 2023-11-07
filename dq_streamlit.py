@@ -566,6 +566,7 @@ with corr_plot:
     data_quantitative = data[["DEN_VAL", "DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
     fig = px.imshow(data_quantitative.corr(numeric_only=True))
     st.write(fig)
+st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 ###### ROW 7 #######
 from ydata_profiling import ProfileReport
@@ -575,7 +576,6 @@ data = data.reset_index(drop=True)
 pr = ProfileReport(data, title="Report")
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
-st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 ###### ROW 8 #######
 # signal 
