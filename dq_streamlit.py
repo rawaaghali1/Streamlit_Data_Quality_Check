@@ -236,9 +236,9 @@ def compute_column_checks_results(dq_json):
     column_results_df = pd.DataFrame({'columns' : columns, 'checks' : checks, 'results' : results})
     return column_results_df
 
-#@st.cache_data
-#def gen_profile_report(df, *report_args, **report_kwargs):
-#    return ProfileReport(df, *report_args, **report_kwargs)
+@st.cache_data
+def gen_profile_report(df, *report_args, **report_kwargs):
+    return ProfileReport(df, *report_args, **report_kwargs)
 
 # run the functions
 data, dq_json= load_data(sb_selectbox)
@@ -580,7 +580,7 @@ if data.shape[0]>50000:
 	data_for_profiling = data.sample(50000)
 else:
 	data_for_profiling = data
-pr = ProfileReport(data_for_profiling)
+pr = gen_profile_report(data_for_profiling)
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
 
