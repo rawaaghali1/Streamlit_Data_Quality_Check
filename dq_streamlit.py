@@ -519,11 +519,13 @@ with column_checks_json:
 	    for i in dq_json:
 		    if column_checks_selectbox[0:15] in i['notes']:
 			    i_subset = {}
+			    i_subset['Column'] = i['column']
+			    i_subset['Expectation'] = ast.literal_eval(i['notes'])[1]
+			    i_subset['Expectation type'] = i['Problem Type']
+			    i_subset['Success'] = i['success']
 			    i_subset['Partial unexpected value list'] = i['partial_unexpected_list']
 			    i_subset['Partial unexpected index list'] = i['partial_unexpected_index_list']
 			    i_subset['Unexpected value counts'] = i['partial_unexpected_counts']
-			    i_subset['Notes'] = ast.literal_eval(i['notes'])[1]
-			    i_subset['Expectation type'] = i['Problem Type']
 			    i_subset['Run date'] = i['run_dat']
 			    st.json(i_subset)
 			    #st.json(i)
