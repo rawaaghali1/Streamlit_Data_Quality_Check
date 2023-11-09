@@ -317,6 +317,8 @@ with consistency:
 
 with overall_score:
     st.metric(label="DQ Overall Score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}")
+    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
+
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
