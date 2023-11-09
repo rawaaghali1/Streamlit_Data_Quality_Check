@@ -538,7 +538,8 @@ with table_checks_json:
 				 'Count': [int(i['element_count'])-int(i['unexpected_count'])-int(i['missing_count']), int(i['missing_count']), int(i['unexpected_count'])]
 				}
 			)
-			fig = px.pie(column_metrics_df, values='Count', names='Type', hole = 0.5, color_discrete_map={"Expected": '#19AA6E', "Missing": '#A9DFC9', "Unexpected": '#FE0000'})
+			fig = px.pie(column_metrics_df, values='Count', names='Type', color = 'Type', hole = 0.5, \
+				     color_discrete_map={"Expected": '#19AA6E', "Missing": '#A9DFC9', "Unexpected": '#FE0000'})
 			st.plotly_chart(fig, use_container_width=True)
 			break
 
