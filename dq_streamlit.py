@@ -535,7 +535,7 @@ with table_checks_json:
 		if column_checks_col_selectbox == i['column']:
 			column_metrics_df = pd.DataFrame(
 				{'Type': ['Expected', 'Unexpected', 'Missing'], 
-				 'Count': [i['element_count']-i['unexpected_count']-i['missing_count'], i['unexpected_count'], i['missing_count']]
+				 'Count': [int(i['element_count'])-int(i['unexpected_count'])-int(i['missing_count']), int(i['unexpected_count']), int(i['missing_count'])]
 				}
 			)
 			fig = px.pie(column_metrics_df, values='Count', names='Type')
