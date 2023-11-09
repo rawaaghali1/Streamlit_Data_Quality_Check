@@ -502,7 +502,7 @@ with column_checks_select:
 
 ###### ROW 5 #######
 
-table_checks_json, column_checks_json = st.columns([2, 8])
+table_checks_json, column_checks_json = st.columns([5, 5])
 
 # table checks json
 #with table_checks_json:
