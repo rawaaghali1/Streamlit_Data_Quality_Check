@@ -519,11 +519,12 @@ with column_checks_json:
 	    for i in dq_json:
 		    if column_checks_selectbox[0:15] in i['notes']:
 			    i_subset = {}
-			    i_subset['partial_unexpected_list'] = i['partial_unexpected_list']
-			    i_subset['partial_unexpected_index_list'] = i['partial_unexpected_index_list']
-			    i_subset['partial_unexpected_counts'] = i['partial_unexpected_counts']
-			    i_subset['notes'] = i['notes']
-			    i_subset['run_dat'] = i['run_dat']
+			    i_subset['Partial unexpected list'] = i['partial_unexpected_list']
+			    i_subset['Partial unexpected index list'] = i['partial_unexpected_index_list']
+			    i_subset['Partialu nexpected counts'] = i['partial_unexpected_counts']
+			    i_subset['Notes'] = i['notes']
+			    i_subset['Expectation type'] = i['Problem Type']
+			    i_subset['run_date'] = i['run_dat']
 			    st.json(i_subset)
 			    #st.json(i)
     except KeyError:
