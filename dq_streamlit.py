@@ -531,16 +531,27 @@ with column_checks_json:
 	    st.json({'checks' : 'None'})
 	    
 with table_checks_json:
-    color_discrete_map = {}
-    color_discrete_map[column_checks_col_selectbox] = '#19AA6E'
-    color_discrete_map[column_checks_col_selectbox+'_l'] = '#0E1117'
-    st.write('Data Quality Score')
-    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', color = 'metric',\
-        hole = 0.5, color_discrete_map=color_discrete_map)
-    fig.update_traces(textinfo='none')
-    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == column_checks_col_selectbox]["percentage"].iloc[0])
-    fig.update_layout(layout_plot)
-    st.plotly_chart(fig, use_container_width=True)
+	for i in dq_json:
+		if column_checks_col_selectbox == i['column']:
+			column_metrics_df = pd.DataFrame(
+				{'Type': ['Expected', 'Unexpected', 'Missing'], 
+				 'Count': [i['element_count']-i['unexpected_count']-i['missing_count'], i['unexpected_count'], i['missing_count']]
+				}
+			)
+			fig = px.pie(column_metrics_df, values='Count', names='Type')
+			st.plotly_chart(fig, use_container_width=True)
+			break
+
+#    color_discrete_map = {}
+#    color_discrete_map[column_checks_col_selectbox] = '#19AA6E'
+#    color_discrete_map[column_checks_col_selectbox+'_l'] = '#0E1117'
+#    st.write('Data Quality Score')
+#    fig = px.pie(dq_metrics_df[dq_metrics_df['metric'].str.contains(column_checks_col_selectbox)], names = 'metric', values = 'percentage', color = 'metric',\
+#        hole = 0.5, color_discrete_map=color_discrete_map)
+#    fig.update_traces(textinfo='none')
+#    layout_plot['annotations'][0]['text'] = str(dq_metrics_df[dq_metrics_df['metric'] == column_checks_col_selectbox]["percentage"].iloc[0])
+#    fig.update_layout(layout_plot)
+#    st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
