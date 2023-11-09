@@ -435,8 +435,8 @@ table_checks_heading, column_checks_heading = st.columns([1,1])
 with table_checks_heading:
     st.subheader('Column checks')
 
-with column_checks_heading:
-    st.subheader('Metrics')
+#with column_checks_heading:
+#    st.subheader('Metrics')
 
 
 ######## ROW 3 #######
@@ -457,8 +457,8 @@ with column_checks_radio:
     column_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'column_checks_radio')
 
 # overall checks passed and failed
-with column_checks_stats:
-    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
+#with column_checks_stats:
+#    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
 
 
 ###### ROW 4 #######
