@@ -518,7 +518,14 @@ with column_checks_json:
     try:
 	    for i in dq_json:
 		    if column_checks_selectbox[0:15] in i['notes']:
-			    st.json(i)
+			    i_subset = {}
+			    i_subset['partial_unexpected_list'] = i['partial_unexpected_list']
+			    i_subset['partial_unexpected_index_list'] = i['partial_unexpected_index_list']
+			    i_subset['partial_unexpected_counts'] = i['partial_unexpected_counts']
+			    i_subset['notes'] = i['notes']
+			    i_subset['run_dat'] = i['run_dat']
+			    st.json(i_subset)
+			    #st.json(i)
     except KeyError:
 	    st.json({'checks' : 'None'})
 	    
