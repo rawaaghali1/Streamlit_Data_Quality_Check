@@ -255,6 +255,13 @@ basic_metrics_df= compute_basic_metrics(data)
 
 layout_plot, layout_dist = layout()
 
+data_for_profiling = data.reset_index(drop=True)
+if data.shape[0]>50000:
+	data_for_profiling = data_for_profiling.sample(50000)
+else:
+	data_for_profiling = data_for_profiling
+pr = gen_profile_report(data_for_profiling)
+
 # Heading
 # put logo image on the top right
 image = Image.open('assets/danone_ds_logo.png')
@@ -599,12 +606,6 @@ with distribution_plot:
 
 ###### ROW 7 #######
 st.subheader('Data Profiling')
-data = data.reset_index(drop=True)
-if data.shape[0]>50000:
-	data_for_profiling = data.sample(50000)
-else:
-	data_for_profiling = data
-pr = gen_profile_report(data_for_profiling)
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
 
@@ -617,5 +618,5 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 # raw dataset
 st.subheader('View raw dataset')
 if st.checkbox('Show dataframe'):
-    data
+    data_for_profiling
 
