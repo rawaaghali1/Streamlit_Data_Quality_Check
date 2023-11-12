@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-11-12T21:57:42.852Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60" etag="jz3QoaJjLRFWdGUuDCL-" version="22.1.0" type="github">
+<mxfile host="app.diagrams.net" modified="2023-11-12T21:58:23.942Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60" etag="c4jFfsswb8ujl7GzSSdR" version="22.1.0" type="github">
   <diagram name="Page-1" id="hvkSNkSnapVHsSa8nqqC">
     <mxGraphModel dx="2053" dy="639" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -88,7 +88,7 @@
             <mxPoint x="166.77999999999997" y="179.47" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MX3xwKC8E9TbjmYPHGwx-48" value="&lt;font color=&quot;#ffffff&quot; style=&quot;font-size: 23px;&quot;&gt;&lt;b&gt;Data Quality Check Data Flow&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#59b4d9;" vertex="1" parent="1">
+        <mxCell id="MX3xwKC8E9TbjmYPHGwx-48" value="&lt;font color=&quot;#ffffff&quot; style=&quot;font-size: 23px;&quot;&gt;&lt;b&gt;Data Quality Check Data Flow&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#59b4d9;strokeColor=#59b4d9;" vertex="1" parent="1">
           <mxGeometry x="-750" y="30" width="1030" height="60" as="geometry" />
         </mxCell>
       </root>
