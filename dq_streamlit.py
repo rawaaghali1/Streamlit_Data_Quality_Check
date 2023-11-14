@@ -237,8 +237,10 @@ def compute_column_checks_results(dq_json):
     return column_results_df
 
 @st.cache_data
-def gen_profile_report(df, *report_args, **report_kwargs):
-    return ProfileReport(df, *report_args, **report_kwargs)
+#def gen_profile_report(df, *report_args, **report_kwargs):
+#    return ProfileReport(df, *report_args, **report_kwargs)
+def gen_profile_report(df):
+    return ProfileReport(df, progress_bar=True)
 
 # run the functions
 data, dq_json= load_data(sb_selectbox)
