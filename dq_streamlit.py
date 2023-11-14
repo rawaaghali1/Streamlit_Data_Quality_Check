@@ -622,7 +622,7 @@ with st.expander("Report", expanded=True):
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 # raw dataset
-st.subheader('View raw dataset')
-if st.checkbox('Show dataframe'):
-    data_for_profiling
+#st.subheader('View raw dataset')
+#if st.checkbox('Show dataframe'):
+#    data_for_profiling
 
