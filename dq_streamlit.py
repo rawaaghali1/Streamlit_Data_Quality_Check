@@ -331,7 +331,7 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 ###### ROW 7 #######
 st.subheader('Data Profiling')
 with st.expander("Report", expanded=True):
-	st_profile_report(pr)
+	st_profile_report(pr, progress_bar=True)
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
