@@ -571,29 +571,31 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 ###### ROW 6 #######
 # barplot and distribution 
 st.subheader('Visualization')
-#bar_plot, distribution_plot  = st.columns([1,1])
+bar_plot, gap_bar_distribution, distribution_plot = st.columns([4, 1, 4])
 
-#with bar_plot:
-bar_selectbox = st.selectbox(
-    'Select an option',
-    ('null values', 'unique values'),
-    key = 'bar_selectbox'
-)
-if bar_selectbox == "null values":
-        variable = 'null_values'
-else:
-        variable = 'unique_values'
+with bar_plot:
+	bar_selectbox = st.selectbox(
+		'Select an option',
+		('null values', 'unique values'),
+		key = 'bar_selectbox'
+	)
+	if bar_selectbox == "null values":
+		variable = 'null_values'
+	else:
+		variable = 'unique_values'
+	st.bar_chart(basic_metrics_df[variable])
 
-st.bar_chart(basic_metrics_df[variable])
+with gap_bar_distribution:
+	st.write('')
 
-#with distribution_plot:
-dist_selectbox = st.selectbox(
-    'Select a column to get distribution',
-    tuple(data.select_dtypes([np.number]).columns),
-    key = 'dist_selectbox'
-)
-fig = px.histogram(data, x=dist_selectbox)
-st.plotly_chart(fig, use_container_width=True)
+with distribution_plot:
+	dist_selectbox = st.selectbox(
+		'Select a column to get distribution',
+		tuple(data.select_dtypes([np.number]).columns),
+		key = 'dist_selectbox'
+	)
+	fig = px.histogram(data, x=dist_selectbox)
+	st.plotly_chart(fig, use_container_width=True)
 
 #corr_plot, unknown_plot  = st.columns([1,1])
 #with corr_plot:
