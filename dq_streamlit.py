@@ -323,9 +323,7 @@ with consistency:
     st.plotly_chart(fig, use_container_width=True)
 
 with overall_score:
-    st.markdown('DQ Overall Score', help='Calculated as the average score of the 5 metrics')
-    #st.metric(label="DQ Overall Score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}")
-    st.metric(label=None, value=f"{total_score_2}", delta = f"-{100 - total_score_2}")
+    st.metric(label="DQ Overall Score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}", help='Calculated as the average score of the 5 metrics')
     st.metric(label="Total column checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
 
 
