@@ -586,6 +586,7 @@ with bar_plot:
 		variable = 'unique_values'
 	#st.bar_chart(basic_metrics_df[variable])
 	fig = px.bar(basic_metrics_df[variable])
+	fig.update_layout(showlegend=False)
 	st.plotly_chart(fig, use_container_width=True)
 	
 with gap_bar_distribution:
