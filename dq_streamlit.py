@@ -571,7 +571,7 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 ###### ROW 6 #######
 # barplot and distribution 
 st.subheader('Visualization')
-bar_plot, gap_bar_distribution, distribution_plot = st.columns([5, 1, 5])
+bar_plot, gap_bar_distribution, distribution_plot = st.columns([6, 1, 6])
 
 with bar_plot:
 	bar_selectbox = st.selectbox(
