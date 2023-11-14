@@ -596,6 +596,7 @@ with distribution_plot:
 		key = 'dist_selectbox'
 	)
 	fig = px.histogram(data, x=dist_selectbox)
+	fig.update_layout(layout_dist)
 	st.plotly_chart(fig, use_container_width=True)
 
 #corr_plot, unknown_plot  = st.columns([1,1])
