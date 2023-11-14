@@ -278,7 +278,7 @@ st.subheader('Metrics')
 accuracy, relevancy, completeness, timeliness, consistency, overall_score = st.columns([1,1,1,1,1,1])
 
 with accuracy:
-    st.markdown('Accuracy', help='Percentage of rows that have correct values for certain columns')		      
+    st.markdown('Accuracy', help='Score based on the percentage of rows that have correct values for certain columns')		      
     fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('accuracy')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"accuracy" : '#19AA6E',"accuracy_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
@@ -287,7 +287,7 @@ with accuracy:
     st.plotly_chart(fig, use_container_width=True)
 
 with relevancy:
-    st.write('Relevancy')
+    st.markdown('Relevancy', help='Score based on the performance of Accuracy and Consistency')		      
     fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('relevancy')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"relevancy" : '#19AA6E',"relevancy_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
@@ -296,7 +296,7 @@ with relevancy:
     st.plotly_chart(fig, use_container_width=True)
 
 with completeness:
-    st.write('Completeness')
+    st.markdown('Completeness', help='Score based on the percentage of rows that are non-missing for certain columns')	
     fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('completeness')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"completeness" : '#19AA6E',"completeness_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
@@ -305,7 +305,7 @@ with completeness:
     st.plotly_chart(fig, use_container_width=True)
 
 with timeliness:
-    st.write('Timeliness')
+    st.markdown('Timeliness', help='Score based on how recently the data is ingested')	
     fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('timeliness')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"timeliness" : '#19AA6E',"timeliness_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
@@ -314,7 +314,7 @@ with timeliness:
     st.plotly_chart(fig, use_container_width=True)
 
 with consistency:
-    st.write('Consistency')
+    st.markdown('Consistency', help='Score based on the percentage of rows that have correct data types for certain columns')
     fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('consistency')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"consistency" : '#19AA6E',"consistency_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
