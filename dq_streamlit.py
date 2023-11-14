@@ -328,13 +328,6 @@ with overall_score:
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
-###### ROW 7 #######
-st.subheader('Data Profiling')
-with st.expander("Report", expanded=True):
-	st_profile_report(pr, progress_bar=True)
-
-st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
-
 ###### ROW 1 #######
 #PHY_STA_COD, TIM_VAL, TPR_VAL, UNT_COD, FAT_CNT_TXT, NIT_FLU_TXT = st.columns(6)
 #AGE_DSC, PRO_HDR_TXT, DEN_VAL, DIL_VAL, HUM_VAL, overall_score = st.columns(6)
@@ -614,6 +607,12 @@ with distribution_plot:
 #    data_quantitative = data[["DEN_VAL", "DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
 #    fig = px.imshow(data_quantitative.corr(numeric_only=True))
 #    st.write(fig)
+st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+###### ROW 7 #######
+st.subheader('Data Profiling', help='Data profiling is the process of examining, analyzing, and creating useful summaries of data. The process of generating a report can take up to 1 minute. If you encounter an error message, please try to refresh the page.')
+with st.expander("Report", expanded=True):
+	st_profile_report(pr)
 
 
 ###### ROW 8 #######
