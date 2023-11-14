@@ -326,6 +326,12 @@ with overall_score:
     st.metric(label="DQ Overall Score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}", help='Calculated as the average score of the 5 metrics')
     st.metric(label="Total column checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
 
+st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+###### ROW 7 #######
+st.subheader('Data Profiling')
+with st.expander("Report", expanded=True):
+	st_profile_report(pr)
 
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
@@ -608,12 +614,7 @@ with distribution_plot:
 #    data_quantitative = data[["DEN_VAL", "DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
 #    fig = px.imshow(data_quantitative.corr(numeric_only=True))
 #    st.write(fig)
-st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
-###### ROW 7 #######
-st.subheader('Data Profiling')
-with st.expander("Report", expanded=True):
-	st_profile_report(pr)
 
 ###### ROW 8 #######
 # signal 
