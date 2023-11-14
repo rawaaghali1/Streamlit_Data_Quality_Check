@@ -571,8 +571,8 @@ st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#3
 ###### ROW 6 #######
 # barplot and distribution 
 st.subheader('Visualization')
-#bar_plot, gap_bar_distribution, distribution_plot = st.columns([1, 1])
-bar_plot, distribution_plot = st.columns([1, 1])
+bar_plot, gap_bar_distribution, distribution_plot = st.columns([5, 1, 5])
+#bar_plot, distribution_plot = st.columns([1, 1])
 
 with bar_plot:
 	bar_selectbox = st.selectbox(
@@ -586,8 +586,8 @@ with bar_plot:
 		variable = 'unique_values'
 	st.bar_chart(basic_metrics_df[variable])
 
-#with gap_bar_distribution:
-#	st.write('')
+with gap_bar_distribution:
+	st.write('')
 
 with distribution_plot:
 	dist_selectbox = st.selectbox(
@@ -596,7 +596,7 @@ with distribution_plot:
 		key = 'dist_selectbox'
 	)
 	fig = px.histogram(data, x=dist_selectbox)
-	fig.update_layout(layout_dist)
+	#fig.update_layout(layout_dist)
 	st.plotly_chart(fig, use_container_width=True)
 
 #corr_plot, unknown_plot  = st.columns([1,1])
