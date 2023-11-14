@@ -612,7 +612,7 @@ with distribution_plot:
 st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 ###### ROW 7 #######
-st.subheader('Data Profiling', help='Data profiling is the process of examining, analyzing, and creating useful summaries of data. The process of generating a report can take up to 1 minute. If you encounter an error message, please try to refresh the page.')
+st.subheader('Data Profiling', help='Data profiling is the process of examining, analyzing, and creating useful summaries of data. \nThe process of generating profiling report can take up to 1 minute. If you encounter an error message during the generation of the report, please try to refresh the page.')
 with st.expander("Report", expanded=True):
 	st_profile_report(pr)
 
