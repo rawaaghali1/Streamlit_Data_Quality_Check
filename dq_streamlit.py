@@ -278,7 +278,7 @@ st.subheader('Metrics')
 accuracy, relevancy, completeness, timeliness, consistency, overall_score = st.columns([1,1,1,1,1,1])
 
 with accuracy:
-    st.write('Accuracy')
+    st.text_area('Accuracy', help='Percentage of rows that have correct values for certain columns')
     fig = px.pie(dq_metrics_df_2[dq_metrics_df_2['metric'].str.contains('accuracy')], names = 'metric', values = 'percentage', color = 'metric', \
         hole = 0.5,color_discrete_map={"accuracy" : '#19AA6E',"accuracy_l" : '#0E1117'})
     fig.update_traces(textinfo='none')
