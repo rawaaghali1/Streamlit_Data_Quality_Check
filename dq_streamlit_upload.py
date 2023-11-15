@@ -70,7 +70,7 @@ def layout():
 
 
 # Add a file uploader to the sidebar:
-uploaded_file_original = st.sidebar.file_uploader("Upload your data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
+uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 uploaded_file_result = st.sidebar.file_uploader("Upload your DQC result file", type='xlsx', help='Only .xlsx file is supported.')
 
 if uploaded_file_original is not None and uploaded_file_result is not None:
