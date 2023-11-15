@@ -53,7 +53,7 @@ data_context_config = DataContextConfig(
         root_directory=root_directory
     ),
 )
-context = get_context(project_config=data_context_config)
+context = get_context()
 
 datasource_config = {
     "name": datasource_name,
