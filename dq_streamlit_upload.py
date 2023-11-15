@@ -70,15 +70,16 @@ def layout():
 
 
 # Add a file uploader to the sidebar:
-uploaded_file_original = st.sidebar.file_uploader("Choose a csv file")
-uploaded_file_result = st.sidebar.file_uploader("Choose a json file")
+uploaded_file_original = st.sidebar.file_uploader("Upload your data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
+uploaded_file_result = st.sidebar.file_uploader("Upload the result file", type='xlsx', help='Only .xlsx file is supported.')
 
 if uploaded_file_original is not None and uploaded_file_result is not None:
 	# loading the data
 	@st.cache_data
 	def load_data(uploaded_file_original, uploaded_file_result):
 		data = pd.read_csv(uploaded_file_original)
-		dq_json = json.load(uploaded_file_result)
+		dq_excel = pd.read_excel(uploaded_file_result)
+		dq_json = dq_excel.to_json(orient ='records')
 	#    lowercase = lambda x: str(x).lower()
 	#    data.rename(lowercase, axis='columns', inplace=True)
 		data.set_index('RES_NUM', drop = False, inplace = True)
