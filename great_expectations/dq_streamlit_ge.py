@@ -211,4 +211,6 @@ if uploaded_file is not None:
         label="Download data as CSV",
         data=merged_df_new,
         file_name='large_df.csv',
-        mime='text/csv')
+        mime='text/csv',
+        key="download-tools-csv"
+    )
