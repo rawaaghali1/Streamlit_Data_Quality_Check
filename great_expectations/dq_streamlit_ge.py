@@ -206,4 +206,4 @@ if uploaded_file is not None:
         else:
             continue
     
-    st.dataframe(merged_df_new)
+    st.write(merged_df_new.shape)
