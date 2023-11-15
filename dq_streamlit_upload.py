@@ -78,7 +78,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	@st.cache_data
 	def load_data(sb_selectbox):
 		data = pd.read_csv(uploaded_file_original)
-        dq_json = json.load(open(uploaded_file_result))
+        	dq_json = json.load(open(uploaded_file_result))
 	#    lowercase = lambda x: str(x).lower()
 	#    data.rename(lowercase, axis='columns', inplace=True)
 		data.set_index('RES_NUM', drop = False, inplace = True)
