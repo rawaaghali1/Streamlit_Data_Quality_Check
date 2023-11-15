@@ -207,5 +207,11 @@ if uploaded_file is not None:
             continue
     
     st.write(merged_df_new.shape)
-    from IPython.display import display
-    display(merged_df_new)
+    csv = merged_df_new.to_csv(index=False).encode('utf-8')
+    st.download_button(
+       "Press to Download",
+       csv,
+       "file.csv",
+       "text/csv",
+       key='download-csv'
+    )
