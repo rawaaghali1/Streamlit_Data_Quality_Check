@@ -76,7 +76,7 @@ uploaded_file_result = st.sidebar.file_uploader("Choose a json file")
 if uploaded_file_original is not None and uploaded_file_result is not None:
 	# loading the data
 	@st.cache_data
-	def load_data(sb_selectbox):
+	def load_data(uploaded_file_original, uploaded_file_result):
 		data = pd.read_csv(uploaded_file_original)
 		dq_json = json.load(open(uploaded_file_result))
 	#    lowercase = lambda x: str(x).lower()
@@ -237,7 +237,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 		return ProfileReport(df, progress_bar=True)
 
 	# run the functions
-	data, dq_json= load_data(sb_selectbox)
+	data, dq_json= load_data(uploaded_file_original, uploaded_file_result)
 
 	dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
 
