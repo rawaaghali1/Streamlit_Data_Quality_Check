@@ -48,11 +48,11 @@ else:
     sheet_name = None
 
 
-data_context_config = DataContextConfig()
-#    store_backend_defaults=FilesystemStoreBackendDefaults(
-#        root_directory=root_directory
-#    ),
-
+data_context_config = DataContextConfig(
+    store_backend_defaults=FilesystemStoreBackendDefaults(
+        root_directory=root_directory
+    ),
+)
 context = get_context(project_config=data_context_config)
 
 datasource_config = {
