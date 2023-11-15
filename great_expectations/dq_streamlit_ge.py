@@ -207,6 +207,27 @@ if uploaded_file is not None:
             continue
     
     st.write(merged_df_new.shape)
+    def classify_problem(description):
+    keywords = {
+        "Classification": ["expected values", "must be equal to",'is in'],
+        "Out-of-Range": ["must be between", "positive"],
+        "Data-type": ["data type", "numeric", "string"],
+        "Missing-value": ["must not be null"],
+        "Pattern": ["must match"]
+    }
+    # Convert lists of strings to a single string and convert to lowercase
+    if isinstance(description, list):
+        description = ', '.join(description).lower()
+    else:
+        description = description.lower()
+    for problem_type, words in keywords.items():
+        if any(word in description for word in words):
+            return problem_type
+    return "unknown"
+
+    # Apply the classification function to determine the problem type
+    merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
+    
     csv = merged_df_new.to_csv(index=False).encode('utf-8')
     st.download_button(
        "Press to Download",
