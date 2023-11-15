@@ -606,10 +606,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 	###### ROW 7 #######
-	help_txt = '''
-	Data profiling is the process of examining, analyzing, and creating useful summaries of data.  
-	'''
-	st.subheader('Data Profiling', help=help_txt)
+	st.subheader('Data Profiling', help='Data profiling is the process of examining, analyzing, and creating useful summaries of data.')
 	if st.button('Generate a Data Profiling report', help='The process can take up to 1 minute. If you encounter an error message, please try to refresh the page.'):
 		with st.expander("Report", expanded=True):
 			st_profile_report(pr)
