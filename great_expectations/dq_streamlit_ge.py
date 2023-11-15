@@ -207,10 +207,4 @@ if uploaded_file is not None:
             continue
     
     st.write(merged_df_new.shape)
-    st.download_button(
-        label="Download data as CSV",
-        data=merged_df_new,
-        file_name='large_df.csv',
-        mime='text/csv',
-        key="download-tools-csv"
-    )
+    merged_df_new.display()
