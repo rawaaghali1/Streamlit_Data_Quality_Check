@@ -241,7 +241,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	# run the functions
 	data, dq_json= load_data(uploaded_file_original, uploaded_file_result)
 
-	dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
+	#dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
 
 	dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data,dq_json)
 
