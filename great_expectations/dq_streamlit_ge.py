@@ -204,4 +204,4 @@ for rule in config['rules']:
     else:
         continue
 
-st.dataframe(merged_df_new)
+print(merged_df_new.shape)
