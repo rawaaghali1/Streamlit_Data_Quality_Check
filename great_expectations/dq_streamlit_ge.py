@@ -205,4 +205,4 @@ if uploaded_file is not None:
         else:
             continue
     
-    print(merged_df_new.shape)
+    st.dataframe(merged_df_new)
