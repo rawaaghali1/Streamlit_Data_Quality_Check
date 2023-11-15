@@ -96,6 +96,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	#    return data, dq_json
 
 	# compute the measures of data quality based on project criteria
+	'''
 	@st.cache_data
 	def compute_dq_metrics(data, dq_json):
 		# PHY_STA_COD
@@ -136,7 +137,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 			   DEN_VAL,100-DEN_VAL,DIL_VAL,100-DIL_VAL,HUM_VAL,100-HUM_VAL]})
 
 		return dq_metrics_df, total_score
-
+	'''
 	# compute the measures of general data quality based on 3-5 criteria
 	@st.cache_data
 	def compute_dq_metrics_2(data,dq_json):
