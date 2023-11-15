@@ -26,7 +26,7 @@ from utile_functions import convert_dict_to_dataframe
 yaml = YAMLHandler()
 uploaded_file = st.file_uploader("Choose a file")
 df = pd.read_csv(uploaded_file)
-file_path = '/great_expectations/sl_batch2v1_rules_3.json'
+file_path = 'great_expectations/sl_batch2v1_rules_3.json'
 with open(file_path, 'r') as file:
     config = json.load(file)
 
