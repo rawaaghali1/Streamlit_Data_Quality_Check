@@ -1,0 +1,140 @@
+{
+    "data_path": "/dbfs/mnt/rniRaw/DQTest/test_data_2/sl_data_migration_pilot_batch2v1.csv",
+    "context_root_dir": "/content/great_expectations/shelflife",
+    "expectation_suite_name": "my_expectation_suite_shelflife_batch1",
+    "datasource_name": "my_datasource_shelflife_batch1",
+    "project_name": "shelflife_batch1",
+    "root_directory": "/content/great_expectations/nut",
+    "data_connector_name": "data_connector_shelflife_batch1",
+    "data_asset_name": "shelflife_data_batch1",
+    "checkpoint_name": "my_checkpoint_shelflife_batch1",
+    "run_name_template": "-DQ_shelflife_RAW_batch1",
+    "rules": [
+		{
+			"expectation":"test_column_values_to_be_positive_or_zero",
+			"kwargs":{
+				"column": "RES_TXT"
+			}
+		},	
+        {
+            "expectation": "expect_column_values_to_not_be_null",
+            "kwargs": {
+                "column": [
+                    "NPB_COD",
+                    "PHY_STA_COD",
+                    "TPR_VAL",
+                    "PRM_COD",
+                    "RES_TXT",
+                    "PAC_TXT",
+                    "BRD_NAM_DSC",
+                    "IDT_COD",
+                    "TIM_VAL",
+                    "RES_NUM"
+                ]
+            }
+        },
+        {
+            "expectation": "test_column_values_to_be_of_type_numeric",
+            "kwargs": {
+                "column": "RES_TXT"
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_be_of_type_datetime",
+            "kwargs": {
+                "column": "MNF_DAT"
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_be_in_list",
+            "kwargs": {
+                "column": "PHY_STA_COD",
+                "value_list": [
+                    "Powder",
+                    "Liquid"
+                ]
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_match_regex",
+            "kwargs": {
+                "column": "TIM_VAL",
+                "regex": "^\\d+(?:\\.\\d+)?(?:\\s*(?i)months?)?$"
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_match_regex",
+            "kwargs": {
+                "column": "TPR_VAL",
+                "regex": "^(?:\\d+(?:\\.\\d+)?(?:\\s*[Cc°](?:\\s*°)?)?|-)$"
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_match_regex",
+            "kwargs": {
+                "column": "UNT_COD",
+                "regex": "^(?!^-?$|^NaN$)\\S+(?:/\\S+)?$"
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_be_in_list",
+            "kwargs": {
+                "column": "FAT_CNT_TXT",
+                "value_list": [
+                    "With Fat",
+                    "Without Fat"
+                ]
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_be_in_list",
+            "kwargs": {
+                "column": "NIT_FLU_TXT",
+                "value_list": [
+                    "Yes",
+                    "No"
+                ]
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_be_in_list",
+            "kwargs": {
+                "column": "AGE_DSC",
+                "value_list": [
+                    "Infant",
+                    "Non-Infant"
+                ]
+            }
+        },
+        {
+            "expectation": "expect_column_values_to_be_in_list",
+            "kwargs": {
+                "column": "PRO_HDR_TXT",
+                "value_list": [
+                    "Intact Protein",
+                    null,
+                    "Partially Hydrolyzed Protein",
+                    "Extensively Hydrolyzed Protein",
+                    "No Protein",
+                    "EHF",
+                    "PHP",
+                    "AAF",
+                    "EHF or PHF",
+                    "PHP or EHF",
+                    "Amino Acid based"
+                ]
+            }
+        },
+        {
+            "expectation": "test_column_values_to_be_of_type_numeric",
+            "kwargs": {
+                "column": [
+                    "DEN_VAL",
+                    "DIL_VAL",
+                    "HUM_VAL",
+                    "TPR_VAL"
+                ]
+            }
+        }
+    ]
+}
