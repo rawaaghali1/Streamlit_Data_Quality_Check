@@ -207,4 +207,4 @@ if uploaded_file is not None:
             continue
     
     st.write(merged_df_new.shape)
-    merged_df_new.display()
+    display(merged_df_new)
