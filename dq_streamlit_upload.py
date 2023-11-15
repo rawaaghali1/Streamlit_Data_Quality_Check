@@ -79,7 +79,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	def load_data(uploaded_file_original, uploaded_file_result):
 		data = pd.read_csv(uploaded_file_original)
 		dq_excel = pd.read_excel(uploaded_file_result)
-		dq_json = dq_excel.to_json(orient ='records')
+		dq_json = dq_excel.to_dict(orient ='records')
 		print(dq_json)
 	#    lowercase = lambda x: str(x).lower()
 	#    data.rename(lowercase, axis='columns', inplace=True)
