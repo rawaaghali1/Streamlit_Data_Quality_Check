@@ -97,48 +97,7 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	#    return data, dq_json
 
 	# compute the measures of data quality based on project criteria
-	'''
-	@st.cache_data
-	def compute_dq_metrics(data, dq_json):
-		# PHY_STA_COD
-		PHY_STA_COD = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PHY_STA_COD'][0])
-		# TIM_VAL
-		TIM_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TIM_VAL'][0])
-		# TPR_VAL
-		TPR_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
-		# UNT_COD
-		UNT_COD = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'UNT_COD'][0])
-		# FAT_CNT_TXT
-		FAT_CNT_TXT = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'FAT_CNT_TXT'][0])
-		# NIT_FLU_TXT
-		NIT_FLU_TXT = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'NIT_FLU_TXT'][0])
-		# AGE_DSC
-		AGE_DSC = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'AGE_DSC'][0])
-		# PRO_HDR_TXT
-		PRO_HDR_TXT = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PRO_HDR_TXT'][0])
-		# DEN_VAL
-		DEN_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DEN_VAL'][0])
-		# DIL_VAL
-		DIL_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DIL_VAL'][0])
-		# HUM_VAL
-		HUM_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'HUM_VAL'][0])
-		
-		# create a score using checks passed and records dropped
-		# checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
-		# get a score based on number of rows dropped
-		# records_score = round((dq_json['total_records_dropped']/dq_json['total_records_actual'])*100)
-		# final dq score
-		total_score = round(((PHY_STA_COD + TIM_VAL + TPR_VAL + UNT_COD + FAT_CNT_TXT + NIT_FLU_TXT + AGE_DSC + PRO_HDR_TXT + DEN_VAL + DIL_VAL + HUM_VAL)/1100) * 100)
-
-		dq_metrics_df = pd.DataFrame({"metric" : ["PHY_STA_COD","PHY_STA_COD_l","TIM_VAL","TIM_VAL_l","TPR_VAL","TPR_VAL_l","UNT_COD","UNT_COD_l",\
-							 "FAT_CNT_TXT","FAT_CNT_TXT_l","NIT_FLU_TXT","NIT_FLU_TXT_l","AGE_DSC","AGE_DSC_l","PRO_HDR_TXT","PRO_HDR_TXT_l",\
-							 "DEN_VAL","DEN_VAL_l","DIL_VAL","DIL_VAL_l","HUM_VAL","HUM_VAL_l"], \
-		"percentage" : [PHY_STA_COD,100-PHY_STA_COD,TIM_VAL,100-TIM_VAL,TPR_VAL,100-TPR_VAL,UNT_COD,100-UNT_COD,\
-			   FAT_CNT_TXT,100-FAT_CNT_TXT,NIT_FLU_TXT,100-NIT_FLU_TXT,AGE_DSC,100-AGE_DSC,PRO_HDR_TXT,100-PRO_HDR_TXT,\
-			   DEN_VAL,100-DEN_VAL,DIL_VAL,100-DIL_VAL,HUM_VAL,100-HUM_VAL]})
-
-		return dq_metrics_df, total_score
-	'''
+	
 	# compute the measures of general data quality based on 3-5 criteria
 	@st.cache_data
 	def compute_dq_metrics_2(data,dq_json):
@@ -242,8 +201,6 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	# run the functions
 	data, dq_json= load_data(uploaded_file_original, uploaded_file_result)
 	
-	#dq_metrics_df, total_score = compute_dq_metrics(data,dq_json)
-
 	dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data,dq_json)
 
 	#table_results_df = compute_table_checks_results(dq_json)
