@@ -207,4 +207,5 @@ if uploaded_file is not None:
             continue
     
     st.write(merged_df_new.shape)
+    from IPython.display import display
     display(merged_df_new)
