@@ -1,10 +1,10 @@
 {
     "data_path": "/dbfs/mnt/rniRaw/DQTest/test_data_2/sl_data_migration_pilot_batch2v1.csv",
-    "context_root_dir": "/content/great_expectations/shelflife",
+    "context_root_dir": "/great_expectations/great_expectations/shelflife",
     "expectation_suite_name": "my_expectation_suite_shelflife_batch1",
     "datasource_name": "my_datasource_shelflife_batch1",
     "project_name": "shelflife_batch1",
-    "root_directory": "/content/great_expectations/nut",
+    "root_directory": "/great_expectations/great_expectations/nut",
     "data_connector_name": "data_connector_shelflife_batch1",
     "data_asset_name": "shelflife_data_batch1",
     "checkpoint_name": "my_checkpoint_shelflife_batch1",
