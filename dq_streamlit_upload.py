@@ -99,27 +99,27 @@ if uploaded_file_original is not None and uploaded_file_result is not None:
 	@st.cache_data
 	def compute_dq_metrics(data, dq_json):
 		# PHY_STA_COD
-		PHY_STA_COD = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PHY_STA_COD'][0])
+		PHY_STA_COD = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PHY_STA_COD'][0])
 		# TIM_VAL
-		TIM_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TIM_VAL'][0])
+		TIM_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TIM_VAL'][0])
 		# TPR_VAL
-		TPR_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
+		TPR_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'TPR_VAL'][0])
 		# UNT_COD
 		UNT_COD = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'UNT_COD'][0])
 		# FAT_CNT_TXT
-		FAT_CNT_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'FAT_CNT_TXT'][0])
+		FAT_CNT_TXT = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'FAT_CNT_TXT'][0])
 		# NIT_FLU_TXT
-		NIT_FLU_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'NIT_FLU_TXT'][0])
+		NIT_FLU_TXT = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'NIT_FLU_TXT'][0])
 		# AGE_DSC
-		AGE_DSC = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'AGE_DSC'][0])
+		AGE_DSC = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'AGE_DSC'][0])
 		# PRO_HDR_TXT
-		PRO_HDR_TXT = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PRO_HDR_TXT'][0])
+		PRO_HDR_TXT = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'PRO_HDR_TXT'][0])
 		# DEN_VAL
-		DEN_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DEN_VAL'][0])
+		DEN_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DEN_VAL'][0])
 		# DIL_VAL
-		DIL_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DIL_VAL'][0])
+		DIL_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'DIL_VAL'][0])
 		# HUM_VAL
-		HUM_VAL = int(100-[float(item['missing_percent']+item['unexpected_percent_total']) for item in dq_json if item['column'] == 'HUM_VAL'][0])
+		HUM_VAL = int(100-[float(item['missing_percent'])+float(item['unexpected_percent_total']) for item in dq_json if item['column'] == 'HUM_VAL'][0])
 		
 		# create a score using checks passed and records dropped
 		# checks_score = round((dq_json['checks_passed']/dq_json['checks_total'])*100)
