@@ -93,7 +93,7 @@ validator = context.get_validator(
 dqc = Data_quality_check()
 merged_df_new = pd.DataFrame()
 expectation_suite = context.get_expectation_suite(expectation_suite_name)
-
+print(merged_df_new.shape)
 for rule in config['rules']:
     expectation = rule['expectation']
     if expectation == 'columns_to_exist':
