@@ -208,6 +208,7 @@ if uploaded_file is not None:
     
     st.write(merged_df_new.shape)
     st.download_button(
-        label="Download data as xlsx",
+        label="Download data as CSV",
         data=merged_df_new,
-        file_name='large_df.xlsx')
+        file_name='large_df.csv',
+        mime='text/csv')
