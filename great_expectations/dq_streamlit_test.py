@@ -397,7 +397,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 	
 	dq_json = merged_df_new.to_dict(orient ='records')
 	
-	dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data,dq_json)
+	dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data)
 
 	#table_results_df = compute_table_checks_results(dq_json)
 
