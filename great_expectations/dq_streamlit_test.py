@@ -359,29 +359,28 @@ def gen_profile_report(df):
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
 if uploaded_file_original is not None and uploaded_file_rule is not None:
-    	data, config = load_data(uploaded_file_original, uploaded_file_rule)
-    	context, batch_request, validator, expectation_suite = great_expectations_configuration(config, data)
-    	# Instantiate the Data_quality_check class
-    	dqc = Data_quality_check()
-    	merged_df_new = perform_dqc(config, dqc)
-    
-    	st.write(merged_df_new.shape)
-
-    	# Apply the classification function to determine the problem type
-    	merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
-
-    	# Create a Pandas Excel writer using XlsxWriter as the engine.
-    	buffer = io.BytesIO()
-    	with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-	    	# Write each dataframe to a different worksheet.
-	    	merged_df_new.to_excel(writer, sheet_name='Sheet1', index=False)
+	data, config = load_data(uploaded_file_original, uploaded_file_rule)
+	context, batch_request, validator, expectation_suite = great_expectations_configuration(config, data)
+	# Instantiate the Data_quality_check class
+	dqc = Data_quality_check()
+	merged_df_new = perform_dqc(config, dqc)
+	st.write(merged_df_new.shape)
 	
-    	st.sidebar.download_button(
-       		label = "Press to Download",
-       		data = buffer,
-       		file_name = "file.xlsx",
-      		mime = "application/vnd.ms-excel"
-    	)
+	# Apply the classification function to determine the problem type
+	merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
+
+	# Create a Pandas Excel writer using XlsxWriter as the engine.
+	buffer = io.BytesIO()
+	with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+		# Write each dataframe to a different worksheet.
+		merged_df_new.to_excel(writer, sheet_name='Sheet1', index=False)
+		
+	st.sidebar.download_button(
+		label = "Press to Download",
+		data = buffer,
+		file_name = "file.xlsx",
+		mime = "application/vnd.ms-excel"
+	)
 	
 	dq_json = merged_df_new.to_dict(orient ='records')
 	
