@@ -379,7 +379,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 		merged_df_new.to_excel(writer, sheet_name='Sheet1', index=False)
 		
 	st.sidebar.download_button(
-		label = "Press to Download",
+		label = "Download an Excel report",
 		data = buffer,
 		file_name = "file.xlsx",
 		mime = "application/vnd.ms-excel"
