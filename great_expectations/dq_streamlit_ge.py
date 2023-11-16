@@ -28,9 +28,9 @@ uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=[
 uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
 if uploaded_file_original is not None and uploaded_file_rule is not None:
     try:
-	df = pd.read_csv(uploaded_file_original)
+	    df = pd.read_csv(uploaded_file_original)
     except:
-	df = pd.read_excel(uploaded_file_original)
+	    df = pd.read_excel(uploaded_file_original)
     st.dataframe(df)
     config = json.load(uploaded_file_rule)
     
