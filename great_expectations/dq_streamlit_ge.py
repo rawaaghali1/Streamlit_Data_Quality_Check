@@ -21,17 +21,8 @@ from expectations_func import Data_quality_check
 from utile_functions import create_df_from_validation_result
 from utile_functions import convert_dict_to_dataframe
 
-yaml = YAMLHandler()
-uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
-uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
-if uploaded_file_original is not None and uploaded_file_rule is not None:
-    try:
-	    df = pd.read_csv(uploaded_file_original)
-    except:
-	    df = pd.read_excel(uploaded_file_original)
-    st.dataframe(df)
-    config = json.load(uploaded_file_rule)
-    
+def great_expectations_configuration(config, df):
+    yaml = YAMLHandler()
     # config properties
     expectation_suite_name = config['expectation_suite_name']
     project_name = config['project_name']
@@ -82,6 +73,18 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
     validator = context.get_validator(
         batch_request=batch_request, expectation_suite_name=my_expectation_suite_name
     )
+    return context, batch_request, validator
+
+uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
+uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
+if uploaded_file_original is not None and uploaded_file_rule is not None:
+    try:
+	    df = pd.read_csv(uploaded_file_original)
+    except:
+	    df = pd.read_excel(uploaded_file_original)
+    st.dataframe(df)
+    config = json.load(uploaded_file_rule)
+    context, batch_request, validator = great_expectations_configuration(config, df)
     # Instantiate the Data_quality_check class
     dqc = Data_quality_check()
     merged_df_new = pd.DataFrame()
