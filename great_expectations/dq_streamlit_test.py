@@ -569,7 +569,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 	with column_checks_json:
 		#try:
 			for i in dq_json:
-				if column_checks_selectbox[0:15] in i['notes'] or column_checks_selectbox[0:15] in i['notes'][1]:
+				if column_checks_selectbox[0:20] in i['notes']:
 					i_subset = {}
 					i_subset['Column'] = i['column']
 					i_subset['Expectation'] = ast.literal_eval(i['notes'])[1]
