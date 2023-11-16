@@ -183,19 +183,13 @@ elif rules_yes_or_not == 'No' and uploaded_file_original is not None:
 	with distribution_plot:
 		dist_selectbox = st.selectbox(
 			'Select a column to get distribution',
-			tuple(data.select_dtypes([np.number]).columns),
+			tuple(df.select_dtypes([np.number]).columns),
 			key = 'dist_selectbox'
 		)
-		fig = px.histogram(data, x=dist_selectbox)
+		fig = px.histogram(df, x=dist_selectbox)
 		#fig.update_layout(layout_dist)
 		st.plotly_chart(fig, use_container_width=True)
 
-	#corr_plot, unknown_plot  = st.columns([1,1])
-	#with corr_plot:
-	#    st.write('Correlation heatmap')
-	#    data_quantitative = data[["DEN_VAL", "DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
-	#    fig = px.imshow(data_quantitative.corr(numeric_only=True))
-	#    st.write(fig)
 	st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 	###### ROW 7 #######
@@ -211,7 +205,6 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 	    df = pd.read_csv(uploaded_file_original)
     except:
 	    df = pd.read_excel(uploaded_file_original)
-    st.dataframe(df)
     config = json.load(uploaded_file_rule)
     context, batch_request, validator, expectation_suite = great_expectations_configuration(config, df)
     # Instantiate the Data_quality_check class
