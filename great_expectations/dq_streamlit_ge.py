@@ -24,13 +24,12 @@ from utile_functions import create_df_from_validation_result
 from utile_functions import convert_dict_to_dataframe
 
 yaml = YAMLHandler()
-uploaded_file = st.sidebar.file_uploader("Choose a file")
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
+uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
+if uploaded_file_original is not None and uploaded_file_rule is not None:
+    df = pd.read_csv(uploaded_file_original)
     st.dataframe(df)
-    file_path = 'great_expectations/sl_batch2v1_rules_3.json'
-    with open(file_path, 'r') as file:
-        config = json.load(file)
+    config = json.load(uploaded_file_rule)
     
     # config properties
     data_path = config['data_path']
@@ -229,7 +228,7 @@ if uploaded_file is not None:
     merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
     
     csv = merged_df_new.to_csv(index=False).encode('utf-8')
-    st.download_button(
+    st.sidebar.download_button(
        "Press to Download",
        csv,
        "file.csv",
