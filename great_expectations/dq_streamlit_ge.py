@@ -228,8 +228,6 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
     with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
 	    # Write each dataframe to a different worksheet.
 	    merged_df_new.to_excel(writer, sheet_name='Sheet1')
-	    # Close the Pandas Excel writer and output the Excel file to the buffer
-	    writer.save()
 	
     st.sidebar.download_button(
        label = "Press to Download",
