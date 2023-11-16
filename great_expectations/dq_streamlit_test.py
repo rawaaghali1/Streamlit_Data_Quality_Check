@@ -245,7 +245,7 @@ def perform_dqc(config, dqc):
             merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
         else:
             continue
-	return merged_df_new
+    return merged_df_new
 
 @st.cache_data
 def classify_problem(description):
