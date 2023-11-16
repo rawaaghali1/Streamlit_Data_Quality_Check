@@ -346,7 +346,10 @@ def compute_column_checks_results(dq_json):
 	for i in dq_json:
 		columns.append(i['column'])
 		st.write(i['notes'][1])
-		checks.append(ast.literal_eval(i['notes'])[1])
+		try:
+			checks.append(i['notes'][1])
+		except:
+			checks.append(ast.literal_eval(i['notes'])[1])
 		results.append(i['success'])
 	column_results_df = pd.DataFrame({'columns' : columns, 'checks' : checks, 'results' : results})
 	return column_results_df
