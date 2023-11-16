@@ -5,6 +5,7 @@ import json
 import datetime
 import os
 import io
+import plotly.express as px
 import great_expectations as ge
 import xlsxwriter
 from ydata_profiling import ProfileReport
