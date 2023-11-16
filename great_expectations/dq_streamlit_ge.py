@@ -29,7 +29,6 @@ def great_expectations_configuration(config, df):
     datasource_name = config['datasource_name']
     checkpoint_name = config['checkpoint_name']
     data_asset_name = config['data_asset_name']
-    root_directory = config["root_directory"]
     run_name_template=config["run_name_template"]
     rules = config['rules']
     if 'sheet_name' in config:
