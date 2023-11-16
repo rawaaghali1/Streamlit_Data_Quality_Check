@@ -81,6 +81,7 @@ def layout():
     layout_dist['hovermode'] = 'x'
     return layout_plot, layout_dist
 
+@st.cache_resource
 def great_expectations_configuration(config, data):
     yaml = YAMLHandler()
     # config properties
@@ -141,6 +142,7 @@ def load_data(uploaded_file_original, uploaded_file_rule):
 	#data.set_index('RES_NUM', drop = False, inplace = True)
 	return data, config
 
+@st.cache_resource
 def perform_dqc(config, dqc):
     merged_df_new = pd.DataFrame()
     for rule in config['rules']:
