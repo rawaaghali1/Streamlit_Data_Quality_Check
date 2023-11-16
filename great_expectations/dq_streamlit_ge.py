@@ -73,7 +73,8 @@ def great_expectations_configuration(config, df):
     validator = context.get_validator(
         batch_request=batch_request, expectation_suite_name=my_expectation_suite_name
     )
-    return context, batch_request, validator
+    expectation_suite = context.get_expectation_suite(expectation_suite_name)
+    return context, batch_request, validator, expectation_suite
 
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
@@ -84,11 +85,10 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 	    df = pd.read_excel(uploaded_file_original)
     st.dataframe(df)
     config = json.load(uploaded_file_rule)
-    context, batch_request, validator = great_expectations_configuration(config, df)
+    context, batch_request, validator, expectation_suite = great_expectations_configuration(config, df)
     # Instantiate the Data_quality_check class
     dqc = Data_quality_check()
     merged_df_new = pd.DataFrame()
-    expectation_suite = context.get_expectation_suite(expectation_suite_name)
     print(merged_df_new.shape)
     for rule in config['rules']:
         expectation = rule['expectation']
