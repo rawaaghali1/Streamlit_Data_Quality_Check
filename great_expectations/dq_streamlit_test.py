@@ -665,7 +665,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 	# columns checks json
 
 	with column_checks_json:
-		try:
+		#try:
 			for i in dq_json:
 				if column_checks_selectbox[0:15] in i['notes']:
 					i_subset = {}
@@ -682,8 +682,8 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 					i_subset['Run date'] = i['run_dat']
 					st.json(i_subset)
 					#st.json(i)
-		except KeyError:
-			st.json({'checks' : 'None'})
+		#except KeyError:
+		#	st.json({'checks' : 'None'})
 			
 	with table_checks_json:
 		for i in dq_json:
