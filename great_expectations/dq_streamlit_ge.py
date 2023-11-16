@@ -4,6 +4,7 @@ import streamlit as st
 import json
 import datetime
 import os
+import io
 import great_expectations as ge
 import openpyxl
 from great_expectations.core.batch import BatchRequest
@@ -221,11 +222,18 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 
     # Apply the classification function to determine the problem type
     merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
-    writer = pd.ExcelWriter(path='file.xlsx', engine='openpyxl')
-    download_xlsx= merged_df_new.to_excel(writer, index=False)
+
+    # Create a Pandas Excel writer using XlsxWriter as the engine.
+    buffer = io.BytesIO()
+    with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+	    # Write each dataframe to a different worksheet.
+	    merged_df_new.to_excel(writer, sheet_name='Sheet1')
+	    # Close the Pandas Excel writer and output the Excel file to the buffer
+	    writer.save()
+	
     st.sidebar.download_button(
        label = "Press to Download",
-       data = download_xlsx,
+       data = buffer,
        file_name = "file.xlsx",
        mime = "application/vnd.ms-excel"
     )
