@@ -285,7 +285,7 @@ def classify_problem(description):
         return "unknown"
 
 @st.cache_data
-def compute_dq_metrics_2(data,dq_json):
+def compute_dq_metrics_2(data):
 	# COMPLETENESS
 	completeness = int(np.round((data.notna().to_numpy() == True).mean() * 100))
 
