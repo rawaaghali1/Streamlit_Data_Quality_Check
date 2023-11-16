@@ -7,6 +7,8 @@ import os
 import io
 import great_expectations as ge
 import xlsxwriter
+from ydata_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 from great_expectations.core.batch import BatchRequest
 from great_expectations.core.batch import RuntimeBatchRequest
 from great_expectations.core.yaml_handler import YAMLHandler
@@ -20,6 +22,58 @@ from great_expectations.core.expectation_configuration import ExpectationConfigu
 from expectations_func import Data_quality_check
 from utile_functions import create_df_from_validation_result
 from utile_functions import convert_dict_to_dataframe
+
+# set the page configuration
+st.set_page_config(
+	layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
+	initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
+	page_title="Data Quality App",  # String or None. Strings get appended with "• Streamlit". 
+	page_icon=None,  # String, anything supported by st.image, or None.
+)
+
+# hide the blurb and footer
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# define layout for plotly graphs
+@st.cache_data
+def layout():
+    layout_plot = dict(paper_bgcolor = '#0E1117',
+        plot_bgcolor = '#0E1117',
+        width = 200,
+        height = 200,
+        margin = dict(t = 0, l = 0, r = 0, b = 0),
+        hovermode = False,
+        showlegend = False,
+        xaxis_title = "",
+        yaxis_title = "",
+        font=dict(family="Arial",
+                size=10,
+            ),
+        xaxis=dict(
+            showline = True,
+            showgrid = True,
+            showticklabels=True,
+            gridcolor = "#dfe3e8",
+            linecolor = '#1E3246'), 
+        yaxis=dict(
+            showline = True,
+            showgrid = True,
+            showticklabels=True,
+            gridcolor = "#dfe3e8",
+            linecolor = '#1E3246'),
+            shapes = [],
+            bargap = 0,
+            annotations=[dict(text='', x=0.5, y=0.5, showarrow=False)])
+    layout_dist = layout_plot.copy()
+    layout_dist['hovermode'] = 'x'
+    return layout_plot, layout_dist
 
 def great_expectations_configuration(config, df):
     yaml = YAMLHandler()
@@ -75,8 +129,82 @@ def great_expectations_configuration(config, df):
     expectation_suite = context.get_expectation_suite(expectation_suite_name)
     return context, batch_request, validator, expectation_suite
 
+# basic metrics like null values, unique values
+@st.cache_data
+def compute_basic_metrics(data):
+	basic_metrics_df = pd.DataFrame({"null_values" : data.isna().sum(), "unique_values" : data.nunique()})
+	return basic_metrics_df
+
+@st.cache_data
+#def gen_profile_report(df, *report_args, **report_kwargs):
+#    return ProfileReport(df, *report_args, **report_kwargs)
+def gen_profile_report(df):
+	return ProfileReport(df, progress_bar=True)
+
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
-uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
+rules_yes_or_not = st.radio(
+    "Do you have a json file for column checks?",
+    ["Yes", "No"],
+    captions = ["You can perform column checks and download an Excel report", "You can check some basic visualizations of your data"])
+
+if rules_yes_or_not == 'Yes':
+	uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
+elif rules_yes_or_not == 'No' and uploaded_file_original is not None:
+	try:
+		df = pd.read_csv(uploaded_file_original)
+	except:
+		df = pd.read_excel(uploaded_file_original)
+	###### ROW 6 #######
+	# barplot and distribution 
+	basic_metrics_df= compute_basic_metrics(df)
+	st.subheader('Visualization')
+	bar_plot, gap_bar_distribution, distribution_plot = st.columns([7, 1, 7])
+	#bar_plot, distribution_plot = st.columns([1, 1])
+
+	with bar_plot:
+		bar_selectbox = st.selectbox(
+			'Select an option',
+			('null values', 'unique values'),
+			key = 'bar_selectbox'
+		)
+		if bar_selectbox == "null values":
+			variable = 'null_values'
+		else:
+			variable = 'unique_values'
+		#st.bar_chart(basic_metrics_df[variable])
+		fig = px.bar(basic_metrics_df[variable])
+		fig.update_layout(showlegend=False)
+		st.plotly_chart(fig, use_container_width=True)
+		
+	with gap_bar_distribution:
+		st.write('')
+
+	with distribution_plot:
+		dist_selectbox = st.selectbox(
+			'Select a column to get distribution',
+			tuple(data.select_dtypes([np.number]).columns),
+			key = 'dist_selectbox'
+		)
+		fig = px.histogram(data, x=dist_selectbox)
+		#fig.update_layout(layout_dist)
+		st.plotly_chart(fig, use_container_width=True)
+
+	#corr_plot, unknown_plot  = st.columns([1,1])
+	#with corr_plot:
+	#    st.write('Correlation heatmap')
+	#    data_quantitative = data[["DEN_VAL", "DIL_VAL", "HUM_VAL", "TPR_VAL", "TIM_VAL"]]
+	#    fig = px.imshow(data_quantitative.corr(numeric_only=True))
+	#    st.write(fig)
+	st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+	###### ROW 7 #######
+	st.subheader('Data Profiling', help='Data profiling is the process of examining, analyzing, and creating useful summaries of data.')
+	if st.button('Generate a Data Profiling report', help='The process can take up to 1 minute. If you encounter an error message, please try to refresh the page.'):
+		with st.expander("Report", expanded=True):
+			st_profile_report(pr)
+
+	st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
 if uploaded_file_original is not None and uploaded_file_rule is not None:
     try:
 	    df = pd.read_csv(uploaded_file_original)
