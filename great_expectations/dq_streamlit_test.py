@@ -396,8 +396,8 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 		file_name = "file.xlsx",
 		mime = "application/vnd.ms-excel"
 	)
-	
-	dq_json = merged_df_new.to_dict(orient ='records')
+	dq_excel = pd.read_excel(buffer)
+	dq_json = dq_excel.to_dict(orient ='records')
 	
 	dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data)
 
