@@ -195,6 +195,7 @@ elif rules_yes_or_not == 'No' and uploaded_file_original is not None:
 	###### ROW 7 #######
 	st.subheader('Data Profiling', help='Data profiling is the process of examining, analyzing, and creating useful summaries of data.')
 	if st.button('Generate a Data Profiling report', help='The process can take up to 1 minute. If you encounter an error message, please try to refresh the page.'):
+		pr = gen_profile_report(data_for_profiling)
 		with st.expander("Report", expanded=True):
 			st_profile_report(pr)
 
