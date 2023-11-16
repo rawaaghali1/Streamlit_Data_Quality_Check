@@ -138,7 +138,7 @@ def load_data(uploaded_file_original, uploaded_file_rule):
 	except:
 		data = pd.read_excel(uploaded_file_original)
 	config = json.load(uploaded_file_rule)
-	data.set_index('RES_NUM', drop = False, inplace = True)
+	#data.set_index('RES_NUM', drop = False, inplace = True)
 	return data, config
 
 def perform_dqc(config, dqc):
