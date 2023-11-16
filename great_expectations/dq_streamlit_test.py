@@ -134,6 +134,25 @@ def load_data(uploaded_file_original, uploaded_file_rule):
 	data.set_index('RES_NUM', drop = False, inplace = True)
 	return data, config
 
+@st.cache_data
+def classify_problem(description):
+        keywords = {
+            "Classification": ["expected values", "must be equal to",'is in'],
+            "Out-of-Range": ["must be between", "positive"],
+            "Data-type": ["data type", "numeric", "string"],
+            "Missing-value": ["must not be null"],
+            "Pattern": ["must match"]
+        }
+        # Convert lists of strings to a single string and convert to lowercase
+        if isinstance(description, list):
+            description = ', '.join(description).lower()
+        else:
+            description = description.lower()
+        for problem_type, words in keywords.items():
+            if any(word in description for word in words):
+                return problem_type
+        return "unknown"
+
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
 if uploaded_file_original is not None and uploaded_file_rule is not None:
@@ -142,7 +161,6 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
     # Instantiate the Data_quality_check class
     dqc = Data_quality_check()
     merged_df_new = pd.DataFrame()
-    print(merged_df_new.shape)
     for rule in config['rules']:
         expectation = rule['expectation']
         if expectation == 'columns_to_exist':
@@ -254,23 +272,6 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
             continue
     
     st.write(merged_df_new.shape)
-    def classify_problem(description):
-        keywords = {
-            "Classification": ["expected values", "must be equal to",'is in'],
-            "Out-of-Range": ["must be between", "positive"],
-            "Data-type": ["data type", "numeric", "string"],
-            "Missing-value": ["must not be null"],
-            "Pattern": ["must match"]
-        }
-        # Convert lists of strings to a single string and convert to lowercase
-        if isinstance(description, list):
-            description = ', '.join(description).lower()
-        else:
-            description = description.lower()
-        for problem_type, words in keywords.items():
-            if any(word in description for word in words):
-                return problem_type
-        return "unknown"
 
     # Apply the classification function to determine the problem type
     merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
