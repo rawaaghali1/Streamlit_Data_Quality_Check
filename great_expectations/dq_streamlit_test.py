@@ -369,6 +369,16 @@ def compute_column_checks_results(dq_json):
 def gen_profile_report(df):
 	return ProfileReport(df, progress_bar=True)
 
+# Heading
+# put logo image on the top right
+image = Image.open('assets/danone_ds_logo.png')
+col1, col2 = st.columns([8, 1])
+with col1:
+	st.title('Data Quality Dashboard')
+with col2:
+	st.write('Powered by:')
+	st.image(image, width=90, output_format='PNG')
+# Sidebar
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
 if uploaded_file_original is not None and uploaded_file_rule is not None:
@@ -413,15 +423,6 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 		data_for_profiling = data_for_profiling
 	pr = gen_profile_report(data_for_profiling)
 
-	# Heading
-	# put logo image on the top right
-	image = Image.open('assets/danone_ds_logo.png')
-	col1, col2 = st.columns([8, 1])
-	with col1:
-		st.title('Data Quality Dashboard')
-	with col2:
-		st.write('Powered by:')
-		st.image(image, width=90, output_format='PNG')
 
 	st.subheader('Metrics')
 
