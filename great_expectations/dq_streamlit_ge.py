@@ -27,16 +27,16 @@ yaml = YAMLHandler()
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 uploaded_file_rule = st.sidebar.file_uploader("Upload your json file", type='json', help='Only .json file for rules is supported.')
 if uploaded_file_original is not None and uploaded_file_rule is not None:
-    df = pd.read_csv(uploaded_file_original)
+	try:
+		df = pd.read_csv(uploaded_file_original)
+	except:
+		df = pd.read_excel(uploaded_file_original)
     st.dataframe(df)
     config = json.load(uploaded_file_rule)
     
     # config properties
-    data_path = config['data_path']
-    context_root_dir = config['context_root_dir']
     expectation_suite_name = config['expectation_suite_name']
     project_name = config['project_name']
-    data_path=config['project_name']
     datasource_name = config['datasource_name']
     checkpoint_name = config['checkpoint_name']
     data_asset_name = config['data_asset_name']
@@ -47,13 +47,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
         sheet_name = config['sheet_name']
     else:
         sheet_name = None
-    
-    
-    data_context_config = DataContextConfig(
-        store_backend_defaults=FilesystemStoreBackendDefaults(
-            root_directory=root_directory
-        ),
-    )
+
     context = get_context()
     
     datasource_config = {
