@@ -223,9 +223,8 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
     
     csv = merged_df_new.to_csv(index=False).encode('utf-8')
     st.sidebar.download_button(
-       "Press to Download",
-       csv,
-       "file.csv",
-       "text/csv",
-       key='download-csv'
+       label = "Press to Download",
+       data = csv,
+       file_name = "file.xlsx",
+       mime = "application/vnd.ms-excel"
     )
