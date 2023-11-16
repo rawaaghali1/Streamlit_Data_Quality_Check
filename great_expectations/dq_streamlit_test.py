@@ -346,7 +346,6 @@ def compute_column_checks_results(dq_json):
 	results = []
 	for i in dq_json:
 		columns.append(i['column'])
-		st.write(i['notes'][1])
 		try:
 			checks.append(i['notes'][1])
 		except:
@@ -369,7 +368,6 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 	# Instantiate the Data_quality_check class
 	dqc = Data_quality_check()
 	merged_df_new = perform_dqc(config, dqc)
-	st.write(merged_df_new.shape)
 	
 	# Apply the classification function to determine the problem type
 	merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
@@ -672,7 +670,10 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 				if column_checks_selectbox[0:15] in i['notes']:
 					i_subset = {}
 					i_subset['Column'] = i['column']
-					i_subset['Expectation'] = ast.literal_eval(i['notes'])[1]
+					try:
+						i_subset['Expectation'] = i['notes'][1]
+					except:
+						i_subset['Expectation'] = ast.literal_eval(i['notes'])[1]
 					i_subset['Expectation type'] = i['Problem Type']
 					i_subset['Success'] = i['success']
 					i_subset['Partial unexpected value list'] = i['partial_unexpected_list']
