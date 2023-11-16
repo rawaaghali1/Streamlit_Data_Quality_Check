@@ -27,7 +27,6 @@ from great_expectations.validator.validator import Validator
 from great_expectations.dataset import PandasDataset
 from great_expectations.core.expectation_configuration import ExpectationConfiguration
 from expectations_func import Data_quality_check
-from utile_functions import create_df_from_validation_result
 from utile_functions import convert_dict_to_dataframe
 
 # set the page configuration
