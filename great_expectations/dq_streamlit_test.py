@@ -133,6 +133,119 @@ def load_data(uploaded_file_original, uploaded_file_rule):
 	config = json.load(uploaded_file_rule)
 	data.set_index('RES_NUM', drop = False, inplace = True)
 	return data, config
+@st.cache_data
+def perform_dqc(config, dqc):
+    merged_df_new = pd.DataFrame()
+    for rule in config['rules']:
+        expectation = rule['expectation']
+        if expectation == 'columns_to_exist':
+            column = rule['kwargs']['column']
+            result = dqc.columns_to_exist(data, column)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")  
+        elif expectation == 'column_values_to_not_be_null_if_column_a':
+            column = rule['kwargs']['value_list']
+            column_a = rule['kwargs']['column_a']
+            value_a = rule['kwargs']['value_a']
+            result = dqc.column_values_to_not_be_null_if_column_a(data,column_a, column, value_a)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")              
+        elif expectation == 'expect_column_values_to_be_in_list':
+            column=rule['kwargs']['column']
+            value_list = rule['kwargs']['value_list']
+            result = dqc.expect_column_values_to_be_in_list(data, column, value_list)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'test_column_values_to_be_of_type_datetime':
+            result = dqc.test_column_values_to_be_of_type_datetime(data, column_A, column_B, or_equal=True)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")    
+        elif expectation == 'test_column_values_to_be_positive_or_zero':
+            column = rule['kwargs']['column']
+            result = dqc.test_column_values_to_be_positive_or_zero(data, column)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'test_column_values_to_be_of_type_numeric':
+            column=rule['kwargs']['column']
+            result = dqc.test_column_values_to_be_of_type_numeric(data, column)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'test_column_values_to_be_of_type_string':
+            column=rule['kwargs']['column']
+            result = dqc.test_column_values_to_be_of_type_string(data, column)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'expect_column_values_to_match_regex':
+            column=rule['kwargs']['column']
+            regex_str = rule['kwargs']['regex']
+            result = dqc.expect_column_values_to_match_regex(data, column,regex_str)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'test_check_value_in_list':
+            column_b = rule['kwargs']['column']
+            column_a = rule['kwargs']['column_a']
+            list_of_values = rule['kwargs']['list_of_values']
+            set_of_values = rule['kwargs']['set_of_values']
+            result = dqc.test_check_value_in_list(data, column_a, list_of_values, column_b, set_of_values)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'test_check_value_and_range':
+            column_b = rule['kwargs']['column']
+            column_a = rule['kwargs']['column_a']
+            list_of_values = rule['kwargs']['list_of_values']
+            min_value = rule['kwargs']['min_value']
+            max_value = rule['kwargs']['max_value']
+            result = dqc.test_check_value_in_list(data, column_a, list_of_values, column_b, min_value,max_value)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'test_check_value_in_list_2_columns':
+            column_c = rule['kwargs']['column']
+            column_a = rule['kwargs']['column_a']
+            column_b = rule['kwargs']['column_b']
+            list_of_values_a = rule['kwargs']['list_of_values_a']
+            list_of_values_b = rule['kwargs']['list_of_values_b']
+            list_of_values_c = rule['kwargs']['set_of_values']
+            result = dqc.test_check_value_in_list_2_columns(data, column_a, list_of_values_a, column_b, list_of_values_b, column_c, list_of_values_c)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'test_check_column_existence_if_a':
+            column = rule['kwargs']['column']
+            column_a = rule['kwargs']['column_a']
+            list_of_values_a = rule['kwargs']['list_of_values_a']
+            result = dqc.test_check_column_existence_if_a(data, column_a, list_of_values_a, column)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'expect_column_values_to_be_between':
+            column= rule['kwargs']['column']
+            min_value = rule['kwargs']['min_value']
+            max_value = rule['kwargs']['max_value']
+            result = dqc.test_column_values_to_be_between(data, column, min_value, max_value)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        elif expectation == 'column_pair_values_to_be_greater_than':
+            column_A=rule['kwargs']['column_a']
+            column_B=rule['kwargs']['column_b']
+            or_equal=rule['kwargs']['or_equal']
+            result = dqc.column_pair_values_to_be_greater_than(data, column_A, column_B,or_equal)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
+        else:
+            continue
+	return merged_df_new
 
 @st.cache_data
 def classify_problem(description):
@@ -160,116 +273,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
     context, batch_request, validator, expectation_suite = great_expectations_configuration(config, data)
     # Instantiate the Data_quality_check class
     dqc = Data_quality_check()
-    merged_df_new = pd.DataFrame()
-    for rule in config['rules']:
-        expectation = rule['expectation']
-        if expectation == 'columns_to_exist':
-            column = rule['kwargs']['column']
-            result = dqc.columns_to_exist(data, column)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")  
-        elif expectation == 'column_values_to_not_be_null_if_column_a':
-            column = rule['kwargs']['value_list']
-            column_a = rule['kwargs']['column_a']
-            value_a = rule['kwargs']['value_a']
-            result = dqc.column_values_to_not_be_null_if_column_a(data,column_a, column, value_a)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")              
-        elif expectation == 'expect_column_values_to_be_in_list':
-            column=rule['kwargs']['column']
-            value_list = rule['kwargs']['value_list']
-            result = dqc.expect_column_values_to_be_in_list(data, column, value_list)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'test_column_values_to_be_of_type_datetime':
-            result = dqc.test_column_values_to_be_of_type_datetime(data, column_A, column_B, or_equal=True)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")    
-        elif expectation == 'test_column_values_to_be_positive_or_zero':
-            column=rule['kwargs']['column']
-            result = dqc.test_column_values_to_be_positive_or_zero(data, column)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'test_column_values_to_be_of_type_numeric':
-            column=rule['kwargs']['column']
-            result = dqc.test_column_values_to_be_of_type_numeric(data, column)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'test_column_values_to_be_of_type_string':
-            column=rule['kwargs']['column']
-            result = dqc.test_column_values_to_be_of_type_string(data, column)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'expect_column_values_to_match_regex':
-            column=rule['kwargs']['column']
-            regex_str = rule['kwargs']['regex']
-            result = dqc.expect_column_values_to_match_regex(data, column,regex_str)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'test_check_value_in_list':
-            column_b = rule['kwargs']['column']
-            column_a = rule['kwargs']['column_a']
-            list_of_values = rule['kwargs']['list_of_values']
-            set_of_values = rule['kwargs']['set_of_values']
-            result = dqc.test_check_value_in_list(data, column_a, list_of_values, column_b, set_of_values)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'test_check_value_and_range':
-            column_b = rule['kwargs']['column']
-            column_a = rule['kwargs']['column_a']
-            list_of_values = rule['kwargs']['list_of_values']
-            min_value = rule['kwargs']['min_value']
-            max_value = rule['kwargs']['max_value']
-            result = dqc.test_check_value_in_list(data, column_a, list_of_values, column_b, min_value,max_value)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'test_check_value_in_list_2_columns':
-            column_c = rule['kwargs']['column']
-            column_a = rule['kwargs']['column_a']
-            column_b = rule['kwargs']['column_b']
-            list_of_values_a = rule['kwargs']['list_of_values_a']
-            list_of_values_b = rule['kwargs']['list_of_values_b']
-            list_of_values_c = rule['kwargs']['set_of_values']
-            result = dqc.test_check_value_in_list_2_columns(data, column_a, list_of_values_a, column_b, list_of_values_b, column_c, list_of_values_c)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'test_check_column_existence_if_a':
-            column = rule['kwargs']['column']
-            column_a = rule['kwargs']['column_a']
-            list_of_values_a = rule['kwargs']['list_of_values_a']
-            result = dqc.test_check_column_existence_if_a(data, column_a, list_of_values_a, column)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'expect_column_values_to_be_between':
-            column= rule['kwargs']['column']
-            min_value = rule['kwargs']['min_value']
-            max_value = rule['kwargs']['max_value']
-            result = dqc.test_column_values_to_be_between(data, column, min_value, max_value)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        elif expectation == 'column_pair_values_to_be_greater_than':
-            column_A=rule['kwargs']['column_a']
-            column_B=rule['kwargs']['column_b']
-            or_equal=rule['kwargs']['or_equal']
-            result = dqc.column_pair_values_to_be_greater_than(data, column_A, column_B,or_equal)
-            df_exists=convert_dict_to_dataframe(result)
-            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")
-        else:
-            continue
+    merged_df_new = perform_dqc(config, dqc)
     
     st.write(merged_df_new.shape)
 
