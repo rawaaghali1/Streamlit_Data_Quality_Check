@@ -73,7 +73,6 @@ def layout():
     layout_dist['hovermode'] = 'x'
     return layout_plot, layout_dist
 
-@st.cache_data
 def great_expectations_configuration(config, data):
     yaml = YAMLHandler()
     # config properties
