@@ -142,9 +142,9 @@ def gen_profile_report(df):
 	return ProfileReport(df, progress_bar=True)
 
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
-rules_yes_or_not = st.radio(
+rules_yes_or_not = st.sidebar.radio(
     "Do you have a json file for column checks?",
-    ["Yes", "No"],
+    ["No", "Yes"],
     captions = ["You can perform column checks and download an Excel report", "You can check some basic visualizations of your data"])
 
 if rules_yes_or_not == 'Yes':
