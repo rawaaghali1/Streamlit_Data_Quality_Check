@@ -131,7 +131,7 @@ def load_data(uploaded_file_original, uploaded_file_rule):
 		data = pd.read_csv(uploaded_file_original)
 	except:
 		data = pd.read_excel(uploaded_file_original)
-  config = json.load(uploaded_file_rule)
+  	config = json.load(uploaded_file_rule)
 	data.set_index('RES_NUM', drop = False, inplace = True)
 	return data, config
 
