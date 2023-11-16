@@ -280,7 +280,7 @@ def compute_dq_metrics_2(data,dq_json):
 
 	# CONSISTENCY
 	cols = ['SRC_SYS_COD','IDT_COD','PDS_COD','NPB_COD','DIL_VAL','HUM_VAL','TPR_VAL','TIM_VAL','RES_TXT']
-	type_list = [str,str,numpy.int64,str,numpy.float64,numpy.float64,numpy.int64,numpy.float64,str]
+	type_list = [str,str,np.int64,str,np.float64,np.float64,np.int64,np.float64,str]
 	# create temporary df
 	temp_data = data[cols]
 	temp_type_list = []
