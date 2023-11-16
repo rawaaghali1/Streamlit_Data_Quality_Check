@@ -158,7 +158,13 @@ def perform_dqc(config, dqc):
             result = dqc.column_values_to_not_be_null_if_column_a(data,column_a, column, value_a)
             df_exists = convert_dict_to_dataframe(result)
             merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
-            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")              
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")     
+        elif expectation == 'column_values_to_not_be_null':
+            column = rule['kwargs']['column']
+            result = dqc.column_values_to_not_be_null(data, column)
+            df_exists = convert_dict_to_dataframe(result)
+            merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
+            merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")     
         elif expectation == 'expect_column_values_to_be_in_list':
             column=rule['kwargs']['column']
             value_list = rule['kwargs']['value_list']
