@@ -5,6 +5,7 @@ import json
 import datetime
 import os
 import great_expectations as ge
+import openpyxl
 from great_expectations.core.batch import BatchRequest
 from great_expectations.core.batch import RuntimeBatchRequest
 from great_expectations.core.yaml_handler import YAMLHandler
@@ -221,7 +222,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
     # Apply the classification function to determine the problem type
     merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
     
-    download_xlsx = merged_df_new.to_excel(index=False).encode('utf-8')
+    download_xlsx = merged_df_new.to_excel(index=False, excel_writer='openpyxl').encode('utf-8')
     st.sidebar.download_button(
        label = "Press to Download",
        data = download_xlsx,
