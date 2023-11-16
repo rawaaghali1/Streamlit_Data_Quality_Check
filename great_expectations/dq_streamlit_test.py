@@ -572,10 +572,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
 				if column_checks_selectbox[0:15] in i['notes'] or column_checks_selectbox[0:15] in i['notes'][1]:
 					i_subset = {}
 					i_subset['Column'] = i['column']
-					try:
-						i_subset['Expectation'] = i['notes'][1]
-					except:
-						i_subset['Expectation'] = ast.literal_eval(i['notes'])[1]
+					i_subset['Expectation'] = ast.literal_eval(i['notes'])[1]
 					i_subset['Expectation type'] = i['Problem Type']
 					i_subset['Success'] = i['success']
 					i_subset['Partial unexpected value list'] = i['partial_unexpected_list']
