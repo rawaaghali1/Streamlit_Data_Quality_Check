@@ -418,7 +418,7 @@ if rules_yes_or_not == 'No' and uploaded_file_original is not None:
 	with distribution_plot:
 		dist_selectbox = st.selectbox(
 			'Select a column to get distribution',
-			tuple(df.select_dtypes([np.number]).columns),
+			tuple(data.select_dtypes([np.number]).columns),
 			key = 'dist_selectbox'
 		)
 		fig = px.histogram(data, x=dist_selectbox)
