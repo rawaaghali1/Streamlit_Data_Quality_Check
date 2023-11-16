@@ -142,7 +142,7 @@ def load_data(uploaded_file_original, uploaded_file_rule):
 	#data.set_index('RES_NUM', drop = False, inplace = True)
 	return data, config
 
-@st.cache_resource
+@st.cache
 def perform_dqc(config, dqc):
     merged_df_new = pd.DataFrame()
     for rule in config['rules']:
