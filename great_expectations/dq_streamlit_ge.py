@@ -222,7 +222,7 @@ if uploaded_file_original is not None and uploaded_file_rule is not None:
     # Apply the classification function to determine the problem type
     merged_df_new['Problem Type'] = merged_df_new['notes'].apply(classify_problem)
     
-    download_xlsx = merged_df_new.to_excel(index=False, engine='openpyxl').encode('utf-8')
+    download_xlsx = merged_df_new.to_excel(index=False)
     st.sidebar.download_button(
        label = "Press to Download",
        data = download_xlsx,
