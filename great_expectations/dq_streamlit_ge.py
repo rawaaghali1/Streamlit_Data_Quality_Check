@@ -6,7 +6,7 @@ import datetime
 import os
 import io
 import great_expectations as ge
-import openpyxl
+import xlsxwriter
 from great_expectations.core.batch import BatchRequest
 from great_expectations.core.batch import RuntimeBatchRequest
 from great_expectations.core.yaml_handler import YAMLHandler
