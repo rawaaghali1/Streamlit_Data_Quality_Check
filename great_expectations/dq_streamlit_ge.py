@@ -10,10 +10,6 @@ import xlsxwriter
 from great_expectations.core.batch import BatchRequest
 from great_expectations.core.batch import RuntimeBatchRequest
 from great_expectations.core.yaml_handler import YAMLHandler
-from great_expectations.data_context.types.base import (
-    DataContextConfig,
-    FilesystemStoreBackendDefaults,
-)
 from great_expectations.data_context import FileDataContext
 from great_expectations.data_context import BaseDataContext
 from great_expectations.util import get_context
