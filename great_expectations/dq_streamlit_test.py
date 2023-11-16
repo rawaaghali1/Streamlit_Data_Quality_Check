@@ -159,7 +159,7 @@ def perform_dqc(config, dqc):
             df_exists = convert_dict_to_dataframe(result)
             merged_df_new = pd.concat([merged_df_new, df_exists], ignore_index=True)
             merged_df_new['run_dat'] =  datetime.datetime.now().strftime("%d/%m/%Y")     
-        elif expectation == 'column_values_to_not_be_null':
+        elif expectation == 'expect_column_values_to_not_be_null':
             column = rule['kwargs']['column']
             result = dqc.column_values_to_not_be_null(data, column)
             df_exists = convert_dict_to_dataframe(result)
