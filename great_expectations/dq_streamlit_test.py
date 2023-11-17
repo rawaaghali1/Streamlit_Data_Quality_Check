@@ -394,7 +394,7 @@ if rules_yes_or_not == 'No' and uploaded_file_original is not None:
 	# barplot and distribution 
 	basic_metrics_df= compute_basic_metrics(data)
 	st.subheader('Visualization')
-	bar_plot, gap_bar_distribution, distribution_plot = st.columns([7, 1, 7])
+	bar_plot, gap_bar_distribution, distribution_plot = st.columns([10, 1, 10])
 	#bar_plot, distribution_plot = st.columns([1, 1])
 
 	with bar_plot:
