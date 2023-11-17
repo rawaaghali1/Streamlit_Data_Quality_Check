@@ -671,7 +671,7 @@ if rules_yes_or_not == 'Yes':
 		###### ROW 6 #######
 		# barplot and distribution 
 		st.subheader('Visualization')
-		bar_plot, gap_bar_distribution, distribution_plot = st.columns([6, 1, 6])
+		bar_plot, gap_bar_distribution, distribution_plot = st.columns([8, 1, 8])
 		#bar_plot, distribution_plot = st.columns([1, 1])
 	
 		with bar_plot:
