@@ -61,14 +61,14 @@ if uploaded_file_original is not None:
         st.session_state.input = pd.concat([st.session_state.input, row])
 
     # Inputs created outside of a form
-    select_box = st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key='input_df_form_col1')
-    st.multiselect('Columns', list(data.columns), key='input_df_form_col2')
+    select_box = st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key='input_df_col1')
+    st.multiselect('Columns', list(data.columns), key='input_df_col2')
     if a == 'Column values must not be null':
-        st.text_input('Values', key='input_df_form_col3', disabled=True)
+        st.text_input('Values', key='input_df_col3', disabled=True)
     elif a == 'Column values must be in a list':
-        st.text_input('Values', key='input_df_form_col3')
+        st.text_input('Values', key='input_df_col3')
     elif a == 'Column values must be of a certain type':
-        st.selectbox('Values', ('Text', 'Numbers'), key='input_df_form_col3')
+        st.selectbox('Values', ('Text', 'Numbers'), key='input_df_col3')
     st.button('Submit', on_click=add_df)
     
     st.write('## Solution using input widgets')
