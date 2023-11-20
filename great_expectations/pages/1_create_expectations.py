@@ -25,10 +25,10 @@ if uploaded_file_original is not None:
         # Create an empty dataframe on first page load, will skip on page reloads
     if 'input' not in st.session_state:
         input = pd.DataFrame({'Expectations':[],'Columns':[],'Values':[]})
-        st.session_state.data = input
+        st.session_state.input = input
 
         # Show current data
-    st.dataframe(st.session_state.data)
+    st.dataframe(st.session_state.input)
     st.write('#### Using form submission')
 
         # Function to append inputs from form into dataframe
@@ -36,7 +36,7 @@ if uploaded_file_original is not None:
         row = pd.DataFrame({'Expectations':[st.session_state.input_df_form_col1],
                             'Columns':[st.session_state.input_df_form_col2],
                             'Values':[st.session_state.input_df_form_col3]})
-        st.session_state.data = pd.concat([st.session_state.data, row])
+        st.session_state.input = pd.concat([st.session_state.input, row])
 
     # Inputs listed within a form
     dfForm = st.form(key='dfForm', clear_on_submit=True)
