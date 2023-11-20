@@ -28,7 +28,7 @@ if uploaded_file_original is not None:
         st.session_state.input = input
 
         # Show current data
-    st.dataframe(st.session_state.input)
+    st.dataframe(st.session_state.input, hide_index=True)
     
     st.write('#### Using form submission')
 
