@@ -18,6 +18,8 @@ st.markdown("# Create Expectations")
 
 uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 if uploaded_file_original is not None:
+	data = load_data(uploaded_file_original)
+
 	st.write('# Solution using a dataframe')
 	
         # Create an empty dataframe on first page load, will skip on page reloads
@@ -41,14 +43,13 @@ if uploaded_file_original is not None:
 	with dfForm:
         	dfFormColumns = st.columns(3)
         	with dfFormColumns[0]:
-            		st.text_input('Expectations', key='input_df_form_col1')
+			st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key='input_df_form_col1')
         	with dfFormColumns[1]:
-            		st.number_input('Columns', step=1, key='input_df_form_col2')
+            		st.multiselect('Columns', list(data.columns), key='input_df_form_col2')
         	with dfFormColumns[2]:
             		st.number_input('Values', step=1, key='input_df_form_col3')
         	st.form_submit_button(on_click=add_dfForm)
 	
-	data = load_data(uploaded_file_original)
 	st.write('## Solution using input widgets')
 	# a selection for the user to specify the number of rows
 	num_rows = st.slider('Number of expectations', min_value=1, max_value=10)
