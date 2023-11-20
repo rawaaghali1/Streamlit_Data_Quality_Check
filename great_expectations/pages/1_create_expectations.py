@@ -18,6 +18,37 @@ st.markdown("# Create Expectations")
 
 uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 if uploaded_file_original is not None:
+        st.write('# Solution using a dataframe')
+
+        # Create an empty dataframe on first page load, will skip on page reloads
+        if 'input' not in st.session_state:
+		input = pd.DataFrame({'Expectations':[],'Columns':[],'Values':[]})
+		st.session_state.data = input
+
+        # Show current data
+        st.dataframe(st.session_state.data)
+
+        st.write('#### Using form submission')
+
+        # Function to append inputs from form into dataframe
+        def add_dfForm():
+        	row = pd.DataFrame({'col1':[st.session_state.input_df_form_col1],
+				    'col2':[st.session_state.input_df_form_col2],
+				    'col3':[st.session_state.input_df_form_col3]})
+		st.session_state.data = pd.concat([st.session_state.data, row])
+
+        # Inputs listed within a form
+        dfForm = st.form(key='dfForm', clear_on_submit=True)
+	with dfForm:
+        	dfFormColumns = st.columns(3)
+        	with dfFormColumns[0]:
+            	st.text_input('col1', key='input_df_form_col1')
+        	with dfFormColumns[1]:
+            	st.number_input('col2', step=1, key='input_df_form_col2')
+        	with dfFormColumns[2]:
+            	st.number_input('col3', step=1, key='input_df_form_col3')
+        	st.form_submit_button(on_click=add_dfForm)
+
         data = load_data(uploaded_file_original)
         st.write('## Solution using input widgets')
         # a selection for the user to specify the number of rows
