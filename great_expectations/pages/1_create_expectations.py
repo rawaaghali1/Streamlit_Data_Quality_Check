@@ -18,10 +18,10 @@ st.markdown("# Create Expectations")
 
 uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 if uploaded_file_original is not None:
-        st.write('# Solution using a dataframe')
-
+	st.write('# Solution using a dataframe')
+	
         # Create an empty dataframe on first page load, will skip on page reloads
-        if 'input' not in st.session_state:
+	if 'input' not in st.session_state:
 		input = pd.DataFrame({'Expectations':[],'Columns':[],'Values':[]})
 		st.session_state.data = input
 
@@ -32,9 +32,9 @@ if uploaded_file_original is not None:
 
         # Function to append inputs from form into dataframe
         def add_dfForm():
-        	row = pd.DataFrame({'col1':[st.session_state.input_df_form_col1],
-				    'col2':[st.session_state.input_df_form_col2],
-				    'col3':[st.session_state.input_df_form_col3]})
+        	row = pd.DataFrame({'Expectations':[st.session_state.input_df_form_col1],
+				    'Columns':[st.session_state.input_df_form_col2],
+				    'Values':[st.session_state.input_df_form_col3]})
 		st.session_state.data = pd.concat([st.session_state.data, row])
 
         # Inputs listed within a form
@@ -42,11 +42,11 @@ if uploaded_file_original is not None:
 	with dfForm:
         	dfFormColumns = st.columns(3)
         	with dfFormColumns[0]:
-            	st.text_input('col1', key='input_df_form_col1')
+            		st.text_input('Expectations', key='input_df_form_col1')
         	with dfFormColumns[1]:
-            	st.number_input('col2', step=1, key='input_df_form_col2')
+            		st.number_input('Columns', step=1, key='input_df_form_col2')
         	with dfFormColumns[2]:
-            	st.number_input('col3', step=1, key='input_df_form_col3')
+            		st.number_input('Values', step=1, key='input_df_form_col3')
         	st.form_submit_button(on_click=add_dfForm)
 
         data = load_data(uploaded_file_original)
@@ -57,12 +57,12 @@ if uploaded_file_original is not None:
         grid = st.columns(3)
         # Function to create a row of widgets (with row number input to assure unique keys)
         def add_row(row):
-            with grid[0]:
-                st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key=f'input_col1{row}')
-            with grid[1]:
-                st.multiselect('Columns', list(data.columns), key=f'input_col2{row}')
-            with grid[2]:
-                st.number_input('Col3', step=1, key=f'input_col3{row}')
+		with grid[0]:
+			st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key=f'input_col1{row}')
+		with grid[1]:
+			st.multiselect('Columns', list(data.columns), key=f'input_col2{row}')
+		with grid[2]:
+			st.number_input('Col3', step=1, key=f'input_col3{row}')
             #with grid[3]:
             #    st.number_input('col4', step=1, key=f'input_col4{row}',
             #                    value = st.session_state[f'input_col2{row}'] \
@@ -71,4 +71,4 @@ if uploaded_file_original is not None:
     
         # Loop to create rows of input widgets
         for r in range(num_rows):
-            add_row(r)
+		add_row(r)
