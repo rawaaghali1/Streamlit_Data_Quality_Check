@@ -27,9 +27,9 @@ if uploaded_file_original is not None:
         # Function to create a row of widgets (with row number input to assure unique keys)
         def add_row(row):
             with grid[0]:
-                st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key=row)
+                st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key=f'input_col1{row}')
             with grid[1]:
-                st.multiselect('Columns', list(data.columns), key=row)
+                st.multiselect('Columns', list(data.columns), key=f'input_col2{row}')
             with grid[2]:
                 st.number_input('Col3', step=1, key=f'input_col3{row}')
             #with grid[3]:
