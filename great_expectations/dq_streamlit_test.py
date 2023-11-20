@@ -379,9 +379,6 @@ with col2:
 	st.write('Powered by:')
 	st.image(image, width=90, output_format='PNG')
 # Sidebar
-st.sidebar.markdown('''
-> :warning:**NOTE:**
->   If you encouter any technical issues, please contact [Zhengxiao Ying](mailto:zhengxiao.ying@external.danone.com).''')
 
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 rules_yes_or_not = st.sidebar.radio(
@@ -721,3 +718,7 @@ if rules_yes_or_not == 'Yes':
 				st_profile_report(pr)
 	
 		st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+st.sidebar.markdown('''
+> :warning:**NOTE:**
+>   If you encouter any technical issues, please contact [Zhengxiao Ying](mailto:zhengxiao.ying@external.danone.com).''')
