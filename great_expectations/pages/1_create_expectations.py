@@ -26,19 +26,18 @@ if uploaded_file_original is not None:
 		st.session_state.data = input
 
         # Show current data
-        st.dataframe(st.session_state.data)
-
-        st.write('#### Using form submission')
+	st.dataframe(st.session_state.data)
+	st.write('#### Using form submission')
 
         # Function to append inputs from form into dataframe
-        def add_dfForm():
+	def add_dfForm():
         	row = pd.DataFrame({'Expectations':[st.session_state.input_df_form_col1],
 				    'Columns':[st.session_state.input_df_form_col2],
 				    'Values':[st.session_state.input_df_form_col3]})
 		st.session_state.data = pd.concat([st.session_state.data, row])
 
         # Inputs listed within a form
-        dfForm = st.form(key='dfForm', clear_on_submit=True)
+	dfForm = st.form(key='dfForm', clear_on_submit=True)
 	with dfForm:
         	dfFormColumns = st.columns(3)
         	with dfFormColumns[0]:
@@ -48,15 +47,15 @@ if uploaded_file_original is not None:
         	with dfFormColumns[2]:
             		st.number_input('Values', step=1, key='input_df_form_col3')
         	st.form_submit_button(on_click=add_dfForm)
-
-        data = load_data(uploaded_file_original)
-        st.write('## Solution using input widgets')
-        # a selection for the user to specify the number of rows
-        num_rows = st.slider('Number of expectations', min_value=1, max_value=10)
-        # columns to lay out the inputs
-        grid = st.columns(3)
-        # Function to create a row of widgets (with row number input to assure unique keys)
-        def add_row(row):
+	
+	data = load_data(uploaded_file_original)
+	st.write('## Solution using input widgets')
+	# a selection for the user to specify the number of rows
+	num_rows = st.slider('Number of expectations', min_value=1, max_value=10)
+	# columns to lay out the inputs
+	grid = st.columns(3)
+	# Function to create a row of widgets (with row number input to assure unique keys)
+	def add_row(row):
 		with grid[0]:
 			st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key=f'input_col1{row}')
 		with grid[1]:
