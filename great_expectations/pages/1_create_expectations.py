@@ -69,5 +69,5 @@ if uploaded_file_original is not None:
             #                    disabled=True)
     
         # Loop to create rows of input widgets
-        for r in range(num_rows):
+	for r in range(num_rows):
 		add_row(r)
