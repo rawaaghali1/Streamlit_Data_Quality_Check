@@ -379,9 +379,7 @@ with col2:
 	st.write('Powered by:')
 	st.image(image, width=90, output_format='PNG')
 # Sidebar
-st.sidebar.markdown('''
-> :warning:**NOTE:**
->   If you encouter any technical issues, please contact [Zhengxiao Ying](mailto:zhengxiao.ying@external.danone.com).''')
+st.sidebar.info('''If you encouter any technical issues, please contact [Zhengxiao Ying](mailto:zhengxiao.ying@external.danone.com).''', icon='!')
 
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 rules_yes_or_not = st.sidebar.radio(
