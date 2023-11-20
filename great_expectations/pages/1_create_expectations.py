@@ -43,11 +43,14 @@ if uploaded_file_original is not None:
     with dfForm:
         dfFormColumns = st.columns(3)
         with dfFormColumns[0]:
-            st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key='input_df_form_col1')
+            a = st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key='input_df_form_col1')
         with dfFormColumns[1]:
             st.multiselect('Columns', list(data.columns), key='input_df_form_col2')
         with dfFormColumns[2]:
-            st.number_input('Values', step=1, key='input_df_form_col3')
+            if a == 'Column values must not be null':
+                st.write('')
+            else:
+                st.number_input('Values', step=1, key='input_df_form_col3')
         st.form_submit_button(on_click=add_dfForm)
     
     st.write('## Solution using input widgets')
