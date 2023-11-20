@@ -380,7 +380,7 @@ with col2:
 	st.image(image, width=90, output_format='PNG')
 # Sidebar
 st.sidebar.markdown('''
-> **_NOTE_**
+> **_NOTE: _**
 > If you encouter any technical issues, please contact [Zhengxiao Ying](mailto:zhengxiao.ying@external.danone.com).''')
 
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
