@@ -2,32 +2,45 @@ import streamlit as st
 import time
 import numpy as np
 
-st.set_page_config(page_title="Plotting Demo", page_icon="📈")
+st.set_page_config(page_title="Create Expectations")
 
-st.markdown("# Plotting Demo")
-st.sidebar.header("Plotting Demo")
-st.write(
-    """This demo illustrates a combination of plotting and animation with
-Streamlit. We're generating a bunch of random numbers in a loop for around
-5 seconds. Enjoy!"""
-)
+@st.cache_data
+def load_data(uploaded_file_original):
+	try:
+		data = pd.read_csv(uploaded_file_original)
+	except:
+		data = pd.read_excel(uploaded_file_original)
+	return data
 
-progress_bar = st.sidebar.progress(0)
-status_text = st.sidebar.empty()
-last_rows = np.random.randn(1, 1)
-chart = st.line_chart(last_rows)
+st.markdown("# Create Expectations")
 
-for i in range(1, 101):
-    new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-    status_text.text("%i%% Complete" % i)
-    chart.add_rows(new_rows)
-    progress_bar.progress(i)
-    last_rows = new_rows
-    time.sleep(0.05)
-
-progress_bar.empty()
-
-# Streamlit widgets automatically run the script from top to bottom. Since
-# this button is not connected to any other logic, it just causes a plain
-# rerun.
-st.button("Re-run")
+uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
+if uploaded_file_original is not None:
+    data = load_data(uploaded_file_original)
+    
+    with tab_widget:
+        st.write('# Solution using input widgets')
+    
+        # a selection for the user to specify the number of rows
+        num_rows = st.slider('Number of rows', min_value=1, max_value=10)
+    
+        # columns to lay out the inputs
+        grid = st.columns(4)
+    
+        # Function to create a row of widgets (with row number input to assure unique keys)
+        def add_row(row):
+            with grid[0]:
+                st.text_input('col1', key=f'input_col1{row}')
+            with grid[1]:
+                st.number_input('col2', step=1, key=f'input_col2{row}')
+            with grid[2]:
+                st.number_input('col3', step=1, key=f'input_col3{row}')
+            with grid[3]:
+                st.number_input('col4', step=1, key=f'input_col4{row}',
+                                value = st.session_state[f'input_col2{row}'] \
+                                    -st.session_state[f'input_col3{row}'],
+                                disabled=True)
+    
+        # Loop to create rows of input widgets
+        for r in range(num_rows):
+            add_row(r)
