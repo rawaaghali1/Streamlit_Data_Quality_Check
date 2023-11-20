@@ -29,6 +29,9 @@ if uploaded_file_original is not None:
 
         # Show current data
     st.dataframe(st.session_state.input)
+    if st.button('Clear all inputs')
+        del st.session_state['input']
+    
     st.write('#### Using form submission')
 
         # Function to append inputs from form into dataframe
