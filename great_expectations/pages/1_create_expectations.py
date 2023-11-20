@@ -18,17 +18,12 @@ st.markdown("# Create Expectations")
 
 uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 if uploaded_file_original is not None:
-    data = load_data(uploaded_file_original)
-    
-    with tab_widget:
-        st.write('# Solution using input widgets')
-    
-        # a selection for the user to specify the number of rows
+	data = load_data(uploaded_file_original)
+	st.write('# Solution using input widgets')
+	# a selection for the user to specify the number of rows
         num_rows = st.slider('Number of rows', min_value=1, max_value=10)
-    
         # columns to lay out the inputs
         grid = st.columns(4)
-    
         # Function to create a row of widgets (with row number input to assure unique keys)
         def add_row(row):
             with grid[0]:
