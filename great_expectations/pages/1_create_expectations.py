@@ -19,7 +19,7 @@ st.markdown("# Create Expectations")
 uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 if uploaded_file_original is not None:
         data = load_data(uploaded_file_original)
-        st.write('# Solution using input widgets')
+        st.write('## Solution using input widgets')
         # a selection for the user to specify the number of rows
         num_rows = st.slider('Number of expectations', min_value=1, max_value=10)
         # columns to lay out the inputs
@@ -31,7 +31,7 @@ if uploaded_file_original is not None:
             with grid[1]:
                 st.multiselect('Columns', list(data.columns))
             with grid[2]:
-                st.number_input('col3', step=1, key=f'input_col3{row}')
+                st.number_input('Col3', step=1, key=f'input_col3{row}')
             #with grid[3]:
             #    st.number_input('col4', step=1, key=f'input_col4{row}',
             #                    value = st.session_state[f'input_col2{row}'] \
