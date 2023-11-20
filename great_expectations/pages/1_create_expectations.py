@@ -31,7 +31,7 @@ if uploaded_file_original is not None:
 
         # Function to append inputs from form into dataframe
 	def add_dfForm():
-        	row = pd.DataFrame({'Expectations':[st.session_state.input_df_form_col1],
+		row = pd.DataFrame({'Expectations':[st.session_state.input_df_form_col1],
 				    'Columns':[st.session_state.input_df_form_col2],
 				    'Values':[st.session_state.input_df_form_col3]})
 		st.session_state.data = pd.concat([st.session_state.data, row])
