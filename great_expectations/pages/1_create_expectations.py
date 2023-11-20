@@ -49,7 +49,7 @@ if uploaded_file_original is not None:
         with dfFormColumns[2]:
             if a == 'Column values must not be null':
                 st.write('')
-            else:
+            elif a == 'Column values must be in a list':
                 st.number_input('Values', step=1, key='input_df_form_col3')
         st.form_submit_button(on_click=add_dfForm)
     
