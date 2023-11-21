@@ -108,7 +108,8 @@ if uploaded_file_original is not None:
     "run_name_template": "data_quality_check",
     "rules": []
     }
-    
+
+    df = st.session_state.input
     for index, row in df.iterrows():
         if row['Expectations'] == 'Column values must not be null':
             config['rules'].append(
