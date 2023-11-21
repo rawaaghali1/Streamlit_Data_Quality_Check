@@ -20,7 +20,8 @@ uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', '
 if uploaded_file_original is not None:
     data = load_data(uploaded_file_original)
 
-    st.write('#### List of expectations')
+    st.subheader('List of expectations')
+    st.write('The expectations you've input are reflected here. To clear all expectations, please click the button in the top right corner and choose "Rerun".')
     
     # Create an empty dataframe on first page load, will skip on page reloads
     if 'input' not in st.session_state:
@@ -36,7 +37,8 @@ if uploaded_file_original is not None:
                 'Columns':[st.session_state.input_df_col2],
                 'Values':[st.session_state.input_df_col3]})
         st.session_state.input = pd.concat([st.session_state.input, row])
-
+    
+    st.subheader('Input and submit your expectations')
     # Inputs created outside of a form
     select_box = st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)'), key='input_df_col1')
     if select_box == 'Column values must be in a list':
