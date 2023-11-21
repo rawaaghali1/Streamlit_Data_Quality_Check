@@ -96,3 +96,39 @@ if uploaded_file_original is not None:
         # Loop to create rows of input widgets
     for r in range(num_rows):
         add_row(r)
+
+    config = {
+    "expectation_suite_name": "my_expectation_suite",
+    "datasource_name": "my_datasource",
+    "project_name": "data_quality_check",
+    "sheet_name": "in",
+    "data_connector_name": "data_connector",
+    "data_asset_name": "data_quality_check_data",
+    "checkpoint_name": "my_checkpoint",
+    "run_name_template": "data_quality_check",
+    "rules": []
+    }
+    
+    for index, row in df.iterrows():
+        if row['Expectations'] == 'Column values must not be null':
+            config['rules'].append(
+                {"expectation": "expect_column_values_to_not_be_null",
+                 "kwargs":{"column":[x.strip() for x in row['Columns'].split(',')]}
+                }
+            )
+        elif row['Expectations'] == 'Column values must be in a list':
+            config['rules'].append(
+                {"expectation": "expect_column_values_to_be_in_list",
+                 "kwargs":{"column":row['Columns'],
+                           "value_list":[x.strip() for x in row['Values'].split(',')]
+                          }
+                }
+            )
+            
+    json_string = json.dumps(config)
+    st.download_button(
+        label="Download your json file",
+        file_name="expectations.json",
+        mime="application/json",
+        data=json_string,
+    )
