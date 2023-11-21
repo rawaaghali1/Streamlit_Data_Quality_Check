@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 import json
+import Image
 import pandas as pd
 import numpy as np
 
@@ -12,6 +13,14 @@ st.set_page_config(
     page_icon=None,  # String, anything supported by st.image, or None.
 )
 
+image = Image.open('assets/danone_ds_logo.png')
+col1, col2 = st.columns([8, 1])
+with col1:
+	st.title('Create Expectations')
+with col2:
+	st.write('Powered by:')
+	st.image(image, width=90, output_format='PNG')
+
 @st.cache_data
 def load_data(uploaded_file_original):
     try:
@@ -19,8 +28,6 @@ def load_data(uploaded_file_original):
     except:
         data = pd.read_excel(uploaded_file_original)
     return data
-
-st.markdown("# Create Expectations")
 
 uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 if uploaded_file_original is not None:
