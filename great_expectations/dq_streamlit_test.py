@@ -291,12 +291,10 @@ def compute_dq_metrics_2(data):
 	completeness = int(np.round((data.notna().to_numpy() == True).mean() * 100))
 
 	# CONSISTENCY
-	try:
-		cols = ['SRC_SYS_COD','IDT_COD','PDS_COD','NPB_COD','DIL_VAL','HUM_VAL','TPR_VAL','TIM_VAL','RES_TXT']
-		type_list = [str,str,np.int64,str,np.float64,np.float64,np.int64,np.float64,str]
-	except:
-		cols = ['PDS_CODE','SL_Time']
-		type_list = [str,np.int64]
+	#cols = ['SRC_SYS_COD','IDT_COD','PDS_COD','NPB_COD','DIL_VAL','HUM_VAL','TPR_VAL','TIM_VAL','RES_TXT']
+	#type_list = [str,str,np.int64,str,np.float64,np.float64,np.int64,np.float64,str]
+	cols = ['PDS_CODE','SL_Time']
+	type_list = [str,np.int64]
 	# create temporary df
 	temp_data = data[cols]
 	temp_type_list = []
