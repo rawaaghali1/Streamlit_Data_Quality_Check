@@ -308,12 +308,18 @@ def compute_dq_metrics_2(data):
 	# ACCURACY
 	a = 0
 	b = 0
-	if data['SRC_SYS_COD'].nunique() == 1:
+	#if data['SRC_SYS_COD'].nunique() == 1:
+	#	a = 95
+	#if len(list(data['PHY_STA_COD'].unique())) == 1:
+	#	b = 95    
+	#c = 100 - len(data[~data['AGE_DSC'].isin(['Infant','Non-Infant'])])/len(data)
+	#d = 100 - len(data[~data['PHY_STA_COD'].isin(['Powder'])])/len(data)
+	if data['PDS_CODE'].nunique() == 1:
 		a = 95
-	if len(list(data['PHY_STA_COD'].unique())) == 1:
+	if len(list(data['Physical_State'].unique())) == 1:
 		b = 95    
-	c = 100 - len(data[~data['AGE_DSC'].isin(['Infant','Non-Infant'])])/len(data)
-	d = 100 - len(data[~data['PHY_STA_COD'].isin(['Powder'])])/len(data)
+	c = 100 - len(data[~data['Manufacturing_Site'].isin(['Fulda','KK'])])/len(data)
+	d = 100 - len(data[~data['Physical_State'].isin(['Powder'])])/len(data)
 	accuracy = round(((a+b+c+d)/400)*100)
 
 	# RELEVANCY
