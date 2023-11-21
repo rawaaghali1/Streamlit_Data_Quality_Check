@@ -21,7 +21,7 @@ if uploaded_file_original is not None:
     data = load_data(uploaded_file_original)
 
     st.subheader('List of expectations')
-    st.write('The expectations you've input are reflected here. To clear all expectations, please click the button in the top right corner and choose "Rerun".')
+    st.write('The expectations you have input are reflected here. To clear all expectations, please click the button in the top right corner and choose "Rerun".')
     
     # Create an empty dataframe on first page load, will skip on page reloads
     if 'input' not in st.session_state:
