@@ -67,7 +67,9 @@ if uploaded_file_original is not None:
     if select_box == 'Column values must not be null':
         st.text_input('Values', key='input_df_col3', disabled=True)
     elif select_box == 'Column values must be in a list':
-        st.text_input('Values', key='input_df_col3')
+        text_input = st.text_input('Values', key='input_df_col3')
+        if text_input:
+            st.write("You entered: ", text_input)
     elif select_box == 'Column values must be of a certain type':
         st.selectbox('Values', ('Text', 'Numbers'), key='input_df_col3')
     st.button('Submit', on_click=add_df)
