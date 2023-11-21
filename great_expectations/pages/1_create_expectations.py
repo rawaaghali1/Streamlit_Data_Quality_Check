@@ -117,18 +117,24 @@ if uploaded_file_original is not None:
         if row['Expectations'] == 'Column values must not be null':
             config['rules'].append(
                 {"expectation": "expect_column_values_to_not_be_null",
-                 "kwargs":{"column": row['Columns']}
+                 "kwargs": {"column": row['Columns']}
                 }
             )
         elif row['Expectations'] == 'Column values must be in a list':
             config['rules'].append(
                 {"expectation": "expect_column_values_to_be_in_list",
-                 "kwargs":{"column":row['Columns'][0],
+                 "kwargs": {"column":row['Columns'][0],
                            "value_list":[x.strip() for x in row['Values'].split(',')]
-                          }
+                           }
                 }
             )
-            
+        elif row['Expectations'] == 'Column values must be numeric (integer or float)':
+            config['rules'].append(
+                {"expectation": "test_column_values_to_be_of_type_numeric",
+                 "kwargs": {"column": row['Columns']}
+                }
+            )
+    
     json_string = json.dumps(config)
     st.download_button(
         label="Download your json file",
