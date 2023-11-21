@@ -1,9 +1,9 @@
 import streamlit as st
 import time
 import json
-import Image
 import pandas as pd
 import numpy as np
+from PIL import Image
 
 # set the page configuration
 st.set_page_config(
