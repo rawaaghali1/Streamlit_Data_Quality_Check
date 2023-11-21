@@ -35,7 +35,7 @@ if uploaded_file_original is not None:
     data = load_data(uploaded_file_original)
 
     st.subheader('List of expectations')
-    st.write('The expectations you have input are reflected in the table below.')
+    st.write('The expectations you have submitted will be reflected in the table below.')
     
     # Create an empty dataframe on first page load, will skip on page reloads
     if 'input' not in st.session_state:
