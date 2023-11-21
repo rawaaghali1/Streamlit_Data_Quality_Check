@@ -111,11 +111,10 @@ if uploaded_file_original is not None:
 
     df = st.session_state.input
     for index, row in df.iterrows():
-        print(row['Columns'])
         if row['Expectations'] == 'Column values must not be null':
             config['rules'].append(
                 {"expectation": "expect_column_values_to_not_be_null",
-                 "kwargs":{"column":[x.strip() for x in row['Columns'].split(',')]}
+                 "kwargs":{"column": row['Columns']}
                 }
             )
         elif row['Expectations'] == 'Column values must be in a list':
