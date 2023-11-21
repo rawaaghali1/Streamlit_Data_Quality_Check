@@ -21,7 +21,7 @@ if uploaded_file_original is not None:
     data = load_data(uploaded_file_original)
 
     st.subheader('List of expectations')
-    st.write('The expectations you have input are reflected in the table below.  To clear all expectations, please click the button in the top right corner and choose "Rerun".')
+    st.write('The expectations you have input are reflected in the table below.')
     
     # Create an empty dataframe on first page load, will skip on page reloads
     if 'input' not in st.session_state:
@@ -30,7 +30,8 @@ if uploaded_file_original is not None:
 
     # Show current data
     st.dataframe(st.session_state.input, hide_index=True)
-
+    st.write('To clear all expectations, please click the button in the top right corner and choose "Rerun".')
+    
     # Function to append non-form inputs into dataframe
     def add_df():
         row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
