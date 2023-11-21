@@ -29,7 +29,8 @@ def load_data(uploaded_file_original):
         data = pd.read_excel(uploaded_file_original)
     return data
 
-uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
+st.subheader('Upload your raw data')
+uploaded_file_original = st.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.', label_visibility="collapsed")
 if uploaded_file_original is not None:
     data = load_data(uploaded_file_original)
 
