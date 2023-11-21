@@ -62,7 +62,7 @@ if uploaded_file_original is not None:
         st.session_state.input = pd.concat([st.session_state.input, row])
 
     # Inputs created outside of a form
-    select_box = st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key='input_df_col1')
+    select_box = st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)'), key='input_df_col1')
     if select_box == 'Column values must be in a list':
         st.selectbox('Columns', list(data.columns), key='input_df_col2', placeholder='Select only 1 column')
     else:
