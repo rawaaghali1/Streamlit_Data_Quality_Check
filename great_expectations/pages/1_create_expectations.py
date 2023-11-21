@@ -92,9 +92,11 @@ if uploaded_file_original is not None:
             )
     
     json_string = json.dumps(config)
-    st.download_button(
-        label="Download your json file",
-        file_name="expectations.json",
-        mime="application/json",
-        data=json_string,
-    )
+
+    if not df.empty:
+        st.download_button(
+            label="Download your json file",
+            file_name="expectations.json",
+            mime="application/json",
+            data=json_string,
+        )
