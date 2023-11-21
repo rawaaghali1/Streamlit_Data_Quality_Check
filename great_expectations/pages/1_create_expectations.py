@@ -30,7 +30,11 @@ if uploaded_file_original is not None:
 
     # Show current data
     st.dataframe(st.session_state.input, hide_index=True)
-    st.write('To clear all expectations, please click the button in the top right corner and choose "Rerun".')
+    def clear_cache():
+        keys = list(st.session_state.keys())
+        for key in keys:
+            st.session_state.pop(key)
+    st.button('Clear Cache', on_click=clear_cache)
     
     # Function to append non-form inputs into dataframe
     def add_df():
