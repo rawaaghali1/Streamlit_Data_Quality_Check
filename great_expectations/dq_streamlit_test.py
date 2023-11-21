@@ -175,6 +175,7 @@ def perform_dqc(config, dqc):
             column = rule['kwargs']['column']
             result = dqc.column_values_to_be_null(data, column)
             df_exists = convert_dict_to_dataframe(result)
+            st.write(df_exists.shape)
             df_exists['missing_count'] = 0 
             df_exists['missing_percent'] = 0     
             df_exists['unexpected_percent_nonmissing'] = 0    
