@@ -63,15 +63,18 @@ if uploaded_file_original is not None:
 
     # Inputs created outside of a form
     select_box = st.selectbox('Expectations', ('Column values must not be null', 'Column values must be in a list', 'Column values must be of a certain type'), key='input_df_col1')
-    st.multiselect('Columns', list(data.columns), key='input_df_col2')
+    if select_box == 'Column values must be in a list':
+        st.selectbox('Columns', list(data.columns), key='input_df_col2', placeholder='Select only 1 column')
+    else:
+        st.multiselect('Columns', list(data.columns), key='input_df_col2', placeholder='Select 1 or more columns')
     if select_box == 'Column values must not be null':
         st.text_input('Values', key='input_df_col3', disabled=True)
     elif select_box == 'Column values must be in a list':
         text_input = st.text_input('Values', key='input_df_col3')
         if text_input:
             st.write("You entered: ", text_input)
-    elif select_box == 'Column values must be of a certain type':
-        st.selectbox('Values', ('Text', 'Numbers'), key='input_df_col3')
+    elif select_box == 'Column values must be numeric (integer or float)':
+        st.text_input('Values', key='input_df_col3', disabled=True)
     st.button('Submit', on_click=add_df)
     
     st.write('## Solution using input widgets')
@@ -120,7 +123,7 @@ if uploaded_file_original is not None:
         elif row['Expectations'] == 'Column values must be in a list':
             config['rules'].append(
                 {"expectation": "expect_column_values_to_be_in_list",
-                 "kwargs":{"column":row['Columns'],
+                 "kwargs":{"column":row['Columns'][0],
                            "value_list":[x.strip() for x in row['Values'].split(',')]
                           }
                 }
