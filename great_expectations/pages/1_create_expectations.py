@@ -34,7 +34,7 @@ if uploaded_file_original is not None:
         keys = list(st.session_state.keys())
         for key in keys:
             st.session_state.pop(key)
-    st.button('Clear Cache', on_click=clear_cache)
+    st.button('Clear all expectations', on_click=clear_cache)
     
     # Function to append non-form inputs into dataframe
     def add_df():
