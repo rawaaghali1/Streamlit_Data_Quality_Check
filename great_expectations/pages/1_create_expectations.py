@@ -49,31 +49,6 @@ if uploaded_file_original is not None:
         for key in keys:
             st.session_state.pop(key)
     st.button('Clear all expectations', on_click=clear_cache)
-    
-    # Function to append non-form inputs into dataframe
-    def add_df():
-        row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
-                'Columns':[st.session_state.input_df_col2],
-                'Values':[st.session_state.input_df_col3]})
-        st.session_state.input = pd.concat([st.session_state.input, row])
-    
-    st.subheader('Input and submit your expectations')
-    # Inputs created outside of a form
-    select_box = st.selectbox('Expectations (required)', ('Column values must not be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)'), key='input_df_col1')
-    if select_box == 'Column values must be in a list':
-        column_select = st.multiselect('Columns', list(data.columns), key='input_df_col2', placeholder='Select only 1 column', max_selections=1)
-    else:
-        column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select 1 or more columns')
-    if select_box == 'Column values must not be null':
-        st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
-    elif select_box == 'Column values must be in a list':
-        text_input = st.text_input('Values (input values should be separated by a comma)', key='input_df_col3')
-        if text_input:
-            st.write("You entered: ", text_input)
-    elif select_box == 'Column values must be numeric (integer or float)':
-        st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
-    if column_select:
-        st.button('Submit', on_click=add_df)
 
     config = {
     "expectation_suite_name": "my_expectation_suite",
@@ -118,4 +93,31 @@ if uploaded_file_original is not None:
             file_name="expectations.json",
             mime="application/json",
             data=json_string,
-        )
+        )	
+	
+    # Function to append non-form inputs into dataframe
+    def add_df():
+        row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
+                'Columns':[st.session_state.input_df_col2],
+                'Values':[st.session_state.input_df_col3]})
+        st.session_state.input = pd.concat([st.session_state.input, row])
+    
+    st.subheader('Input and submit your expectations')
+    # Inputs created outside of a form
+    select_box = st.selectbox('Expectations (required)', ('Column values must not be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)'), key='input_df_col1')
+    if select_box == 'Column values must be in a list':
+        column_select = st.multiselect('Columns', list(data.columns), key='input_df_col2', placeholder='Select only 1 column', max_selections=1)
+    else:
+        column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select 1 or more columns')
+    if select_box == 'Column values must not be null':
+        st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
+    elif select_box == 'Column values must be in a list':
+        text_input = st.text_input('Values (input values should be separated by a comma)', key='input_df_col3')
+        if text_input:
+            st.write("You entered: ", text_input)
+    elif select_box == 'Column values must be numeric (integer or float)':
+        st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
+    if column_select:
+        st.button('Submit', on_click=add_df)
+
+
