@@ -106,7 +106,7 @@ if uploaded_file_original is not None:
     # Inputs created outside of a form
     select_box = st.selectbox('Expectations (required)', ('Column values must not be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)'), key='input_df_col1')
     if select_box == 'Column values must be in a list':
-        column_select = st.multiselect('Columns', list(data.columns), key='input_df_col2', placeholder='Select only 1 column', max_selections=1)
+        column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select only 1 column', max_selections=1)
     else:
         column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select 1 or more columns')
     if select_box == 'Column values must not be null':
