@@ -65,13 +65,13 @@ if uploaded_file_original is not None:
     else:
         st.multiselect('Columns', list(data.columns), key='input_df_col2', placeholder='Select 1 or more columns')
     if select_box == 'Column values must not be null':
-        st.text_input('Values', key='input_df_col3', disabled=True)
+        st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
     elif select_box == 'Column values must be in a list':
-        text_input = st.text_input('Values', key='input_df_col3')
+        text_input = st.text_input('Values (input values should be separated by a comma)', key='input_df_col3')
         if text_input:
             st.write("You entered: ", text_input)
     elif select_box == 'Column values must be numeric (integer or float)':
-        st.text_input('Values', key='input_df_col3', disabled=True)
+        st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
     st.button('Submit', on_click=add_df)
 
     config = {
