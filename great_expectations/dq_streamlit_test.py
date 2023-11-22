@@ -297,24 +297,29 @@ def classify_problem(description):
         return "unknown"
 
 @st.cache_data
-def compute_dq_metrics_2(data):
+def compute_dq_metrics_2(data, merged_df_new):
 	# COMPLETENESS
 	completeness = int(np.round((data.notna().to_numpy() == True).mean() * 100))
 
 	# CONSISTENCY
 	#cols = ['SRC_SYS_COD','IDT_COD','PDS_COD','NPB_COD','DIL_VAL','HUM_VAL','TPR_VAL','TIM_VAL','RES_TXT']
 	#type_list = [str,str,np.int64,str,np.float64,np.float64,np.int64,np.float64,str]
-	cols = ['PDS_CODE','SL_Time']
-	type_list = [str,np.int64]
+	#cols = ['PDS_CODE','SL_Time']
+	#type_list = [str,np.int64]
 	# create temporary df
-	temp_data = data[cols]
-	temp_type_list = []
+	#temp_data = data[cols]
+	#temp_type_list = []
 	# get the type of columns
-	for col in temp_data.columns:
-		temp_type_list.append(type(temp_data[col].iloc[0]))
-	con_df = pd.DataFrame({"columns" : cols, "type_actual" : type_list, "type_current" : temp_type_list})
-	con_df['type_result'] = con_df['type_actual'] == con_df['type_current']
-	consistency = round(con_df["type_result"].sum()/len(con_df) * 100)
+	#for col in temp_data.columns:
+	#	temp_type_list.append(type(temp_data[col].iloc[0]))
+	#con_df = pd.DataFrame({"columns" : cols, "type_actual" : type_list, "type_current" : temp_type_list})
+	#con_df['type_result'] = con_df['type_actual'] == con_df['type_current']
+	#consistency = round(con_df["type_result"].sum()/len(con_df) * 100)
+	if 'Data-type' in merged_df_new['Problem Type'].unique():
+		temp_df = merged_df_new[merged_df_new['Problem Type'] == 'Data-type']
+		consistency = round(100 - temp_df.unexpected_percent_total.mean())
+	else:
+		consistency = 80 
 
 	# ACCURACY
 	a = 0
@@ -325,14 +330,19 @@ def compute_dq_metrics_2(data):
 	#	b = 95    
 	#c = 100 - len(data[~data['AGE_DSC'].isin(['Infant','Non-Infant'])])/len(data)
 	#d = 100 - len(data[~data['PHY_STA_COD'].isin(['Powder'])])/len(data)
-	if data['PDS_CODE'].nunique() == 1:
-		a = 95
-	if len(list(data['Physical_State'].unique())) == 1:
-		b = 95    
-	c = 100 - len(data[~data['Manufacturing_Site'].isin(['Fulda','KK'])])/len(data)
-	d = 100 - len(data[~data['Physical_State'].isin(['Powder'])])/len(data)
-	accuracy = round(((a+b+c+d)/400)*100)
-
+	#if data['PDS_CODE'].nunique() == 1:
+	#	a = 95
+	#if len(list(data['Physical_State'].unique())) == 1:
+	#	b = 95    
+	#c = 100 - len(data[~data['Manufacturing_Site'].isin(['Fulda','KK'])])/len(data)
+	#d = 100 - len(data[~data['Physical_State'].isin(['Powder'])])/len(data)
+	#accuracy = round(((a+b+c+d)/400)*100)
+	if 'Classification' in merged_df_new['Problem Type'].unique() or 'Pattern' in merged_df_new['Problem Type'].unique():
+		temp_df = merged_df_new[(merged_df_new['Problem Type'] == 'Classification') | (merged_df_new['Problem Type'] == 'Pattern')]
+		accuracy = round(100 - temp_df.unexpected_percent_total.mean())
+	else:
+		accuracy = 80
+	
 	# RELEVANCY
 	relevancy = round(((accuracy + consistency)/200)*100)
 
@@ -340,7 +350,7 @@ def compute_dq_metrics_2(data):
 	today = datetime.datetime.now().date()
 	#data_date = datetime.datetime.strptime(data['MNF_DAT'].iloc[0], "%Y-%m-%d %H:%M:%S.%f").date()
 	#delta = today - data_date
-	timeliness = 50
+	timeliness = 80
 	#if delta.days > 150:
 	#    timeliness = 30
 	#elif delta.days > 120:
@@ -482,7 +492,7 @@ if rules_yes_or_not == 'Yes':
 		dq_excel = pd.read_excel(buffer)
 		dq_json = dq_excel.to_dict(orient ='records')
 		
-		dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data)
+		dq_metrics_df_2, total_score_2 = compute_dq_metrics_2(data, merged_df_new)
 	
 		#table_results_df = compute_table_checks_results(dq_json)
 	
