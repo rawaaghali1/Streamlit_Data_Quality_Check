@@ -177,9 +177,9 @@ if uploaded_file_original is not None:
     elif select_box == 'Column values must be between 2 numbers':
         min_num, max_num = st.columns(2)
         with min_num:
-            min_num_input = st.number_input('Min value (can be empty)', value=None, key='input_df_col3')
+            min_num_input = st.number_input('Min value (can be empty)', value=int, key='input_df_col3')
         with max_num:
-            max_num_input = st.number_input('Max value (can be empty)', value=None, key='input_df_col4')
+            max_num_input = st.number_input('Max value (can be empty)', value=int, key='input_df_col4')
         if min_num_input is None and max_num_input is None:
             st.warning('Min value and max value cannot both be empty.')
     else:
