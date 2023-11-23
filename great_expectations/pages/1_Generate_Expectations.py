@@ -98,11 +98,20 @@ if uploaded_file_original is not None:
             config['rules'].append(
                 {"expectation": "expect_column_values_to_match_regex",
                  "kwargs": {"column": row['Columns'][0],
-                           "regex": row['Values']
+                            "regex": row['Values']
                            }
                 }
             )
-    
+        elif row['Expectations'] == 'Column values must be between 2 numbers':
+            config['rules'].append(
+                {"expectation": "expect_column_values_to_be_between",
+                 "kwargs": {"column": row['Columns'][0],
+                            "min_value": row['Values'].split(' - ')[0],
+			    "max_value": row['Values'].split(' - ')[1]
+                           }
+                }
+            )
+
     json_string = json.dumps(config)
 
     if not df.empty:
@@ -138,14 +147,16 @@ if uploaded_file_original is not None:
             row['Values'][0] = 'Null'
         elif row['Expectations'][0] == 'Column values must be numeric (integer or float)':
             row['Values'][0] = 'Numeric'
+	elif row['Expectations'][0] == 'Column values must be between 2 numbers':
+            row['Values'][0] = str(st.session_state.input_df_col3) + ' - ' + str(st.session_state.input_df_col4)
         st.session_state.input = pd.concat([st.session_state.input, row])
         st.session_state.input.reset_index(inplace=True, drop=True)
 	
     
     st.subheader('Input and submit your expectations')
     # Inputs created outside of a form
-    select_box = st.selectbox('Expectations (required)', ('Column values must not be null', 'Column values must be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)', 'Column values must match a pattern in text'), key='input_df_col1')
-    if select_box == 'Column values must be in a list' or select_box == 'Column values must match a pattern in text':
+    select_box = st.selectbox('Expectations (required)', ('Column values must not be null', 'Column values must be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)', 'Column values must match a pattern in text', 'Column values must be between 2 numbers'), key='input_df_col1')
+    if select_box == 'Column values must be in a list' or select_box == 'Column values must match a pattern in text' or select_box == 'Column values must be between 2 numbers':
         column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select only 1 column', max_selections=1)
     else:
         column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select 1 or more columns')
@@ -156,7 +167,13 @@ if uploaded_file_original is not None:
     elif select_box == 'Column values must match a pattern in text':
         text_input = st.text_input('Values (only a regular expression should be input)', key='input_df_col3')
         if text_input:
-            st.write("You entered: ", text_input)	    
+            st.write("You entered: ", text_input)
+    elif select_box == 'Column values must be between 2 values':
+        min_num, max_num = st.columns(2)
+        with min_num:
+            st.number_input('Min value (can be empty)', value=None, key='input_df_col3')
+        with max_num:
+            st.number_input('Max value (can be empty)', value=None, key='input_df_col4')
     else:
         st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
 
