@@ -35,8 +35,16 @@ if uploaded_file_original is not None:
     data = load_data(uploaded_file_original)
 
     st.subheader('List of expectations')
-    st.write('The expectations you have submitted will be reflected in the table below.')
-    
+    col1, col2 = st.columns([8, 2])
+    with col1:
+        st.write('The expectations you have submitted will be reflected in the table below.')
+    with col2:
+        def clear_cache():
+            keys = list(st.session_state.keys())
+            for key in keys:
+                st.session_state.pop(key)
+        st.button('Delete all expectations', on_click=clear_cache)
+        
     # Create an empty dataframe on first page load, will skip on page reloads
     if 'input' not in st.session_state:
         input = pd.DataFrame({'Expectations':[],'Columns':[],'Values':[]})
@@ -118,12 +126,6 @@ if uploaded_file_original is not None:
             expectation_number = st.number_input(label='Input the row number of the expectation you want to delete', value=None, min_value=0, max_value=st.session_state.input.shape[0]-1, label_visibility="collapsed")
         if expectation_number is not None:
             st.button(f'Delete Expectation No.{expectation_number}', on_click=delete_expectation, args=(expectation_number,), kwargs=None)
-
-        def clear_cache():
-            keys = list(st.session_state.keys())
-            for key in keys:
-                st.session_state.pop(key)
-        st.button('Delete all expectations', on_click=clear_cache)
 	
     # Function to append non-form inputs into dataframe
     def add_df():
