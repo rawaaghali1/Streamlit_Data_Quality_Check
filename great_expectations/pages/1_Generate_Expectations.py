@@ -129,7 +129,7 @@ if uploaded_file_original is not None:
 	
     # Function to append non-form inputs into dataframe
     def add_df():
-        if (st.session_state.input[['Expectations','Columns']].values == [st.session_state.input_df_col1, st.session_state.input_df_col2]).all(axis=1).any():
+        if st.session_state.input.query('@st.session_state.input_df_col1 == Expectations and @st.session_state.input_df_col2 == Columns').empty:
                 st.warning('The same expectation has already to added on the selected column(s), please delete the existing expectation first.', icon='⚠️')   
         row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
                 'Columns':[st.session_state.input_df_col2],
