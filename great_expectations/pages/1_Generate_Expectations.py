@@ -42,30 +42,10 @@ if uploaded_file_original is not None:
         input = pd.DataFrame({'Expectations':[],'Columns':[],'Values':[]})
         st.session_state.input = input
 
-    # Show current data
+    # Show current dataframe
     st.dataframe(st.session_state.input, hide_index=False, use_container_width=True)
-    
-    def delete_expectation(expectation_number):
-        if expectation_number in st.session_state.input.index:
-            st.session_state.input.drop(index=expectation_number, inplace=True)
-            st.session_state.input.reset_index(inplace=True, drop=True)
 
-    if not st.session_state.input.empty:
-        delete_input, delete_button, delete_empty = st.columns([5, 3, 2])
-        with delete_input:
-            st.write('Input the row number of the expectation you want to delete')
-            expectation_number = st.number_input(label='Input the row number of the expectation you want to delete', value=None, min_value=0, max_value=st.session_state.input.shape[0]-1, label_visibility="collapsed")
-        with delete_button:
-            if expectation_number is not None:
-                st.write(' ')
-                st.button(f'Delete Expectation No.{expectation_number}', on_click=delete_expectation, args=(expectation_number,), kwargs=None)
-
-    def clear_cache():
-        keys = list(st.session_state.keys())
-        for key in keys:
-            st.session_state.pop(key)
-    st.button('Delete all expectations', on_click=clear_cache)
-
+    # Download current dataframe as a json file
     config = {
     "expectation_suite_name": "my_expectation_suite",
     "datasource_name": "my_datasource",
@@ -123,7 +103,27 @@ if uploaded_file_original is not None:
             file_name="expectations.json",
             mime="application/json",
             data=json_string,
-        )	
+        )
+
+    # Add options to delete expectations
+    def delete_expectation(expectation_number):
+        if expectation_number in st.session_state.input.index:
+            st.session_state.input.drop(index=expectation_number, inplace=True)
+            st.session_state.input.reset_index(inplace=True, drop=True)
+
+    if not st.session_state.input.empty:
+        delete_input, delete_button, delete_empty = st.columns([5, 3, 2])
+        st.write('If you want to delete an expectation, please input the row number of the expectation you want to delete below:')
+        with delete_input:
+            expectation_number = st.number_input(label='Input the row number of the expectation you want to delete', value=None, min_value=0, max_value=st.session_state.input.shape[0]-1, label_visibility="collapsed")
+        if expectation_number is not None:
+            st.button(f'Delete Expectation No.{expectation_number}', on_click=delete_expectation, args=(expectation_number,), kwargs=None)
+
+        def clear_cache():
+            keys = list(st.session_state.keys())
+            for key in keys:
+                st.session_state.pop(key)
+        st.button('Delete all expectations', on_click=clear_cache)
 	
     # Function to append non-form inputs into dataframe
     def add_df():
