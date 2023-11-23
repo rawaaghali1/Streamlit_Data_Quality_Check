@@ -103,11 +103,17 @@ if uploaded_file_original is not None:
                 }
             )
         elif row['Expectations'] == 'Column values must be between 2 numbers':
+            min_value = row['Values'].split(' - ')[0]
+            max_value = row['Values'].split(' - ')[1]
+            if min_value == 'None':
+                min_value = None
+            if max_value == 'None':
+                max_value = None
             config['rules'].append(
                 {"expectation": "expect_column_values_to_be_between",
                  "kwargs": {"column": row['Columns'][0],
-                            "min_value": row['Values'].split(' - ')[0],
-			    "max_value": row['Values'].split(' - ')[1]
+                            "min_value": min_value,
+			    "max_value": max_value
                            }
                 }
             )
