@@ -73,8 +73,8 @@ if uploaded_file_original is not None:
         elif row['Expectations'] == 'Column values must be in a list':
             config['rules'].append(
                 {"expectation": "expect_column_values_to_be_in_list",
-                 "kwargs": {"column":row['Columns'][0],
-                           "value_list":[x.strip() for x in row['Values'].split(',')]
+                 "kwargs": {"column": row['Columns'][0],
+                           "value_list": [x.strip() for x in row['Values'].split(',')]
                            }
                 }
             )
@@ -82,6 +82,20 @@ if uploaded_file_original is not None:
             config['rules'].append(
                 {"expectation": "test_column_values_to_be_of_type_numeric",
                  "kwargs": {"column": row['Columns']}
+                }
+            )
+        elif row['Expectations'] == 'Column values must be null':
+            config['rules'].append(
+                {"expectation": "expect_column_values_to_be_null",
+                 "kwargs": {"column": row['Columns']}
+                }
+            )
+        elif row['Expectations'] == 'Column values must match a pattern in text':
+            config['rules'].append(
+                {"expectation": "expect_column_values_to_match_regex",
+                 "kwargs": {"column": row['Columns'][0],
+                           "value_list": row['Values']
+                           }
                 }
             )
     
@@ -104,19 +118,22 @@ if uploaded_file_original is not None:
     
     st.subheader('Input and submit your expectations')
     # Inputs created outside of a form
-    select_box = st.selectbox('Expectations (required)', ('Column values must not be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)'), key='input_df_col1')
-    if select_box == 'Column values must be in a list':
+    select_box = st.selectbox('Expectations (required)', ('Column values must not be null', 'Column values must be null', 'Column values must be in a list', 'Column values must be numeric (integer or float)', 'Column values must match a pattern in text'), key='input_df_col1')
+    if select_box == 'Column values must be in a list' or select_box == 'Column values must match a pattern in text':
         column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select only 1 column', max_selections=1)
     else:
         column_select = st.multiselect('Columns (required)', list(data.columns), key='input_df_col2', placeholder='Select 1 or more columns')
-    if select_box == 'Column values must not be null':
-        st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
-    elif select_box == 'Column values must be in a list':
+    if select_box == 'Column values must be in a list':
         text_input = st.text_input('Values (input values should be separated by a comma)', key='input_df_col3')
         if text_input:
             st.write("You entered: ", text_input)
-    elif select_box == 'Column values must be numeric (integer or float)':
+    elif select_box == 'Column values must match a pattern in text':
+        text_input = st.text_input('Values (only a regular expression should be input)', key='input_df_col3')
+        if text_input:
+            st.write("You entered: ", text_input)	    
+    else:
         st.number_input('Values (not required)', value=None, key='input_df_col3', disabled=True)
+
     if column_select:
         st.button('Submit', on_click=add_df)
 
