@@ -66,7 +66,7 @@ if uploaded_file_original is not None:
     "rules": []
     }
 
-    df = st.session_state.input
+    df = st.session_state.input.drop_duplicates()
     for index, row in df.iterrows():
         if row['Expectations'] == 'Column values must not be null':
             config['rules'].append(
@@ -132,6 +132,7 @@ if uploaded_file_original is not None:
         row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
                 'Columns':[st.session_state.input_df_col2],
                 'Values':[st.session_state.input_df_col3]})
+	if df[(df['Expectations'] == condition_expectations) & (df['Columns'].apply(lambda x: set(x) == set(condition_columns)))].empty:
         if row['Expectations'][0] == 'Column values must not be null':
             row['Values'][0] = 'Not null'
         elif row['Expectations'][0] == 'Column values must be null':
