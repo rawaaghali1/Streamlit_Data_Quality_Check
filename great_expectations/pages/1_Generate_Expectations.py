@@ -54,7 +54,7 @@ if uploaded_file_original is not None:
         delete_input, delete_button, delete_empty = st.columns([5, 3, 2])
         with delete_input:
             st.write('Input the row number of the expectation you want to delete')
-            expectation_number = st.number_input(value=None, min_value=0, max_value=st.session_state.input.shape[0]-1)
+            expectation_number = st.number_input(label='Input the row number of the expectation you want to delete', value=None, min_value=0, max_value=st.session_state.input.shape[0]-1, label_visibility="collapsed")
         with delete_button:
             if expectation_number is not None:
                 st.write(' ')
