@@ -44,6 +44,15 @@ if uploaded_file_original is not None:
 
     # Show current data
     st.dataframe(st.session_state.input, hide_index=False, use_container_width=True)
+    
+    def delete_expectation(expectation_number):
+        if expectation_number in st.session_state.input.index:
+            st.session_state.input.drop(index=expectation_number, inplace=True)
+            st.session_state.input.reset_index(inplace=True, drop=True)
+    expectation_number = st.number_input('Input the row number of the expectation you want to delete', value=int, min_value=0)
+    if expectation_number:
+        st.button(f'Delete Expection No.{expectation_number}', on_click=delete_expectation(expectation_number))
+
     def clear_cache():
         keys = list(st.session_state.keys())
         for key in keys:
