@@ -35,7 +35,7 @@ if uploaded_file_original is not None:
     data = load_data(uploaded_file_original)
 
     st.subheader('List of expectations')
-    col1, col2 = st.columns([8, 1])
+    col1, col2 = st.columns([5, 1])
     with col1:
         st.write('The expectations you have submitted will be reflected in the table below.')
     with col2:
