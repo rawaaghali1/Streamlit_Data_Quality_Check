@@ -633,19 +633,11 @@ if rules_yes_or_not == 'Yes':
 				column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & ((column_results_df['results']==True)|(column_results_df['results']=='TRUE'))]['checks'])
 			else:
 				column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & ((column_results_df['results']==False)|(column_results_df['results']=='FALSE'))]['checks'])
-			try:
-				column_checks_selectbox = st.selectbox(
-				'Select a check',
-				column_checks_options,
-				key = 'column_checks_selectbox'
-				)
-			except TypeError:
-				column_checks_selectbox = st.selectbox(
-				'Select a check',
-				('No column is selectable'),
-				key = 'column_checks_selectbox',
-				disabled = True
-				)
+			column_checks_selectbox = st.selectbox(
+			'Select a check',
+			column_checks_options,
+			key = 'column_checks_selectbox'
+			)
 	
 		###### ROW 5 #######
 	
@@ -662,7 +654,7 @@ if rules_yes_or_not == 'Yes':
 		# columns checks json
 	
 		with column_checks_json:
-			#try:
+			try:
 				for i in dq_json:
 					if column_checks_selectbox[0:20] in i['notes']:
 						i_subset = {}
@@ -676,8 +668,8 @@ if rules_yes_or_not == 'Yes':
 						i_subset['Run date'] = i['run_dat']
 						st.json(i_subset)
 						#st.json(i)
-			#except KeyError:
-			#	st.json({'checks' : 'None'})
+			except:
+				st.json({'checks' : 'None'})
 				
 		with table_checks_json:
 			for i in dq_json:
