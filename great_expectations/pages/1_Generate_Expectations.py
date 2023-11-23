@@ -115,7 +115,7 @@ if uploaded_file_original is not None:
                 'Columns':[st.session_state.input_df_col2],
                 'Values':[st.session_state.input_df_col3]})
         st.session_state.input = pd.concat([st.session_state.input, row])
-        st.session_state.input = st.session_state.input.reset_index()
+        st.session_state.input = st.session_state.input.reset_index(inplace=True)
 	
     
     st.subheader('Input and submit your expectations')
