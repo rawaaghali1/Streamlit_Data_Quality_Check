@@ -162,4 +162,4 @@ if uploaded_file_original is not None:
         st.button('Submit', on_click=add_df)
 
 
-st.write([1,2,3])
+st.write(type([1,2,3]))
