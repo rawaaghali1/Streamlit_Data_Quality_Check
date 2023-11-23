@@ -94,7 +94,7 @@ if uploaded_file_original is not None:
             config['rules'].append(
                 {"expectation": "expect_column_values_to_match_regex",
                  "kwargs": {"column": row['Columns'][0],
-                           "value_list": row['Values']
+                           "regex": row['Values']
                            }
                 }
             )
