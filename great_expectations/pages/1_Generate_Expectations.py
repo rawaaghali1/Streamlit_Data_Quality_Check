@@ -66,7 +66,7 @@ if uploaded_file_original is not None:
     "rules": []
     }
 
-    df = st.session_state.input.drop_duplicates()
+    df = st.session_state.input.loc[st.session_state.input.astype(str).drop_duplicates().index]
     for index, row in df.iterrows():
         if row['Expectations'] == 'Column values must not be null':
             config['rules'].append(
