@@ -633,11 +633,19 @@ if rules_yes_or_not == 'Yes':
 				column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & ((column_results_df['results']==True)|(column_results_df['results']=='TRUE'))]['checks'])
 			else:
 				column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & ((column_results_df['results']==False)|(column_results_df['results']=='FALSE'))]['checks'])
-			column_checks_selectbox = st.selectbox(
-			'Select a check',
-			column_checks_options,
-			key = 'column_checks_selectbox'
-			)
+			try:
+				column_checks_selectbox = st.selectbox(
+				'Select a check',
+				column_checks_options,
+				key = 'column_checks_selectbox'
+				)
+			except TypeError:
+				column_checks_selectbox = st.selectbox(
+				'Select a check',
+				('No column is selectable'),
+				key = 'column_checks_selectbox',
+				disabled = True
+				)
 	
 		###### ROW 5 #######
 	
