@@ -43,7 +43,7 @@ if uploaded_file_original is not None:
         st.session_state.input = input
 
     # Show current data
-    st.dataframe(st.session_state.input, hide_index=True, use_container_width=True)
+    st.dataframe(st.session_state.input, hide_index=False, use_container_width=True)
     def clear_cache():
         keys = list(st.session_state.keys())
         for key in keys:
@@ -115,6 +115,8 @@ if uploaded_file_original is not None:
                 'Columns':[st.session_state.input_df_col2],
                 'Values':[st.session_state.input_df_col3]})
         st.session_state.input = pd.concat([st.session_state.input, row])
+	st.session_state.input = st.session_state.input.reset_index()
+	
     
     st.subheader('Input and submit your expectations')
     # Inputs created outside of a form
