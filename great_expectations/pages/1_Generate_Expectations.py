@@ -147,7 +147,7 @@ if uploaded_file_original is not None:
             row['Values'][0] = 'Null'
         elif row['Expectations'][0] == 'Column values must be numeric (integer or float)':
             row['Values'][0] = 'Numeric'
-	elif row['Expectations'][0] == 'Column values must be between 2 numbers':
+        elif row['Expectations'][0] == 'Column values must be between 2 numbers':
             row['Values'][0] = str(st.session_state.input_df_col3) + ' - ' + str(st.session_state.input_df_col4)
         st.session_state.input = pd.concat([st.session_state.input, row])
         st.session_state.input.reset_index(inplace=True, drop=True)
