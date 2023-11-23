@@ -49,7 +49,8 @@ if uploaded_file_original is not None:
         if expectation_number in st.session_state.input.index:
             st.session_state.input.drop(index=expectation_number, inplace=True)
             st.session_state.input.reset_index(inplace=True, drop=True)
-    
+
+    col1, col2 = st.columns([8, 1])
     if not st.session_state.input.empty:
         expectation_number = st.number_input('Input the row number of the expectation you want to delete', value=None, min_value=0, max_value=st.session_state.input.shape[0]-1)
         if expectation_number is not None:
@@ -59,7 +60,7 @@ if uploaded_file_original is not None:
         keys = list(st.session_state.keys())
         for key in keys:
             st.session_state.pop(key)
-    st.button('Clear all expectations', on_click=clear_cache)
+    st.button('Delete all expectations', on_click=clear_cache)
 
     config = {
     "expectation_suite_name": "my_expectation_suite",
@@ -114,7 +115,7 @@ if uploaded_file_original is not None:
 
     if not df.empty:
         st.download_button(
-            label="Download your json file",
+            label="Download your list as a json file",
             file_name="expectations.json",
             mime="application/json",
             data=json_string,
