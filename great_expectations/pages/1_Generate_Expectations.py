@@ -132,11 +132,12 @@ if uploaded_file_original is not None:
         row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
                 'Columns':[st.session_state.input_df_col2],
                 'Values':[st.session_state.input_df_col3]})
-        if row['Expectations'][0] == ['Column values must not be null']:
+        st.write(row['Expectations'][0])
+        if row['Expectations'][0] == 'Column values must not be null':
             row['Values'][0] == 'Not null'
-        elif row['Expectations'][0] == ['Column values must be null']:
+        elif row['Expectations'][0] == 'Column values must be null':
             row['Values'][0] == 'Null'
-        elif row['Expectations'][0] == ['Column values must be numeric (integer or float)']:
+        elif row['Expectations'][0] == 'Column values must be numeric (integer or float)':
             row['Values'][0] == 'Numeric'
         st.session_state.input = pd.concat([st.session_state.input, row])
         st.session_state.input.reset_index(inplace=True, drop=True)
