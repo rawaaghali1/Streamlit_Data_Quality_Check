@@ -131,6 +131,7 @@ if uploaded_file_original is not None:
     def add_df():
         st.write(st.session_state.input_df_col1)
         st.write(list(st.session_state.input_df_col2))
+        st.write(st.session_state.input.query('@st.session_state.input_df_col1 == Expectations and @st.session_state.input_df_col2 == Columns').shape[0])
         if not st.session_state.input.query('@st.session_state.input_df_col1 == Expectations and @st.session_state.input_df_col2 == Columns').empty:
                 st.write('The same expectation has already to added on the selected column(s), please delete the existing expectation first.')   
         row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
@@ -160,6 +161,3 @@ if uploaded_file_original is not None:
 
     if column_select:
         st.button('Submit', on_click=add_df)
-
-
-st.write(type([1,2,3]))
