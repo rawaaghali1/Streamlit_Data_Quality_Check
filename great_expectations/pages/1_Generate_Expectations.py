@@ -168,7 +168,7 @@ if uploaded_file_original is not None:
         text_input = st.text_input('Values (only a regular expression should be input)', key='input_df_col3')
         if text_input:
             st.write("You entered: ", text_input)
-    elif select_box == 'Column values must be between 2 values':
+    elif select_box == 'Column values must be between 2 numbers':
         min_num, max_num = st.columns(2)
         with min_num:
             st.number_input('Min value (can be empty)', value=None, key='input_df_col3')
