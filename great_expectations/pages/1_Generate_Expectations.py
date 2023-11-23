@@ -129,14 +129,15 @@ if uploaded_file_original is not None:
 	
     # Function to append non-form inputs into dataframe
     def add_df():
-        st.write(st.session_state.input_df_col1)
-        st.write(st.session_state.input_df_col2)
-        st.write(st.session_state.input['Columns'][0])
-        #if ((st.session_state.input.Expectations == st.session_state.input_df_col1) & (st.session_state.input.Columns == st.session_state.input_df_col2)).any():
-        #    st.warning('The same expectation has already to added on the selected column(s), please delete the existing expectation first.')   
         row = pd.DataFrame({'Expectations':[st.session_state.input_df_col1],
                 'Columns':[st.session_state.input_df_col2],
                 'Values':[st.session_state.input_df_col3]})
+	if row['Expectations'][0] == 'Column values must not be null':
+            row['Values'][0] == 'Not null'
+	elif row['Expectations'][0] == 'Column values must be null':
+            row['Values'][0] == 'Null'
+	elif row['Expectations'][0] == 'Column values must be numeric (integer or float)':
+            row['Values'][0] == 'Numeric'
         st.session_state.input = pd.concat([st.session_state.input, row])
         st.session_state.input.reset_index(inplace=True, drop=True)
 	
