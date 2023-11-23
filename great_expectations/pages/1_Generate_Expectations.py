@@ -139,6 +139,7 @@ if uploaded_file_original is not None:
             row['Values'][0] == 'Null'
         elif row['Expectations'][0] == 'Column values must be numeric (integer or float)':
             row['Values'][0] == 'Numeric'
+        st.write(row['Values'][0])
         st.session_state.input = pd.concat([st.session_state.input, row])
         st.session_state.input.reset_index(inplace=True, drop=True)
 	
