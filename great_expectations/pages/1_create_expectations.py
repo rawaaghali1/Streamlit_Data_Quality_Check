@@ -9,14 +9,14 @@ from PIL import Image
 st.set_page_config(
     layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
     initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
-    page_title="Create Expectations",  # String or None. Strings get appended with "• Streamlit". 
+    page_title="Generate Expectations",  # String or None. Strings get appended with "• Streamlit". 
     page_icon=None,  # String, anything supported by st.image, or None.
 )
 
 image = Image.open('assets/danone_ds_logo.png')
 col1, col2 = st.columns([8, 1])
 with col1:
-	st.title('Create Expectations')
+	st.title('Generate Expectations')
 with col2:
 	st.write('Powered by:')
 	st.image(image, width=90, output_format='PNG')
