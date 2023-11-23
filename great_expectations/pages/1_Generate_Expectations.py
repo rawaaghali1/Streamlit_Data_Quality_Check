@@ -49,9 +49,11 @@ if uploaded_file_original is not None:
         if expectation_number in st.session_state.input.index:
             st.session_state.input.drop(index=expectation_number, inplace=True)
             st.session_state.input.reset_index(inplace=True, drop=True)
-    expectation_number = st.number_input('Input the row number of the expectation you want to delete', value=int, min_value=0)
-    if expectation_number:
-        st.button(f'Delete Expection No.{expectation_number}', on_click=delete_expectation(expectation_number))
+    
+    if not st.session_state.input.empty:
+        expectation_number = st.number_input('Input the row number of the expectation you want to delete', min_value=0, max_value=st.session_state.input.shape[0]-1)
+        if expectation_number:
+            st.button(f'Delete Expection No.{expectation_number}', on_click=delete_expectation(expectation_number))
 
     def clear_cache():
         keys = list(st.session_state.keys())
