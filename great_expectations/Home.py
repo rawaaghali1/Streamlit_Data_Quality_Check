@@ -11,13 +11,13 @@ home_introduction = "Welcome to DQC Tool! DQC, or Data Quality Check, refers to 
 home_howitworks = """
 Your journey towards impeccable data quality begins here! Data Quality Check Web App streamlines the process of validating and enhancing the quality of your datasets. Here’s how you can harness the power of our tool:  
 
-### 1. Generate Your Data Quality Dashboard
+##### 1. Generate Your Data Quality Dashboard
 
 - **Upload Your Data**: Begin by uploading your dataset in a supported format, such as CSV or Excel.
 - **Upload Your Expectation JSON File**: Provide us with a JSON file that outlines your specific expectations for data quality. This file should contain criteria such as data types, desired ranges, uniqueness constraints, and more.
 - **Receive Insights**: Once you submit your data and expectation file, you'll receive a comprehensive dashboard visualizing the quality of your data, highlighting areas that meet your criteria and those that need attention.
 
-### 2. Create Your Expectation JSON File
+##### 2. Create Your Expectation JSON File
 
 - **Upload and Define Expectations**: If you don't have an expectation JSON file, no worries! Simply upload your dataset, and our intuitive interface will guide you through setting up your expectations for each column. This could include specifications like acceptable value ranges, required formats, or uniqueness.
 - **Generate and Download Your JSON File**: After setting your expectations, hit 'Download JSON'. Instantly, you'll have a tailor-made JSON file that you can use not only with our app but also in your other data quality projects.
