@@ -11,6 +11,7 @@ st.set_page_config(
 home_title = "DQC Tool"
 home_introduction = """
 Welcome to DQC Tool! DQC, or Data Quality Check, refers to the process of validating and ensuring the accuracy, consistency, and reliability of data in your data. This process is crucial in data management and analytics because high-quality data is essential for making informed decisions and accurate analyses. 
+\n
 To help you ensure the quality of your data, we developed this DQC Tool, a web app where you can upload your raw data, define your expectations of what certain column values in your data should be like, and generate a dashboard to review your data quality and even explore your raw data.
 """
 
