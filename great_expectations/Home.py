@@ -44,6 +44,5 @@ st.markdown(home_howitworks)
 st.markdown("""\n""")
 
 st.info('''
-> **NOTE:**
->   If you encouter any technical issues, please contact [Zhengxiao Ying](mailto:zhengxiao.ying@external.danone.com).''', icon="ℹ️")
+If you encouter any technical issues or need any help, please contact [Zhengxiao YING](mailto:zhengxiao.ying@external.danone.com) or [Mahabub ALAM](mailto:mahabub.alam@danone.com).''', icon="ℹ️")
 
