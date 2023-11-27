@@ -1,13 +1,19 @@
 import streamlit as st 
 
-
 st.set_page_config(
-    page_title="Home",
+    layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
+    initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
+    page_title="DQC Tool",  # String or None. Strings get appended with "• Streamlit". 
+    page_icon=None,  # String, anything supported by st.image, or None.
 )
 
 # copies 
 home_title = "DQC Tool"
-home_introduction = "Welcome to DQC Tool! DQC, or Data Quality Check, refers to the process of validating and ensuring the accuracy, consistency, and reliability of data in your data. This process is crucial in data management and analytics because high-quality data is essential for making informed decisions and accurate analyses. To help you ensure the quality of your data, we developed this DQC Tool, a web app where you can upload your raw data, define your expectations of what certain column values in your data should be like, and generate a dashboard to review your data quality and even explore your raw data."
+home_introduction = """
+Welcome to DQC Tool! DQC, or Data Quality Check, refers to the process of validating and ensuring the accuracy, consistency, and reliability of data in your data. This process is crucial in data management and analytics because high-quality data is essential for making informed decisions and accurate analyses. 
+To help you ensure the quality of your data, we developed this DQC Tool, a web app where you can upload your raw data, define your expectations of what certain column values in your data should be like, and generate a dashboard to review your data quality and even explore your raw data.
+"""
+
 home_howitworks = """
 Your journey towards impeccable data quality begins here! Data Quality Check Web App streamlines the process of validating and enhancing the quality of your datasets. Here’s how you can harness the power of our tool:  
 
@@ -36,4 +42,8 @@ st.markdown("#### How It Works")
 st.markdown(home_howitworks)
 
 st.markdown("""\n""")
+
+st.info('''
+> **NOTE:**
+>   If you encouter any technical issues, please contact [Zhengxiao Ying](mailto:zhengxiao.ying@external.danone.com).''', icon="ℹ️")
 
