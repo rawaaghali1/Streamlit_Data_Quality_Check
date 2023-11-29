@@ -16,7 +16,7 @@ To help you ensure the quality of your data, we developed this DQC Tool, a web a
 """
 
 home_howitworks = """
-Your journey towards impeccable data quality begins here! Data Quality Check Web App streamlines the process of validating and enhancing the quality of your datasets. Here’s how you can harness the power of our tool:  
+Your journey towards impeccable data quality begins here! DQC Tool streamlines the process of validating and enhancing the quality of your datasets. Here’s how you can harness the power of our tool:  
 
 ##### 1. Create Your Expectation JSON File
 
