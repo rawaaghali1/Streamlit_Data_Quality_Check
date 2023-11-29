@@ -38,12 +38,6 @@ if uploaded_file_original is not None:
     col1, col2 = st.columns([8, 2])
     with col1:
         st.write('The expectations you have submitted will be reflected in the table below.')
-    with col2:
-        def clear_cache():
-            keys = list(st.session_state.keys())
-            for key in keys:
-                st.session_state.pop(key)
-        st.button('Delete all expectations', on_click=clear_cache)
         
     # Create an empty dataframe on first page load, will skip on page reloads
     if 'input' not in st.session_state:
@@ -52,6 +46,12 @@ if uploaded_file_original is not None:
 
     # Show current dataframe
     st.dataframe(st.session_state.input, hide_index=False, use_container_width=True)
+
+    def clear_cache():
+        keys = list(st.session_state.keys())
+        for key in keys:
+            st.session_state.pop(key)
+    st.button('Delete all expectations', on_click=clear_cache)
 
     # Download current dataframe as a json file
     config = {
