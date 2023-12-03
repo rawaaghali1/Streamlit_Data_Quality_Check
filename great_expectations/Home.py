@@ -8,28 +8,27 @@ st.set_page_config(
 )
 
 # copies 
-home_title = "DQC Tool"
+home_title = "Interactive Data Quality Check"
 home_introduction = """
-Welcome to DQC Tool! DQC, or Data Quality Check, refers to the process of validating and ensuring the accuracy, consistency, and reliability of data in your data. This process is crucial in data management and analytics because high-quality data is essential for making informed decisions and accurate analyses. 
+Welcome to Interactive Data Quality Check! Data Quality Check, or DQC, refers to the process of validating and ensuring the accuracy, consistency, and reliability of data in your data. This process is crucial in data management and analytics because high-quality data is essential for making informed decisions and accurate analyses. 
 \n
-To help you ensure the quality of your data, we developed this DQC Tool, a web app where you can upload your raw data, define your expectations of what certain column values in your data should be like, and generate a dashboard to review your data quality and even explore your raw data.
+To help you ensure the quality of your data, we developed this interactive DQC Tool, a web app where you can upload your raw data, define your expectations of what certain column values in your data should be like, and generate a dashboard to review your data quality and even explore your raw data.
 """
 
 home_howitworks = """
-Your journey towards impeccable data quality begins here! DQC Tool streamlines the process of validating and enhancing the quality of your datasets. Here’s how you can harness the power of our tool:  
+Your journey towards impeccable data quality begins here! Interactive Data Quality Check streamlines the process of validating and enhancing the quality of your datasets. Here’s how you can harness the power of our tool:  
 
-##### 1. Create Your Expectation JSON File
-
-- **Upload Your Data and Define Expectations**: If you don't know about JSON files, no worries! Simply upload your CSV or Excel dataset, and our intuitive interface will guide you through setting up your expectations for each column. This could include specifications like acceptable value ranges, required formats, or uniqueness.
-- **Generate and Download Your JSON File**: After setting your expectations, hit 'Download the list as a json file'. Instantly, you'll have a tailor-made JSON file that you can use with our app in the next step.
-
-##### 2. Generate Your Data Quality Dashboard
+##### 1. Generate Your Data Quality Dashboard
 
 - **Upload Your Data**: Begin by uploading your dataset in a supported format, such as CSV or Excel.
-- **Upload Your Expectation JSON File**: Provide us with a JSON file (generated in the previous step) that outlines your specific expectations for data quality. This file should contain criteria such as data types, desired ranges, uniqueness constraints, and more.
+- **Upload Your Expectation JSON File**: Provide us with a JSON file that outlines your specific expectations for data quality. This file should contain criteria such as data types, desired ranges, uniqueness constraints, and more. If you don't have such a file, you can generate one in the "Create Your Expectation JSON File" step.
 - **Receive Insights**: Once you submit your data and expectation file, you'll receive a comprehensive dashboard visualizing the quality of your data, highlighting areas that meet your criteria and those that need attention.
 - **Download your Excel Report**: Once you submit your data and expectation file, you can also choose to download an Excel report that includes the index of column values that don't match your expectations.
 
+##### 2. Create Your Expectation JSON File
+
+- **Upload Your Data and Define Expectations**: If you don't know about JSON files, no worries! Simply upload your CSV or Excel dataset, and our intuitive interface will guide you through setting up your expectations for each column. This could include specifications like acceptable value ranges, required formats, or uniqueness.
+- **Generate and Download Your JSON File**: After setting your expectations, hit 'Download the list as a json file'. Instantly, you'll have a tailor-made JSON file that you can use with our app in the next step.
 """
 
 #st.title(home_title)
