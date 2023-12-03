@@ -31,7 +31,7 @@ Your journey towards impeccable data quality begins here! Interactive Data Quali
 
 ##### 1. Generate Your Data Quality Dashboard
 
-- **Upload Your Data**: Begin by uploading your dataset in a supported format, such as CSV or Excel.
+- **Upload Your Data**: Begin by uploading your dataset in a supported format, such as CSV or Excel. Please make sure that your file only contains one sheet and one header row on top.
 - **Upload Your Expectation JSON File**: Provide us with a JSON file that outlines your specific expectations for data quality. This file should contain criteria such as data types, desired ranges, uniqueness constraints, and more. If you don't have such a file, you can generate one in the "Create Your Expectation JSON File" step.
 - **Receive Insights**: Once you submit your data and expectation file, you'll receive a comprehensive dashboard visualizing the quality of your data, highlighting areas that meet your criteria and those that need attention.
 - **Download your Excel Report**: Once you submit your data and expectation file, you can also choose to download an Excel report that includes the index of column values that don't match your expectations.
