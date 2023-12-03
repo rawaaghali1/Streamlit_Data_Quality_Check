@@ -1,12 +1,23 @@
 import streamlit as st 
 
+from PIL import Image
+
+# set the page configuration
 st.set_page_config(
     layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
     initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
-    page_title="DQC Tool",  # String or None. Strings get appended with "• Streamlit". 
+    page_title="Interactive Data Quality Check",  # String or None. Strings get appended with "• Streamlit". 
     page_icon=None,  # String, anything supported by st.image, or None.
 )
 
+image_logo = Image.open('assets/danone_ds_logo.png')
+col1, col2 = st.columns([8, 1])
+with col1:
+	st.title('Interactive Data Quality Check')
+with col2:
+	st.write('Powered by:')
+	st.image(image_logo, width=90, output_format='PNG')
+    
 # copies 
 home_title = "Interactive Data Quality Check"
 home_introduction = """
@@ -31,9 +42,6 @@ Your journey towards impeccable data quality begins here! Interactive Data Quali
 - **Generate and Download Your JSON File**: After setting your expectations, hit 'Download the list as a json file'. Instantly, you'll have a tailor-made JSON file that you can use with our app in the next step.
 """
 
-#st.title(home_title)
-st.markdown(f"""# {home_title}""",unsafe_allow_html=True)
-
 st.markdown("""\n""")
 st.markdown("#### About")
 st.write(home_introduction)
@@ -41,6 +49,8 @@ st.write(home_introduction)
 st.markdown("""\n""")
 
 st.markdown("#### How It Works")
+image_flowchart = Image.open('assets/flowchart.png')
+st.image(image_flowchart, output_format='PNG')
 st.markdown(home_howitworks)
 
 st.markdown("""\n""")
