@@ -23,7 +23,7 @@ home_title = "Interactive Data Quality Check"
 home_introduction = """
 Welcome to Interactive Data Quality Check! Data Quality Check, or DQC, refers to the process of validating and ensuring the accuracy, consistency, and reliability of data in your data. This process is crucial in data management and analytics because high-quality data is essential for making informed decisions and accurate analyses. 
 \n
-To help you ensure the quality of your data, we developed this interactive DQC Tool, a web app where you can upload your raw data, define your rules (or expectations) of what certain column values in your data should be like, and generate a dashboard to review your data quality and even explore your raw data.
+To help you ensure the quality of your data, we developed this interactive DQC Tool, a web app where you can upload your raw data, define your rules, or expectations of what certain column values in your data should be like, and generate a dashboard to review your data quality and even explore your raw data.
 """
 
 home_howitworks = """
