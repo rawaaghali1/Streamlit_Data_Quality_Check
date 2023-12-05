@@ -9,7 +9,7 @@ from PIL import Image
 st.set_page_config(
     layout="wide",  # Can be "centered" or "wide". In the future also "dashboard", etc.
     initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
-    page_title="Generate Expectations",  # String or None. Strings get appended with "• Streamlit". 
+    page_title="Generate Your DQC Rules",  # String or None. Strings get appended with "• Streamlit". 
     page_icon=None,  # String, anything supported by st.image, or None.
 )
 
