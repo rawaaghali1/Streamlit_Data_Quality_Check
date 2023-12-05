@@ -411,9 +411,9 @@ with col2:
 
 uploaded_file_original = st.sidebar.file_uploader("Upload your raw data", type=['csv', 'xlsx'], help='Only .csv or .xlsx file is supported.')
 rules_yes_or_not = st.sidebar.radio(
-    "Do you have a json file for column checks?",
+    "Do you have a json file with DQC rules?",
     ["No", "Yes"],
-    captions = ["You can check basic visualizations of your data", "You can visualize the column check result and download an Excel report"])
+    captions = ["You can check basic visualizations of your data", "You can visualize the DQC result and download an Excel report"])
 
 if rules_yes_or_not == 'No' and uploaded_file_original is not None:
 	try:
@@ -562,7 +562,7 @@ if rules_yes_or_not == 'Yes':
 	
 		with overall_score:
 			st.metric(label="DQ Overall Score", value=f"{total_score_2}", delta = f"-{100 - total_score_2}", help='Calculated as the average score of the 5 metrics')
-			st.metric(label="Total column checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
+			st.metric(label="Total rules", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} rules failed")
 	
 		st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 	
@@ -570,7 +570,7 @@ if rules_yes_or_not == 'Yes':
 		# heading
 		table_checks_heading, column_checks_heading = st.columns([1,1])
 		with table_checks_heading:
-			st.subheader('Column checks')
+			st.subheader('DQC result')
 	
 		#with column_checks_heading:
 		#    st.subheader('Metrics')
@@ -582,20 +582,20 @@ if rules_yes_or_not == 'Yes':
 	
 		#TABLE CHECKS
 		#with table_checks_radio:
-		#    table_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'table_checks_radio')
+		#    table_checks_radio = st.radio(label = 'Rule status', options = ('Pass', 'Fail'), key = 'table_checks_radio')
 	
 		#with table_checks_stats:
-		#    st.metric(label="Total checks", value=f"{len(data)}", delta = f"-{dq_json['checks_table_level']['checks_table_failed']} checks failed")
+		#    st.metric(label="Total number of rules", value=f"{len(data)}", delta = f"-{dq_json['checks_table_level']['checks_table_failed']} rules failed")
 	
 	
 		# COLUMN CHECKS
 		# radio button for checks passed and failed
 		with column_checks_radio:
-			column_checks_radio = st.radio(label = 'Checks status', options = ('Pass', 'Fail'), key = 'column_checks_radio')
+			column_checks_radio = st.radio(label = 'Rule status', options = ('Pass', 'Fail'), key = 'column_checks_radio')
 	
 		# overall checks passed and failed
 		#with column_checks_stats:
-		#    st.metric(label="Total checks", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} checks failed")
+		#    st.metric(label="Total number of rules", value=f"{len(dq_json)}", delta = f"-{sum(1 for element in dq_json if element['success']=='FALSE' or element['success']==False)} rules failed")
 	
 	
 		###### ROW 4 #######
@@ -609,7 +609,7 @@ if rules_yes_or_not == 'Yes':
 		#        table_checks_options = tuple(table_results_df[table_results_df['results']==False]['checks'])
 			
 		#    table_checks_selectbox = st.selectbox(
-		#    'Select a check',
+		#    'Select a rule',
 		#    table_checks_options,
 		#    key = 'table_checks_selectbox'
 		#    )
