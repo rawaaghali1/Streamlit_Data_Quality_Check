@@ -16,7 +16,7 @@ st.set_page_config(
 image = Image.open('assets/danone_ds_logo.png')
 col1, col2 = st.columns([8, 1])
 with col1:
-	st.title('Generate Expectations')
+	st.title('Generate Your DQC Rules')
 with col2:
 	st.write('Powered by:')
 	st.image(image, width=90, output_format='PNG')
