@@ -634,7 +634,7 @@ if rules_yes_or_not == 'Yes':
 			else:
 				column_checks_options = tuple(column_results_df[(column_results_df['columns'] == column_checks_col_selectbox) & ((column_results_df['results']==False)|(column_results_df['results']=='FALSE'))]['checks'])
 			column_checks_selectbox = st.selectbox(
-			'Select a check',
+			'Select a rule',
 			column_checks_options,
 			key = 'column_checks_selectbox'
 			)
