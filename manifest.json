@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "data quality streamlit",
+  "version": "1.0",
+  "description": "Enhance your data quality experience!",
+  "icons": {
+    "48": "icon.png",
+    "96": "icon@2x.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": ["tabs", "storage"],
+  "default_locale": "en",
+  "web_accessible_resources": ["images/my-image.png"]
+}
