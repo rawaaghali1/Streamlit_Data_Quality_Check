@@ -5,14 +5,7 @@
     "appmode": "python-api",
     "entrypoint": "example:great_expectations/Home"
   },
-  "python": {
-    "version": "3.8.17",
-    "package_manager": {
-    "name": "pip",
-    "version": "23.0.1",
-      "package_file": "requirements.txt"
-    }
-  },
+  
   "files": {
     "requirements.txt": {
       "checksum": "c635ded4f341ff578ce3b9d0610fb2f9"
