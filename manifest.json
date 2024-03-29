@@ -1,17 +1,72 @@
-writeManifest(
-  appDir = getwd(),
-  appFiles = NULL,
-  appFileManifest = NULL,
-  appPrimaryDoc = NULL,
-  appMode = NULL,
-  contentCategory = NULL,
-  python = NULL,
-  forceGeneratePythonEnvironment = FALSE,
-  quarto = NA,
-  image = NULL,
-  envManagement = NULL,
-  envManagementR = NULL,
-  envManagementPy = NULL,
-  verbose = FALSE,
-  quiet = FALSE
-)
+{
+  "version": 1,
+  "locale": "en_US.UTF-8",
+  "metadata": {
+    "appmode": "python-api",
+    "entrypoint": "example:great_expectations/Home"
+  },
+  "python": {
+    "version": "3.8.17",
+    "package_manager": {
+      "name": "pip",
+      "version": "23.0.1",
+      "package_file": "requirements.txt"
+    }
+  },
+  "files": {
+    "requirements.txt": {
+      "checksum": "c635ded4f341ff578ce3b9d0610fb2f9"
+    },
+    ".Rhistory": {
+      "checksum": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    ".devcontainer/devcontainer.json": {
+      "checksum": "0ee298fcb7d1f7bdba293363ef837b01"
+    },
+    ".gitignore": {
+      "checksum": "0557d1db2d04aab4c2665d16172d6e71"
+    },
+    "Diagram test.drawio": {
+      "checksum": "32123dfee64ed6345824a45a5da40fa1"
+    },
+    "README.md": {
+      "checksum": "539a7f5fff6f82195a11277cae1d67db"
+    },
+    "Untitled Diagram.drawio": {
+      "checksum": "a5e64ec2fb6428e524f2e41fe9b77a59"
+    },
+    "assets/danone_ds_logo.png": {
+      "checksum": "77abf1c9952bc0aebdbb2f1487508571"
+    },
+    "assets/flowchart.png": {
+      "checksum": "c45c8f34bf46afc6d3fba57103351613"
+    },
+    "assets/flowchart_0.png": {
+      "checksum": "ec39cc98d8495209fe7422b438e78f0b"
+    },
+    "flowchart_2.png": {
+      "checksum": "240a51144bfd5ca23cc137658b942489"
+    },
+    "great_expectations/Home.py": {
+      "checksum": "26a083b20352ccd06daddb21ca870971"
+    },
+    "great_expectations/expectations_func.py": {
+      "checksum": "d130f1494b73cc8631efdd6dbae58740"
+    },
+    "great_expectations/pages/1_DQC_Dashboard.py": {
+      "checksum": "9f41aeba2544041573d5a5d06761c59a"
+    },
+    "great_expectations/pages/2_Generate_Your_DQC_Rules.py": {
+      "checksum": "cb8f9663f2ef9e906b2cd0362c7a596a"
+    },
+    "great_expectations/utile_functions.py": {
+      "checksum": "a02254c7ce88de28ae48c917a15741e5"
+    },
+    "project.Rproj": {
+      "checksum": "d238fb803a0459072d9043f94c1165ab"
+    },
+    "python": {
+      "checksum": "d41d8cd98f00b204e9800998ecf8427e"
+    }
+  }
+}
