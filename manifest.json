@@ -4,8 +4,7 @@
   "metadata": {
     "appmode": "python-api",
     "entrypoint": "example:great_expectations/Home"
-  },
-  
+  }, 
   "files": {
     "requirements.txt": {
       "checksum": "c635ded4f341ff578ce3b9d0610fb2f9"
