@@ -6,10 +6,10 @@
     "entrypoint": "example:great_expectations/Home"
   },
   "python": {
-    "version": "3.8.17",
+    "version": "3.7",
     "package_manager": {
       "name": "pip",
-      "version": "23.0.1",
+      "version": "20.3.4",
       "package_file": "requirements.txt"
     }
   },
